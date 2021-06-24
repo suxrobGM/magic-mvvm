@@ -4,6 +4,22 @@
     <TargetFramework>netstandard2.1</TargetFramework>
 	<AssemblyName>MagicMvvm.Core</AssemblyName>
     <RootNamespace>MagicMvvm</RootNamespace>
+	<Authors>Sukhrob Ilyosbekov</Authors>
+	<Company>Smart Meal Service</Company>
+	<PackageProjectUrl>https://github.com/suxrobGM/MagicMvvm</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/suxrobGM/MagicMvvm</RepositoryUrl>
+	<Description>MagicMvvm is lightweight library for building rapid MVVM applications.</Description>
+	<Copyright>Copyright Sukhrob Ilyosbekov 2021</Copyright>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<PackageTags>mvvm, wpf, MagicMvvm, prism, xaml</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+	<None Include="..\..\LICENSE">
+	  <Pack>True</Pack>
+	  <PackagePath></PackagePath>
+	</None>
+  </ItemGroup>
 
 </Project>
