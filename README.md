@@ -92,7 +92,7 @@ public partial class App : Application
 
 Create view model class then inherit abstract class `ViewModelBase`
 Inside `ViewModelBase` defined set of methods such as a `SetProperty()`
-`SetProperty()` method changes value of backing field then raises propery changed event. 
+method changes value of backing field then raises propery changed event. 
 
 ```csharp
 public class MainWindowViewModel : ViewModelBase
