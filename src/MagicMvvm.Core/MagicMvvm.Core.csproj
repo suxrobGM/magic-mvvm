@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
 	<AssemblyName>MagicMvvm.Core</AssemblyName>
     <RootNamespace>MagicMvvm</RootNamespace>
+	<Version>1.0.1</Version>
 	<Authors>Sukhrob Ilyosbekov</Authors>
 	<Company>Smart Meal Service</Company>
 	<PackageProjectUrl>https://github.com/suxrobGM/MagicMvvm</PackageProjectUrl>
@@ -13,6 +14,11 @@
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	<PackageTags>mvvm, wpf, MagicMvvm, prism, xaml</PackageTags>
+	<DocumentationFile>.\MagicMvvm.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

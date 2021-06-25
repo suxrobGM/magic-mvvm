@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 
 namespace MagicMvvm.Dialogs
 {
@@ -15,7 +14,7 @@ namespace MagicMvvm.Dialogs
         /// Register dialog inside registrar.
         /// </summary>
         /// <param name="dialogName">The unique name of the dialog.</param>
-        /// <typeparam name="TDialogView">View of dialog which is inherited from <see cref="FrameworkElement"/></typeparam>
+        /// <typeparam name="TDialogView">View of dialog which is inherited from FrameworkElement</typeparam>
         /// <returns>The <see cref="IDialogManager"/>, for registering several dialogs easily.</returns>
         IDialogManager RegisterDialog<TDialogView>(string dialogName);
 
@@ -23,7 +22,7 @@ namespace MagicMvvm.Dialogs
         /// Register dialog host window inside registrar.
         /// </summary>
         /// <param name="windowName">The unique name of the dialog's hosting window.</param>
-        /// <typeparam name="TDialogWindow">View of dialog's hosting window which is class that implements <see cref="IDialogHostWindow"/></typeparam>
+        /// <typeparam name="TDialogWindow">View of dialog's hosting window which is class that implements IDialogHostWindow</typeparam>
         /// <returns>The <see cref="IDialogManager"/>, for registering several host windows easily.</returns>
         IDialogManager RegisterDialogHostWindow<TDialogWindow>(string windowName);
 

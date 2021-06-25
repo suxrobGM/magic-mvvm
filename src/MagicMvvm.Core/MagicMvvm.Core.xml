@@ -1,0 +1,1536 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MagicMvvm.Core</name>
+    </assembly>
+    <members>
+        <member name="T:MagicMvvm.Annotations.CanBeNullAttribute">
+            <summary>
+            Indicates that the value of the marked element could be <c>null</c> sometimes,
+            so checking for <c>null</c> is required before its usage.
+            </summary>
+            <example><code>
+            [CanBeNull] object Test() => null;
+            
+            void UseTest() {
+              var p = Test();
+              var s = p.ToString(); // Warning: Possible 'System.NullReferenceException'
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.NotNullAttribute">
+            <summary>
+            Indicates that the value of the marked element can never be <c>null</c>.
+            </summary>
+            <example><code>
+            [NotNull] object Foo() {
+              return null; // Warning: Possible 'null' assignment
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.ItemNotNullAttribute">
+            <summary>
+            Can be applied to symbols of types derived from IEnumerable as well as to symbols of Task
+            and Lazy classes to indicate that the value of a collection item, of the Task.Result property
+            or of the Lazy.Value property can never be null.
+            </summary>
+            <example><code>
+            public void Foo([ItemNotNull]List&lt;string&gt; books)
+            {
+              foreach (var book in books) {
+                if (book != null) // Warning: Expression is always true
+                 Console.WriteLine(book.ToUpper());
+              }
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.ItemCanBeNullAttribute">
+            <summary>
+            Can be applied to symbols of types derived from IEnumerable as well as to symbols of Task
+            and Lazy classes to indicate that the value of a collection item, of the Task.Result property
+            or of the Lazy.Value property can be null.
+            </summary>
+            <example><code>
+            public void Foo([ItemCanBeNull]List&lt;string&gt; books)
+            {
+              foreach (var book in books)
+              {
+                // Warning: Possible 'System.NullReferenceException'
+                Console.WriteLine(book.ToUpper());
+              }
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.StringFormatMethodAttribute">
+            <summary>
+            Indicates that the marked method builds string by the format pattern and (optional) arguments.
+            The parameter, which contains the format string, should be given in constructor. The format string
+            should be in <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])"/>-like form.
+            </summary>
+            <example><code>
+            [StringFormatMethod("message")]
+            void ShowError(string message, params object[] args) { /* do something */ }
+            
+            void Foo() {
+              ShowError("Failed: {0}"); // Warning: Non-existing argument in format string
+            }
+            </code></example>
+        </member>
+        <member name="M:MagicMvvm.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+            <param name="formatParameterName">
+            Specifies which parameter of an annotated method should be treated as the format string
+            </param>
+        </member>
+        <member name="T:MagicMvvm.Annotations.ValueProviderAttribute">
+             <summary>
+             Use this annotation to specify a type that contains static or const fields
+             with values for the annotated property/field/parameter.
+             The specified type will be used to improve completion suggestions.
+             </summary>
+             <example><code>
+             namespace TestNamespace
+             {
+               public class Constants
+               {
+                 public static int INT_CONST = 1;
+                 public const string STRING_CONST = "1";
+               }
+            
+               public class Class1
+               {
+                 [ValueProvider("TestNamespace.Constants")] public int myField;
+                 public void Foo([ValueProvider("TestNamespace.Constants")] string str) { }
+            
+                 public void Test()
+                 {
+                   Foo(/*try completion here*/);//
+                   myField = /*try completion here*/
+                 }
+               }
+             }
+             </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.ValueRangeAttribute">
+            <summary>
+            Indicates that the integral value falls into the specified interval.
+            It's allowed to specify multiple non-intersecting intervals.
+            Values of interval boundaries are inclusive.
+            </summary>
+            <example><code>
+            void Foo([ValueRange(0, 100)] int value) {
+              if (value == -1) { // Warning: Expression is always 'false'
+                ...
+              }
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.NonNegativeValueAttribute">
+            <summary>
+            Indicates that the integral value never falls below zero.
+            </summary>
+            <example><code>
+            void Foo([NonNegativeValue] int value) {
+              if (value == -1) { // Warning: Expression is always 'false'
+                ...
+              }
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.InvokerParameterNameAttribute">
+            <summary>
+            Indicates that the function argument should be a string literal and match one
+            of the parameters of the caller function. For example, ReSharper annotates
+            the parameter of <see cref="T:System.ArgumentNullException"/>.
+            </summary>
+            <example><code>
+            void Foo(string param) {
+              if (param == null)
+                throw new ArgumentNullException("par"); // Warning: Cannot resolve symbol
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.NotifyPropertyChangedInvocatorAttribute">
+             <summary>
+             Indicates that the method is contained in a type that implements
+             <c>System.ComponentModel.INotifyPropertyChanged</c> interface and this method
+             is used to notify that some property value changed.
+             </summary>
+             <remarks>
+             The method should be non-static and conform to one of the supported signatures:
+             <list>
+             <item><c>NotifyChanged(string)</c></item>
+             <item><c>NotifyChanged(params string[])</c></item>
+             <item><c>NotifyChanged{T}(Expression{Func{T}})</c></item>
+             <item><c>NotifyChanged{T,U}(Expression{Func{T,U}})</c></item>
+             <item><c>SetProperty{T}(ref T, T, string)</c></item>
+             </list>
+             </remarks>
+             <example><code>
+             public class Foo : INotifyPropertyChanged {
+               public event PropertyChangedEventHandler PropertyChanged;
+             
+               [NotifyPropertyChangedInvocator]
+               protected virtual void NotifyChanged(string propertyName) { ... }
+            
+               string _name;
+             
+               public string Name {
+                 get { return _name; }
+                 set { _name = value; NotifyChanged("LastName"); /* Warning */ }
+               }
+             }
+             </code>
+             Examples of generated notifications:
+             <list>
+             <item><c>NotifyChanged("Property")</c></item>
+             <item><c>NotifyChanged(() =&gt; Property)</c></item>
+             <item><c>NotifyChanged((VM x) =&gt; x.Property)</c></item>
+             <item><c>SetProperty(ref myField, value, "Property")</c></item>
+             </list>
+             </example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.ContractAnnotationAttribute">
+            <summary>
+            Describes dependency between method input and output.
+            </summary>
+            <syntax>
+            <p>Function Definition Table syntax:</p>
+            <list>
+            <item>FDT      ::= FDTRow [;FDTRow]*</item>
+            <item>FDTRow   ::= Input =&gt; Output | Output &lt;= Input</item>
+            <item>Input    ::= ParameterName: Value [, Input]*</item>
+            <item>Output   ::= [ParameterName: Value]* {halt|stop|void|nothing|Value}</item>
+            <item>Value    ::= true | false | null | notnull | canbenull</item>
+            </list>
+            If the method has a single input parameter, its name could be omitted.<br/>
+            Using <c>halt</c> (or <c>void</c>/<c>nothing</c>, which is the same) for the method output
+            means that the method doesn't return normally (throws or terminates the process).<br/>
+            Value <c>canbenull</c> is only applicable for output parameters.<br/>
+            You can use multiple <c>[ContractAnnotation]</c> for each FDT row, or use single attribute
+            with rows separated by semicolon. There is no notion of order rows, all rows are checked
+            for applicability and applied per each program state tracked by the analysis engine.<br/>
+            </syntax>
+            <examples><list>
+            <item><code>
+            [ContractAnnotation("=&gt; halt")]
+            public void TerminationMethod()
+            </code></item>
+            <item><code>
+            [ContractAnnotation("null &lt;= param:null")] // reverse condition syntax
+            public string GetName(string surname)
+            </code></item>
+            <item><code>
+            [ContractAnnotation("s:null =&gt; true")]
+            public bool IsNullOrEmpty(string s) // string.IsNullOrEmpty()
+            </code></item>
+            <item><code>
+            // A method that returns null if the parameter is null,
+            // and not null if the parameter is not null
+            [ContractAnnotation("null =&gt; null; notnull =&gt; notnull")]
+            public object Transform(object data)
+            </code></item>
+            <item><code>
+            [ContractAnnotation("=&gt; true, result: notnull; =&gt; false, result: null")]
+            public bool TryParse(string s, out Person result)
+            </code></item>
+            </list></examples>
+        </member>
+        <member name="T:MagicMvvm.Annotations.LocalizationRequiredAttribute">
+            <summary>
+            Indicates whether the marked element should be localized.
+            </summary>
+            <example><code>
+            [LocalizationRequiredAttribute(true)]
+            class Foo {
+              string str = "my string"; // Warning: Localizable string
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.CannotApplyEqualityOperatorAttribute">
+            <summary>
+            Indicates that the value of the marked type (or its derivatives)
+            cannot be compared using '==' or '!=' operators and <c>Equals()</c>
+            should be used instead. However, using '==' or '!=' for comparison
+            with <c>null</c> is always permitted.
+            </summary>
+            <example><code>
+            [CannotApplyEqualityOperator]
+            class NoEquality { }
+            
+            class UsesNoEquality {
+              void Test() {
+                var ca1 = new NoEquality();
+                var ca2 = new NoEquality();
+                if (ca1 != null) { // OK
+                  bool condition = ca1 == ca2; // Warning
+                }
+              }
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.BaseTypeRequiredAttribute">
+            <summary>
+            When applied to a target attribute, specifies a requirement for any type marked
+            with the target attribute to implement or inherit specific type or types.
+            </summary>
+            <example><code>
+            [BaseTypeRequired(typeof(IComponent)] // Specify requirement
+            class ComponentAttribute : Attribute { }
+            
+            [Component] // ComponentAttribute requires implementing IComponent interface
+            class MyComponent : IComponent { }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.UsedImplicitlyAttribute">
+            <summary>
+            Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library),
+            so this symbol will not be reported as unused (as well as by other usage inspections).
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.MeansImplicitUseAttribute">
+            <summary>
+            Can be applied to attributes, type parameters, and parameters of a type assignable from <see cref="T:System.Type"/> .
+            When applied to an attribute, the decorated attribute behaves the same as <see cref="T:MagicMvvm.Annotations.UsedImplicitlyAttribute"/>.
+            When applied to a type parameter or to a parameter of type <see cref="T:System.Type"/>,  indicates that the corresponding type
+            is used implicitly.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.ImplicitUseKindFlags">
+            <summary>
+            Specify the details of implicitly used symbol when it is marked
+            with <see cref="T:MagicMvvm.Annotations.MeansImplicitUseAttribute"/> or <see cref="T:MagicMvvm.Annotations.UsedImplicitlyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.ImplicitUseKindFlags.Access">
+            <summary>Only entity marked with attribute considered used.</summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.ImplicitUseKindFlags.Assign">
+            <summary>Indicates implicit assignment to a member.</summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.ImplicitUseKindFlags.InstantiatedWithFixedConstructorSignature">
+            <summary>
+            Indicates implicit instantiation of a type with fixed constructor signature.
+            That means any unused constructor parameters won't be reported as such.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature">
+            <summary>Indicates implicit instantiation of a type.</summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.ImplicitUseTargetFlags">
+            <summary>
+            Specify what is considered to be used implicitly when marked
+            with <see cref="T:MagicMvvm.Annotations.MeansImplicitUseAttribute"/> or <see cref="T:MagicMvvm.Annotations.UsedImplicitlyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.ImplicitUseTargetFlags.Members">
+            <summary>Members of entity marked with attribute are considered used.</summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.ImplicitUseTargetFlags.WithInheritors">
+            <summary> Inherited entities are considered used. </summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.ImplicitUseTargetFlags.WithMembers">
+            <summary>Entity marked with attribute and all its members considered used.</summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.PublicAPIAttribute">
+            <summary>
+            This attribute is intended to mark publicly available API
+            which should not be removed and so is treated as used.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.InstantHandleAttribute">
+            <summary>
+            Tells code analysis engine if the parameter is completely handled when the invoked method is on stack.
+            If the parameter is a delegate, indicates that delegate is executed while the method is executed.
+            If the parameter is an enumerable, indicates that it is enumerated while the method is executed.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.PureAttribute">
+            <summary>
+            Indicates that a method does not make any observable state changes.
+            The same as <c>System.Diagnostics.Contracts.PureAttribute</c>.
+            </summary>
+            <example><code>
+            [Pure] int Multiply(int x, int y) => x * y;
+            
+            void M() {
+              Multiply(123, 42); // Warning: Return value of pure method is not used
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.MustUseReturnValueAttribute">
+            <summary>
+            Indicates that the return value of the method invocation must be used.
+            </summary>
+            <remarks>
+            Methods decorated with this attribute (in contrast to pure methods) might change state,
+            but make no sense without using their return value. <br/>
+            Similarly to <see cref="T:MagicMvvm.Annotations.PureAttribute"/>, this attribute
+            will help detecting usages of the method when the return value in not used.
+            Additionally, you can optionally specify a custom message, which will be used when showing warnings, e.g.
+            <code>[MustUseReturnValue("Use the return value to...")]</code>.
+            </remarks>
+        </member>
+        <member name="T:MagicMvvm.Annotations.ProvidesContextAttribute">
+            <summary>
+            Indicates the type member or parameter of some type, that should be used instead of all other ways
+            to get the value of that type. This annotation is useful when you have some "context" value evaluated
+            and stored somewhere, meaning that all other ways to get this value must be consolidated with existing one.
+            </summary>
+            <example><code>
+            class Foo {
+              [ProvidesContext] IBarService _barService = ...;
+            
+              void ProcessNode(INode node) {
+                DoSomething(node, node.GetGlobalServices().Bar);
+                //              ^ Warning: use value of '_barService' field
+              }
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.PathReferenceAttribute">
+            <summary>
+            Indicates that a parameter is a path to a file or a folder within a web project.
+            Path can be relative or absolute, starting from web root (~).
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.SourceTemplateAttribute">
+            <summary>
+            An extension method marked with this attribute is processed by code completion
+            as a 'Source Template'. When the extension method is completed over some expression, its source code
+            is automatically expanded like a template at call site.
+            </summary>
+            <remarks>
+            Template method body can contain valid source code and/or special comments starting with '$'.
+            Text inside these comments is added as source code when the template is applied. Template parameters
+            can be used either as additional method parameters or as identifiers wrapped in two '$' signs.
+            Use the <see cref="T:MagicMvvm.Annotations.MacroAttribute"/> attribute to specify macros for parameters.
+            </remarks>
+            <example>
+            In this example, the 'forEach' method is a source template available over all values
+            of enumerable types, producing ordinary C# 'foreach' statement and placing caret inside block:
+            <code>
+            [SourceTemplate]
+            public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; xs) {
+              foreach (var x in xs) {
+                 //$ $END$
+              }
+            }
+            </code>
+            </example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.MacroAttribute">
+            <summary>
+            Allows specifying a macro for a parameter of a <see cref="T:MagicMvvm.Annotations.SourceTemplateAttribute">source template</see>.
+            </summary>
+            <remarks>
+            You can apply the attribute on the whole method or on any of its additional parameters. The macro expression
+            is defined in the <see cref="P:MagicMvvm.Annotations.MacroAttribute.Expression"/> property. When applied on a method, the target
+            template parameter is defined in the <see cref="P:MagicMvvm.Annotations.MacroAttribute.Target"/> property. To apply the macro silently
+            for the parameter, set the <see cref="P:MagicMvvm.Annotations.MacroAttribute.Editable"/> property value = -1.
+            </remarks>
+            <example>
+            Applying the attribute on a source template method:
+            <code>
+            [SourceTemplate, Macro(Target = "item", Expression = "suggestVariableName()")]
+            public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; collection) {
+              foreach (var item in collection) {
+                //$ $END$
+              }
+            }
+            </code>
+            Applying the attribute on a template method parameter:
+            <code>
+            [SourceTemplate]
+            public static void something(this Entity x, [Macro(Expression = "guid()", Editable = -1)] string newguid) {
+              /*$ var $x$Id = "$newguid$" + x.ToString();
+              x.DoSomething($x$Id); */
+            }
+            </code>
+            </example>
+        </member>
+        <member name="P:MagicMvvm.Annotations.MacroAttribute.Expression">
+            <summary>
+            Allows specifying a macro that will be executed for a <see cref="T:MagicMvvm.Annotations.SourceTemplateAttribute">source template</see>
+            parameter when the template is expanded.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Annotations.MacroAttribute.Editable">
+            <summary>
+            Allows specifying which occurrence of the target parameter becomes editable when the template is deployed.
+            </summary>
+            <remarks>
+            If the target parameter is used several times in the template, only one occurrence becomes editable;
+            other occurrences are changed synchronously. To specify the zero-based index of the editable occurrence,
+            use values >= 0. To make the parameter non-editable when the template is expanded, use -1.
+            </remarks>
+        </member>
+        <member name="P:MagicMvvm.Annotations.MacroAttribute.Target">
+            <summary>
+            Identifies the target parameter of a <see cref="T:MagicMvvm.Annotations.SourceTemplateAttribute">source template</see> if the
+            <see cref="T:MagicMvvm.Annotations.MacroAttribute"/> is applied on a template method.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcActionAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+            is an MVC action. If applied to a method, the MVC action name is calculated
+            implicitly from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcAreaAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that the marked parameter is an MVC area.
+            Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcControllerAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is
+            an MVC controller. If applied to a method, the MVC controller name is calculated
+            implicitly from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcMasterAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that the marked parameter is an MVC Master. Use this attribute
+            for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, String)</c>.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcModelTypeAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that the marked parameter is an MVC model type. Use this attribute
+            for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, Object)</c>.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcPartialViewAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC
+            partial view. If applied to a method, the MVC partial view name is calculated implicitly
+            from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcSuppressViewErrorAttribute">
+            <summary>
+            ASP.NET MVC attribute. Allows disabling inspections for MVC views within a class or a method.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcDisplayTemplateAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC display template.
+            Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcEditorTemplateAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that the marked parameter is an MVC editor template.
+            Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcTemplateAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that the marked parameter is an MVC template.
+            Use this attribute for custom wrappers similar to
+            <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcViewAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+            is an MVC view component. If applied to a method, the MVC view name is calculated implicitly
+            from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Controller.View(Object)</c>.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcViewComponentAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+            is an MVC view component name.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcViewComponentViewAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+            is an MVC view component view. If applied to a method, the MVC view component view name is default.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AspMvcActionSelectorAttribute">
+            <summary>
+            ASP.NET MVC attribute. When applied to a parameter of an attribute,
+            indicates that this parameter is an MVC action name.
+            </summary>
+            <example><code>
+            [ActionName("Foo")]
+            public ActionResult Login(string returnUrl) {
+              ViewBag.ReturnUrl = Url.Action("Foo"); // OK
+              return RedirectToAction("Bar"); // Error: Cannot resolve action
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.RazorSectionAttribute">
+            <summary>
+            Razor attribute. Indicates that the marked parameter or method is a Razor section.
+            Use this attribute for custom wrappers similar to
+            <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.CollectionAccessAttribute">
+            <summary>
+            Indicates how method, constructor invocation, or property access
+            over collection type affects the contents of the collection.
+            Use <see cref="P:MagicMvvm.Annotations.CollectionAccessAttribute.CollectionAccessType"/> to specify the access type.
+            </summary>
+            <remarks>
+            Using this attribute only makes sense if all collection methods are marked with this attribute.
+            </remarks>
+            <example><code>
+            public class MyStringCollection : List&lt;string&gt;
+            {
+              [CollectionAccess(CollectionAccessType.Read)]
+              public string GetFirstString()
+              {
+                return this.ElementAt(0);
+              }
+            }
+            class Test
+            {
+              public void Foo()
+              {
+                // Warning: Contents of the collection is never updated
+                var col = new MyStringCollection();
+                string x = col.GetFirstString();
+              }
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.CollectionAccessType">
+            <summary>
+            Provides a value for the <see cref="T:MagicMvvm.Annotations.CollectionAccessAttribute"/> to define
+            how the collection method invocation affects the contents of the collection.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.CollectionAccessType.None">
+            <summary>Method does not use or modify content of the collection.</summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.CollectionAccessType.Read">
+            <summary>Method only reads content of the collection but does not modify it.</summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.CollectionAccessType.ModifyExistingContent">
+            <summary>Method can change content of the collection but does not add new elements.</summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.CollectionAccessType.UpdatedContent">
+            <summary>Method can add new elements to the collection.</summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AssertionMethodAttribute">
+            <summary>
+            Indicates that the marked method is assertion method, i.e. it halts the control flow if
+            one of the conditions is satisfied. To set the condition, mark one of the parameters with
+            <see cref="T:MagicMvvm.Annotations.AssertionConditionAttribute"/> attribute.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AssertionConditionAttribute">
+            <summary>
+            Indicates the condition parameter of the assertion method. The method itself should be
+            marked by <see cref="T:MagicMvvm.Annotations.AssertionMethodAttribute"/> attribute. The mandatory argument of
+            the attribute is the assertion type.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.AssertionConditionType">
+            <summary>
+            Specifies assertion type. If the assertion method argument satisfies the condition,
+            then the execution continues. Otherwise, execution is assumed to be halted.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.AssertionConditionType.IS_TRUE">
+            <summary>Marked parameter should be evaluated to true.</summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.AssertionConditionType.IS_FALSE">
+            <summary>Marked parameter should be evaluated to false.</summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.AssertionConditionType.IS_NULL">
+            <summary>Marked parameter should be evaluated to null value.</summary>
+        </member>
+        <member name="F:MagicMvvm.Annotations.AssertionConditionType.IS_NOT_NULL">
+            <summary>Marked parameter should be evaluated to not null value.</summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.TerminatesProgramAttribute">
+            <summary>
+            Indicates that the marked method unconditionally terminates control flow execution.
+            For example, it could unconditionally throw exception.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.LinqTunnelAttribute">
+            <summary>
+            Indicates that method is pure LINQ method, with postponed enumeration (like Enumerable.Select,
+            .Where). This annotation allows inference of [InstantHandle] annotation for parameters
+            of delegate type by analyzing LINQ method chains.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.NoEnumerationAttribute">
+            <summary>
+            Indicates that IEnumerable passed as a parameter is not enumerated.
+            Use this annotation to suppress the 'Possible multiple enumeration of IEnumerable' inspection.
+            </summary>
+            <example><code>
+            static void ThrowIfNull&lt;T&gt;([NoEnumeration] T v, string n) where T : class
+            {
+              // custom check for null but no enumeration
+            }
+            
+            void Foo(IEnumerable&lt;string&gt; values)
+            {
+              ThrowIfNull(values, nameof(values));
+              var x = values.ToList(); // No warnings about multiple enumeration
+            }
+            </code></example>
+        </member>
+        <member name="T:MagicMvvm.Annotations.RegexPatternAttribute">
+            <summary>
+            Indicates that the marked parameter is a regular expression pattern.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.NoReorderAttribute">
+            <summary>
+            Prevents the Member Reordering feature from tossing members of the marked class.
+            </summary>
+            <remarks>
+            The attribute must be mentioned in your member reordering patterns.
+            </remarks>
+        </member>
+        <member name="T:MagicMvvm.Annotations.XamlItemsControlAttribute">
+            <summary>
+            XAML attribute. Indicates the type that has <c>ItemsSource</c> property and should be treated
+            as <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolve.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Annotations.XamlItemBindingOfItemsControlAttribute">
+            <summary>
+            XAML attribute. Indicates the property of some <c>BindingBase</c>-derived type, that
+            is used to bind some item of <c>ItemsControl</c>-derived type. This annotation will
+            enable the <c>DataContext</c> type resolve for XAML bindings for such properties.
+            </summary>
+            <remarks>
+            Property should have the tree ancestor of the <c>ItemsControl</c> type or
+            marked with the <see cref="T:MagicMvvm.Annotations.XamlItemsControlAttribute"/> attribute.
+            </remarks>
+        </member>
+        <member name="T:MagicMvvm.Annotations.XamlItemStyleOfItemsControlAttribute">
+            <summary>
+            XAML attribute. Indicates the property of some <c>Style</c>-derived type, that
+            is used to style items of <c>ItemsControl</c>-derived type. This annotation will
+            enable the <c>DataContext</c> type resolve for XAML bindings for such properties.
+            </summary>
+            <remarks>
+            Property should have the tree ancestor of the <c>ItemsControl</c> type or
+            marked with the <see cref="T:MagicMvvm.Annotations.XamlItemsControlAttribute"/> attribute.
+            </remarks>
+        </member>
+        <member name="T:MagicMvvm.Commands.DelegateCommand">
+            <summary>
+            An <see cref="T:System.Windows.Input.ICommand"/> whose delegates do not take any parameters for <see cref="M:MagicMvvm.Commands.DelegateCommand.Execute"/> and <see cref="M:MagicMvvm.Commands.DelegateCommand.CanExecute"/>.
+            </summary>
+            <see cref="T:MagicMvvm.Commands.DelegateCommandBase"/>
+            <see cref="T:MagicMvvm.Commands.DelegateCommand`1"/>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand.#ctor(System.Action)">
+            <summary>
+            Creates a new instance of <see cref="T:MagicMvvm.Commands.DelegateCommand"/> with the <see cref="T:System.Action"/> to invoke on execution.
+            </summary>
+            <param name="executeMethod">The <see cref="T:System.Action"/> to invoke when <see cref="M:System.Windows.Input.ICommand.Execute(System.Object)"/> is called.</param>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand.#ctor(System.Action,System.Func{System.Boolean})">
+            <summary>
+            Creates a new instance of <see cref="T:MagicMvvm.Commands.DelegateCommand"/> with the <see cref="T:System.Action"/> to invoke on execution
+            and a <see langword="Func" /> to query for determining if the command can execute.
+            </summary>
+            <param name="executeMethod">The <see cref="T:System.Action"/> to invoke when <see cref="M:System.Windows.Input.ICommand.Execute(System.Object)"/> is called.</param>
+            <param name="canExecuteMethod">The <see cref="T:System.Func`1"/> to invoke when <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/> is called</param>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand.Execute">
+            <summary>
+             Executes the command.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand.CanExecute">
+            <summary>
+            Determines if the command can be executed.
+            </summary>
+            <returns>Returns <see langword="true"/> if the command can execute,otherwise returns <see langword="false"/>.</returns>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand.Execute(System.Object)">
+            <summary>
+            Handle the internal invocation of <see cref="M:System.Windows.Input.ICommand.Execute(System.Object)"/>
+            </summary>
+            <param name="parameter">Command Parameter</param>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand.CanExecute(System.Object)">
+            <summary>
+            Handle the internal invocation of <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/>
+            </summary>
+            <param name="parameter"></param>
+            <returns><see langword="true"/> if the Command Can Execute, otherwise <see langword="false" /></returns>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand.ObservesProperty``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Observes a property that implements INotifyPropertyChanged, and automatically calls DelegateCommandBase.RaiseCanExecuteChanged on property changed notifications.
+            </summary>
+            <typeparam name="T">The object type containing the property specified in the expression.</typeparam>
+            <param name="propertyExpression">The property expression. Example: ObservesProperty(() => PropertyName).</param>
+            <returns>The current instance of DelegateCommand</returns>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand.ObservesCanExecute(System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+            <summary>
+            Observes a property that is used to determine if this command can execute, and if it implements INotifyPropertyChanged it will automatically call DelegateCommandBase.RaiseCanExecuteChanged on property changed notifications.
+            </summary>
+            <param name="canExecuteExpression">The property expression. Example: ObservesCanExecute(() => PropertyName).</param>
+            <returns>The current instance of DelegateCommand</returns>
+        </member>
+        <member name="T:MagicMvvm.Commands.DelegateCommandBase">
+            <summary>
+            An <see cref="T:System.Windows.Input.ICommand"/> whose delegates can be attached for <see cref="M:MagicMvvm.Commands.DelegateCommandBase.Execute(System.Object)"/> and <see cref="M:MagicMvvm.Commands.DelegateCommandBase.CanExecute(System.Object)"/>.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommandBase.#ctor">
+            <summary>
+            Creates a new instance of a <see cref="T:MagicMvvm.Commands.DelegateCommandBase"/>, specifying both the execute action and the can execute function.
+            </summary>
+        </member>
+        <member name="E:MagicMvvm.Commands.DelegateCommandBase.CanExecuteChanged">
+            <summary>
+            Occurs when changes occur that affect whether or not the command should execute.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommandBase.OnCanExecuteChanged">
+            <summary>
+            Raises <see cref="E:System.Windows.Input.ICommand.CanExecuteChanged"/> so every
+            command invoker can requery <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/>.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommandBase.RaiseCanExecuteChanged">
+            <summary>
+            Raises <see cref="E:MagicMvvm.Commands.DelegateCommandBase.CanExecuteChanged"/> so every command invoker
+            can requery to check if the command can execute.
+            </summary>
+            <remarks>Note that this will trigger the execution of <see cref="E:MagicMvvm.Commands.DelegateCommandBase.CanExecuteChanged"/> once for each invoker.</remarks>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommandBase.Execute(System.Object)">
+            <summary>
+            Handle the internal invocation of <see cref="M:System.Windows.Input.ICommand.Execute(System.Object)"/>
+            </summary>
+            <param name="parameter">Command Parameter</param>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommandBase.CanExecute(System.Object)">
+            <summary>
+            Handle the internal invocation of <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/>
+            </summary>
+            <param name="parameter"></param>
+            <returns><see langword="true"/> if the Command Can Execute, otherwise <see langword="false" /></returns>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommandBase.ObservesPropertyInternal``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Observes a property that implements INotifyPropertyChanged, and automatically calls DelegateCommandBase.RaiseCanExecuteChanged on property changed notifications.
+            </summary>
+            <typeparam name="T">The object type containing the property specified in the expression.</typeparam>
+            <param name="propertyExpression">The property expression. Example: ObservesProperty(() => PropertyName).</param>
+        </member>
+        <member name="P:MagicMvvm.Commands.DelegateCommandBase.IsActive">
+            <summary>
+            Gets or sets a value indicating whether the object is active.
+            </summary>
+            <value><see langword="true" /> if the object is active; otherwise <see langword="false" />.</value>
+        </member>
+        <member name="E:MagicMvvm.Commands.DelegateCommandBase.IsActiveChanged">
+            <summary>
+            Fired if the <see cref="P:MagicMvvm.Commands.DelegateCommandBase.IsActive"/> property changes.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommandBase.OnIsActiveChanged">
+            <summary>
+            This raises the <see cref="E:MagicMvvm.Commands.DelegateCommandBase.IsActiveChanged"/> event.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Commands.DelegateCommand`1">
+             <summary>
+             An <see cref="T:System.Windows.Input.ICommand"/> whose delegates can be attached for <see cref="M:MagicMvvm.Commands.DelegateCommand`1.Execute(`0)"/> and <see cref="M:MagicMvvm.Commands.DelegateCommand`1.CanExecute(`0)"/>.
+             </summary>
+             <typeparam name="T">Parameter type.</typeparam>
+             <remarks>
+             The constructor deliberately prevents the use of value types.
+             Because ICommand takes an object, having a value type for T would cause unexpected behavior when CanExecute(null) is called during XAML initialization for command bindings.
+             Using default(T) was considered and rejected as a solution because the implementor would not be able to distinguish between a valid and defaulted values.
+             <para/>
+             Instead, callers should support a value type by using a nullable value type and checking the HasValue property before using the Value property.
+             <example>
+                 <code>
+             public MyClass()
+             {
+                 this.submitCommand = new DelegateCommand&lt;int?&gt;(this.Submit, this.CanSubmit);
+             }
+            
+             private bool CanSubmit(int? customerId)
+             {
+                 return (customerId.HasValue &amp;&amp; customers.Contains(customerId.Value));
+             }
+                 </code>
+             </example>
+             </remarks>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand`1.#ctor(System.Action{`0})">
+            <summary>
+            Initializes a new instance of <see cref="T:MagicMvvm.Commands.DelegateCommand`1"/>.
+            </summary>
+            <param name="executeMethod">Delegate to execute when Execute is called on the command. This can be null to just hook up a CanExecute delegate.</param>
+            <remarks><see cref="M:MagicMvvm.Commands.DelegateCommand`1.CanExecute(`0)"/> will always return true.</remarks>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand`1.#ctor(System.Action{`0},System.Func{`0,System.Boolean})">
+            <summary>
+            Initializes a new instance of <see cref="T:MagicMvvm.Commands.DelegateCommand`1"/>.
+            </summary>
+            <param name="executeMethod">Delegate to execute when Execute is called on the command. This can be null to just hook up a CanExecute delegate.</param>
+            <param name="canExecuteMethod">Delegate to execute when CanExecute is called on the command. This can be null.</param>
+            <exception cref="T:System.ArgumentNullException">When both <paramref name="executeMethod"/> and <paramref name="canExecuteMethod"/> are <see langword="null" />.</exception>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand`1.Execute(`0)">
+            <summary>
+            Executes the command and invokes the <see cref="T:System.Action`1"/> provided during construction.
+            </summary>
+            <param name="parameter">Data used by the command.</param>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand`1.CanExecute(`0)">
+            <summary>
+            Determines if the command can execute by invoked the <see cref="T:System.Func`2"/> provided during construction.
+            </summary>
+            <param name="parameter">Data used by the command to determine if it can execute.</param>
+            <returns>
+            <see langword="true" /> if this command can be executed; otherwise, <see langword="false" />.
+            </returns>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand`1.Execute(System.Object)">
+            <summary>
+            Handle the internal invocation of <see cref="M:System.Windows.Input.ICommand.Execute(System.Object)"/>
+            </summary>
+            <param name="parameter">Command Parameter</param>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand`1.CanExecute(System.Object)">
+            <summary>
+            Handle the internal invocation of <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/>
+            </summary>
+            <param name="parameter"></param>
+            <returns><see langword="true"/> if the Command Can Execute, otherwise <see langword="false" /></returns>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand`1.ObservesProperty``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Observes a property that implements INotifyPropertyChanged, and automatically calls DelegateCommandBase.RaiseCanExecuteChanged on property changed notifications.
+            </summary>
+            <typeparam name="TType">The type of the return value of the method that this delegate encapsulates</typeparam>
+            <param name="propertyExpression">The property expression. Example: ObservesProperty(() => PropertyName).</param>
+            <returns>The current instance of DelegateCommand</returns>
+        </member>
+        <member name="M:MagicMvvm.Commands.DelegateCommand`1.ObservesCanExecute(System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+            <summary>
+            Observes a property that is used to determine if this command can execute, and if it implements INotifyPropertyChanged it will automatically call DelegateCommandBase.RaiseCanExecuteChanged on property changed notifications.
+            </summary>
+            <param name="canExecuteExpression">The property expression. Example: ObservesCanExecute(() => PropertyName).</param>
+            <returns>The current instance of DelegateCommand</returns>
+        </member>
+        <member name="T:MagicMvvm.Commands.PropertyObserver">
+            <summary>
+            Provide a way to observe property changes of INotifyPropertyChanged objects and invokes a
+            custom action when the PropertyChanged event is fired.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Commands.PropertyObserver.Observes``1(System.Linq.Expressions.Expression{System.Func{``0}},System.Action)">
+            <summary>
+            Observes a property that implements INotifyPropertyChanged, and automatically calls a custom action on
+            property changed notifications. The given expression must be in this form: "() => Prop.NestedProp.PropToObserve".
+            </summary>
+            <param name="propertyExpression">Expression representing property to be observed. Ex.: "() => Prop.NestedProp.PropToObserve".</param>
+            <param name="action">Action to be invoked when PropertyChanged event occurs.</param>
+        </member>
+        <member name="T:MagicMvvm.Commands.PropertyObserverNode">
+            <summary>
+            Represents each node of nested properties expression and takes care of
+            subscribing/unsubscribing INotifyPropertyChanged.PropertyChanged listeners on it.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Common.IParameters">
+            <summary>
+            Defines a contract for specifying values associated with a unique key.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Common.IParameters.Add(System.String,System.Object)">
+            <summary>
+            Adds the specified key and value to the parameter collection.
+            </summary>
+            <param name="key">The key of the parameter to add.</param>
+            <param name="value">The value of the parameter to add.</param>
+        </member>
+        <member name="M:MagicMvvm.Common.IParameters.ContainsKey(System.String)">
+            <summary>
+            Determines whether the <see cref="T:MagicMvvm.Common.IParameters"/> contains the specified <paramref name="key"/>.
+            </summary>
+            <param name="key">The key to search the parameters for existence.</param>
+            <returns>true if the <see cref="T:MagicMvvm.Common.IParameters"/> contains a parameter with the specified key; otherwise, false.</returns>
+        </member>
+        <member name="P:MagicMvvm.Common.IParameters.Count">
+            <summary>
+            Gets the number of parameters contained in the <see cref="T:MagicMvvm.Common.IParameters"/>.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Common.IParameters.Keys">
+            <summary>
+            Gets a collection containing the keys in the <see cref="T:MagicMvvm.Common.IParameters"/>.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Common.IParameters.GetValue``1(System.String)">
+            <summary>
+            Gets the parameter associated with the specified <paramref name="key"/>.
+            </summary>
+            <typeparam name="T">The type of the parameter to get.</typeparam>
+            <param name="key">The key of the parameter to find.</param>
+            <returns>A matching value of <typeparamref name="T"/> if it exists.</returns>
+        </member>
+        <member name="M:MagicMvvm.Common.IParameters.GetValues``1(System.String)">
+            <summary>
+            Gets the parameter associated with the specified <paramref name="key"/>.
+            </summary>
+            <typeparam name="T">The type of the parameter to get.</typeparam>
+            <param name="key">The key of the parameter to find.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of all the values referenced by key.</returns>
+        </member>
+        <member name="M:MagicMvvm.Common.IParameters.TryGetValue``1(System.String,``0@)">
+            <summary>
+            Gets the parameter associated with the specified <paramref name="key"/>.
+            </summary>
+            <typeparam name="T">The type of the parameter to get.</typeparam>
+            <param name="key">The key of the parameter to get.</param>
+            <param name="value">
+            When this method returns, contains the parameter associated with the specified key,
+            if the key is found; otherwise, the default value for the type of the value parameter.
+            </param>
+            <returns>true if the <see cref="T:MagicMvvm.Common.IParameters"/> contains a parameter with the specified key; otherwise, false.</returns>
+        </member>
+        <member name="P:MagicMvvm.Common.IParameters.Item(System.String)">
+            <summary>
+            Gets the parameter associated with the specified key (legacy).
+            </summary>
+            <param name="key">The key of the parameter to get.</param>
+            <returns>A matching value if it exists.</returns>
+        </member>
+        <member name="T:MagicMvvm.Common.ParametersBase">
+            <summary>
+            This is a generic parameters base class used for Dialog Parameters and Navigation Parameters.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersBase.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersBase.#ctor(System.String)">
+            <summary>
+            Constructs a list of parameters.
+            </summary>
+            <param name="query">Query string to be parsed.</param>
+        </member>
+        <member name="P:MagicMvvm.Common.ParametersBase.Item(System.String)">
+            <summary>
+            Searches Parameter collection and returns value if Collection contains key.
+            Otherwise returns null.
+            </summary>
+            <param name="key">The key for the value to be returned.</param>
+            <returns>The value of the parameter referenced by the key; otherwise <c>null</c>.</returns>
+        </member>
+        <member name="P:MagicMvvm.Common.ParametersBase.Count">
+            <summary>
+            The count, or number, of parameters in collection.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Common.ParametersBase.Keys">
+            <summary>
+            Returns an IEnumerable of the Keys in the collection.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersBase.Add(System.String,System.Object)">
+            <summary>
+            Adds the key and value to the parameters collection.
+            </summary>
+            <param name="key">The key to reference this value in the parameters collection.</param>
+            <param name="value">The value of the parameter to store.</param>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersBase.ContainsKey(System.String)">
+            <summary>
+            Checks collection for presence of key.
+            </summary>
+            <param name="key">The key to check in the collection.</param>
+            <returns><c>true</c> if key exists; else returns <c>false</c>.</returns>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersBase.GetEnumerator">
+            <summary>
+            Gets an enumerator for the KeyValuePairs in parameter collection.
+            </summary>
+            <returns>Enumerator.</returns>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersBase.GetValue``1(System.String)">
+            <summary>
+            Returns the value of the member referenced by key.
+            </summary>
+            <typeparam name="T">The type of object to be returned.</typeparam>
+            <param name="key">The key for the value to be returned.</param>
+            <returns>Returns a matching parameter of <typeparamref name="T"/> if one exists in the Collection.</returns>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersBase.GetValues``1(System.String)">
+             <summary>
+             Returns an IEnumerable of all parameters.
+             </summary>
+             <typeparam name="T">The type for the values to be returned.</typeparam>
+             <param name="key">The key for the values to be returned.</param>
+            <returns>Returns a IEnumerable of all the instances of type <typeparamref name="T"/>.</returns>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersBase.TryGetValue``1(System.String,``0@)">
+            <summary>
+            Checks to see if the parameter collection contains the value.
+            </summary>
+            <typeparam name="T">The type for the values to be returned.</typeparam>
+            <param name="key">The key for the value to be returned.</param>
+            <param name="value">Value of the returned parameter if it exists.</param>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersBase.ToString">
+            <summary>
+            Converts parameter collection to a parameter string.
+            </summary>
+            <returns>A string representation of the parameters.</returns>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersBase.FromParameters(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}})">
+            <summary>
+            Adds a collection of parameters to the local parameter list.
+            </summary>
+            <param name="parameters">An IEnumerable of KeyValuePairs to add to the current parameter list.</param>
+        </member>
+        <member name="T:MagicMvvm.Common.ParametersExtensions">
+            <summary>
+            Extension methods for Navigation or Dialog parameters
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersExtensions.GetValue``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}},System.String)">
+            <summary>
+            Searches <paramref name="parameters"/> for <paramref name="key"/>
+            </summary>
+            <typeparam name="T">The type of the parameter to return</typeparam>
+            <param name="parameters">A collection of parameters to search</param>
+            <param name="key">The key of the parameter to find</param>
+            <returns>A matching value of <typeparamref name="T"/> if it exists</returns>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersExtensions.GetValue(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}},System.String,System.Type)">
+            <summary>
+            Searches <paramref name="parameters"/> for value referenced by <paramref name="key"/>
+            </summary>
+            <param name="parameters">A collection of parameters to search</param>
+            <param name="key">The key of the parameter to find</param>
+            <param name="type">The type of the parameter to return</param>
+            <returns>A matching value of <paramref name="type"/> if it exists</returns>
+            <exception cref="T:System.InvalidCastException">Unable to convert the value of Type</exception>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersExtensions.TryGetValue``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}},System.String,``0@)">
+            <summary>
+            Searches <paramref name="parameters"/> for value referenced by <paramref name="key"/>
+            </summary>
+            <typeparam name="T">The type of the parameter to return</typeparam>
+            <param name="parameters">A collection of parameters to search</param>
+            <param name="key">The key of the parameter to find</param>
+            <param name="value">The value of parameter to return</param>
+            <returns>Success if value is found; otherwise returns <c>false</c></returns>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersExtensions.GetValues``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}},System.String)">
+            <summary>
+            Searches <paramref name="parameters"/> for value referenced by <paramref name="key"/>
+            </summary>
+            <typeparam name="T">The type of the parameter to return</typeparam>
+            <param name="parameters">A collection of parameters to search</param>
+            <param name="key">The key of the parameter to find</param>
+            <returns>An IEnumerable{T} of all the values referenced by key</returns>
+        </member>
+        <member name="M:MagicMvvm.Common.ParametersExtensions.ContainsKey(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}},System.String)">
+            <summary>
+            Checks to see if key exists in parameter collection
+            </summary>
+            <param name="parameters">IEnumerable to search</param>
+            <param name="key">The key to search the <paramref name="parameters"/> for existence</param>
+            <returns><c>true</c> if key exists; <c>false</c> otherwise</returns>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.ButtonResult">
+            <summary>
+            The result of the dialog.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Dialogs.ButtonResult.Abort">
+            <summary>
+            Abort.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Dialogs.ButtonResult.Cancel">
+            <summary>
+            Cancel.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Dialogs.ButtonResult.Ignore">
+            <summary>
+            Ignore.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Dialogs.ButtonResult.No">
+            <summary>
+            No.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Dialogs.ButtonResult.None">
+            <summary>
+            No result returned.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Dialogs.ButtonResult.OK">
+            <summary>
+            OK.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Dialogs.ButtonResult.Retry">
+            <summary>
+            Retry.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Dialogs.ButtonResult.Yes">
+            <summary>
+            Yes.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.DialogParameters">
+            <summary>
+            Represents Dialog parameters.
+            </summary>
+            <remarks>
+            This class can be used to to pass object parameters during the showing and closing of Dialogs.
+            </remarks>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MagicMvvm.Dialogs.DialogParameters"/> class.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogParameters.#ctor(System.String)">
+            <summary>
+            Constructs a list of parameters.
+            </summary>
+            <param name="query">Query string to be parsed.</param>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.DialogResult">
+            <summary>
+            An <see cref="T:MagicMvvm.Dialogs.IDialogResult"/> that contains <see cref="T:MagicMvvm.Dialogs.IDialogParameters"/> from the dialog
+            and the <see cref="T:MagicMvvm.Dialogs.ButtonResult"/> of the dialog.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.DialogResult.Parameters">
+            <summary>
+            The parameters from the dialog.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.DialogResult.Result">
+            <summary>
+            The result of the dialog.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MagicMvvm.Dialogs.DialogResult"/> class.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogResult.#ctor(MagicMvvm.Dialogs.ButtonResult)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MagicMvvm.Dialogs.DialogResult"/> class.
+            </summary>
+            <param name="result">The result of the dialog.</param>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogResult.#ctor(MagicMvvm.Dialogs.ButtonResult,MagicMvvm.Dialogs.IDialogParameters)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MagicMvvm.Dialogs.DialogResult"/> class.
+            </summary>
+            <param name="result">The result of the dialog.</param>
+            <param name="parameters">The parameters from the dialog.</param>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.IDialogAware">
+            <summary>
+            Interface that provides dialog functions and events to ViewModels.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.IDialogAware.Title">
+            <summary>
+            The title of the dialog that will show in the hostWindow title bar.
+            </summary>
+        </member>
+        <member name="E:MagicMvvm.Dialogs.IDialogAware.RequestClose">
+            <summary>
+            Instructs the IDialogHostWindow to close the dialog.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.IDialogAware.CanCloseDialog">
+            <summary>
+            Determines if the dialog can be closed.
+            </summary>
+            <returns>If <c>true</c> the dialog can be closed. If <c>false</c> the dialog will not close.</returns>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.IDialogAware.OnDialogClosed">
+            <summary>
+            Called when the dialog is closed.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.IDialogAware.OnDialogOpened(MagicMvvm.Dialogs.IDialogParameters)">
+            <summary>
+            Called when the dialog is opened.
+            </summary>
+            <param name="parameters">The parameters passed to the dialog.</param>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.IDialogManager">
+            <summary>
+            Interface to show modal or non-modal dialogs.
+            </summary>
+            <remarks>
+            Register type as a singleton inside container.
+            </remarks>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.IDialogManager.RegisterDialog``1(System.String)">
+            <summary>
+            Register dialog inside registrar.
+            </summary>
+            <param name="dialogName">The unique name of the dialog.</param>
+            <typeparam name="TDialogView">View of dialog which is inherited from FrameworkElement</typeparam>
+            <returns>The <see cref="T:MagicMvvm.Dialogs.IDialogManager"/>, for registering several dialogs easily.</returns>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.IDialogManager.RegisterDialogHostWindow``1(System.String)">
+            <summary>
+            Register dialog host window inside registrar.
+            </summary>
+            <param name="windowName">The unique name of the dialog's hosting window.</param>
+            <typeparam name="TDialogWindow">View of dialog's hosting window which is class that implements IDialogHostWindow</typeparam>
+            <returns>The <see cref="T:MagicMvvm.Dialogs.IDialogManager"/>, for registering several host windows easily.</returns>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.IDialogManager.Show(System.String,MagicMvvm.Dialogs.IDialogParameters,System.Action{MagicMvvm.Dialogs.IDialogResult},System.String)">
+            <summary>
+            Shows a non-modal dialog.
+            </summary>
+            <param name="name">The unique name of the dialog to show.</param>
+            <param name="parameters">The parameters to pass to the dialog.</param>
+            <param name="callback">The action to perform when the dialog is closed.</param>
+            <param name="windowName">The unique name of dialog's hosting window.</param>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.IDialogManager.ShowDialog(System.String,MagicMvvm.Dialogs.IDialogParameters,System.Action{MagicMvvm.Dialogs.IDialogResult},System.String)">
+            <summary>
+            Shows a modal dialog.
+            </summary>
+            <param name="name">The unique name of the dialog to show.</param>
+            <param name="parameters">The parameters to pass to the dialog.</param>
+            <param name="callback">The action to perform when the dialog is closed.</param>
+            <param name="windowName">The unique name of dialog's hosting window.</param>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.IDialogParameters">
+            <summary>
+            Represents Dialog parameters.
+            </summary>
+            <remarks>
+            A class that implements this interface can be used to pass
+            object parameters during the showing and closing of Dialogs.
+            </remarks>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.IDialogResult">
+            <summary>
+            Contains <see cref="T:MagicMvvm.Dialogs.IDialogParameters"/> from the dialog
+            and the <see cref="T:MagicMvvm.Dialogs.ButtonResult"/> of the dialog.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.IDialogResult.Parameters">
+            <summary>
+            The parameters from the dialog.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.IDialogResult.Result">
+            <summary>
+            The result of the dialog.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.IActiveAware">
+            <summary>
+            Interface that defines if the object instance is active
+            and notifies when the activity changes.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.IActiveAware.IsActive">
+            <summary>
+            Gets or sets a value indicating whether the object is active.
+            </summary>
+            <value><see langword="true" /> if the object is active; otherwise <see langword="false" />.</value>
+        </member>
+        <member name="E:MagicMvvm.IActiveAware.IsActiveChanged">
+            <summary>
+            Notifies that the value for <see cref="P:MagicMvvm.IActiveAware.IsActive"/> property has changed.
+            </summary>
+        </member>
+        <member name="E:MagicMvvm.BindableBase.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.BindableBase.SetProperty``1(``0@,``0,System.String)">
+            <summary>
+            Checks if a property already matches a desired value. Sets the property and
+            notifies listeners only when necessary.
+            </summary>
+            <typeparam name="T">Type of the property.</typeparam>
+            <param name="storage">Reference to a property with both getter and setter.</param>
+            <param name="value">Desired value for the property.</param>
+            <param name="propertyName">Name of the property used to notify listeners. This
+            value is optional and can be provided automatically when invoked from compilers that
+            support CallerMemberName.</param>
+            <returns>True if the value was changed, false if the existing value matched the
+            desired value.</returns>
+        </member>
+        <member name="M:MagicMvvm.BindableBase.SetProperty``1(``0@,``0,System.Action,System.String)">
+            <summary>
+            Checks if a property already matches a desired value. Sets the property and
+            notifies listeners only when necessary.
+            </summary>
+            <typeparam name="T">Type of the property.</typeparam>
+            <param name="storage">Reference to a property with both getter and setter.</param>
+            <param name="value">Desired value for the property.</param>
+            <param name="propertyName">Name of the property used to notify listeners. This
+            value is optional and can be provided automatically when invoked from compilers that
+            support CallerMemberName.</param>
+            <param name="onChanged">Action that is called after the property value has been changed.</param>
+            <returns>True if the value was changed, false if the existing value matched the
+            desired value.</returns>
+        </member>
+        <member name="M:MagicMvvm.BindableBase.RaisePropertyChanged(System.String)">
+            <summary>
+            Raises this object's PropertyChanged event.
+            </summary>
+            <param name="propertyName">Name of the property used to notify listeners. This
+            value is optional and can be provided automatically when invoked from compilers
+            that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
+        </member>
+        <member name="M:MagicMvvm.BindableBase.RaisePropertiesChanged(System.String[])">
+            <summary>
+            Raises all property's PropertyChanged event.
+            </summary>
+            <param name="propertiesNames"></param>
+        </member>
+        <member name="M:MagicMvvm.BindableBase.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Raises this object's PropertyChanged event.
+            </summary>
+            <param name="args">The PropertyChangedEventArgs</param>
+        </member>
+        <member name="M:MagicMvvm.BindableBase.OnPropertiesChanged(System.String[])">
+            <summary>
+            Raises all property's PropertyChanged event.
+            </summary>
+            <param name="propertiesNames"></param>
+        </member>
+        <member name="T:MagicMvvm.Navigation.INavigationAware">
+            <summary>
+            Provides a way for objects involved in navigation to be notified of navigation activities.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Navigation.INavigationAware.OnNavigatedTo(MagicMvvm.Navigation.NavigationContext)">
+            <summary>
+            Called when the implementer has been navigated to.
+            </summary>
+            <param name="navigationContext">The navigation context.</param>
+        </member>
+        <member name="M:MagicMvvm.Navigation.INavigationAware.OnNavigatedFrom(MagicMvvm.Navigation.NavigationContext)">
+            <summary>
+            Called when the implementer is being navigated away from.
+            </summary>
+            <param name="navigationContext">The navigation context.</param>
+        </member>
+        <member name="T:MagicMvvm.Navigation.INavigationManager">
+            <summary>
+            Interface of navigation manager. 
+            </summary>
+            <remarks>
+            Register type as a singleton inside container.
+            </remarks>
+        </member>
+        <member name="M:MagicMvvm.Navigation.INavigationManager.RegisterRegionWithView(System.String,System.Object)">
+            <summary>
+            Register region name and region view's instance inside registrar. Associate a view with a region, using a concrete instance of the view. 
+            </summary>
+            <param name="regionName">The name of the region to associate the view with.</param>
+            <param name="viewInstance">The instance of the view which associated with region name.</param>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationManager"/>, for adding several views easily</returns>
+        </member>
+        <member name="M:MagicMvvm.Navigation.INavigationManager.RegisterView(System.String,System.Uri)">
+            <summary>
+            Register view name and view source inside registrar. Configures specified view for navigation.
+            </summary>
+            <param name="viewName">The view name</param>
+            <param name="viewSource">The URI of specified view</param>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationManager"/>, for adding several views easily</returns>
+        </member>
+        <member name="M:MagicMvvm.Navigation.INavigationManager.RequestNavigate(System.String,System.String,System.Action,MagicMvvm.Navigation.INavigationParameters)">
+            <summary>
+            Navigates the specified view to the region.
+            </summary>
+            <param name="regionName">The name of the region to call Navigate on.</param>
+            <param name="viewName">The name of the view that registered for navigation inside manager.</param>
+            <param name="navigationCallback">The navigation callback that will be executed after the navigation is completed.</param>
+            <param name="navigationParameters">Navigation parameters to pass arguments between views.</param>
+        </member>
+        <member name="T:MagicMvvm.Navigation.INavigationParameters">
+            <summary>
+            Represents Navigation parameters.
+            </summary>
+            <remarks>
+            This class can be used to to pass object parameters during Navigation.
+            </remarks>
+        </member>
+        <member name="T:MagicMvvm.Navigation.NavigationContext">
+            <summary>
+            Encapsulates information about a navigation request.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Navigation.NavigationContext.#ctor(MagicMvvm.Navigation.INavigationParameters)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MagicMvvm.Navigation.NavigationContext"/> class for a region name and a 
+            <see cref="T:System.Uri"/>.
+            </summary>
+            <param name="navigationParameters">The navigation parameters.</param>
+        </member>
+        <member name="P:MagicMvvm.Navigation.NavigationContext.Parameters">
+            <summary>
+            Gets the <see cref="T:MagicMvvm.Navigation.NavigationParameters"/> extracted from the URI and the object parameters passed in navigation.
+            </summary>
+            <value>The URI query.</value>
+        </member>
+        <member name="T:MagicMvvm.Navigation.NavigationParameters">
+            <summary>
+            Represents Navigation parameters.
+            </summary>
+            <remarks>
+            This class can be used to to pass object parameters during Navigation.
+            </remarks>
+        </member>
+        <member name="M:MagicMvvm.Navigation.NavigationParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MagicMvvm.Navigation.NavigationParameters"/> class.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Navigation.NavigationParameters.#ctor(System.String)">
+            <summary>
+            Constructs a list of parameters
+            </summary>
+            <param name="query">Query string to be parsed</param>
+        </member>
+    </members>
+</doc>

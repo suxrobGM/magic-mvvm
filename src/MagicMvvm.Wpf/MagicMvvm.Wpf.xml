@@ -1,0 +1,362 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MagicMvvm.Wpf</name>
+    </assembly>
+    <members>
+        <member name="T:MagicMvvm.Dialogs.DialogHost">
+            <summary>
+            This class contains <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/> attached properties.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Dialogs.DialogHost.WindowStyleProperty">
+            <summary>
+            Identifies the WindowStyle attached property.
+            </summary>
+            <remarks>
+            This attached property is used to specify the style of a <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/>.
+            </remarks>
+        </member>
+        <member name="F:MagicMvvm.Dialogs.DialogHost.MatchParentSizeProperty">
+            <summary>
+            Identifies the MatchParentSize attached property.
+            </summary>
+            <remarks>
+            This attached property is used to indicate that change width and height of <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/> to match parent size.
+            By default, the width and height are sized to match the content size.
+            </remarks>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.DialogHostWindow">
+            <summary>
+            Default dialog host.
+            </summary>
+            <summary>
+            DialogHostWindow
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogHostWindow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MagicMvvm.Dialogs.DialogHostWindow"/> class.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.DialogHostWindow.Result">
+            <summary>
+            The <see cref="T:MagicMvvm.Dialogs.IDialogResult"/> of the dialog.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogHostWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.DialogManager">
+            <summary>
+            Implements <see cref="T:MagicMvvm.Dialogs.IDialogManager"/> to show modal or non-modal dialogs.
+            </summary>
+            <remarks>
+            Register type as a singleton inside container.
+            The dialog's ViewModel must implement IDialogAware.
+            </remarks>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManager.ShowDialogWindow(MagicMvvm.Dialogs.IDialogHostWindow,System.Boolean)">
+            <summary>
+            Shows the dialog host window.
+            </summary>
+            <param name="dialogHostWindow">The dialog host window to show.</param>
+            <param name="isModal">If true; dialog is shown as a modal</param>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManager.CreateDialogWindow(System.String)">
+            <summary>
+            Create a new <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/>.
+            </summary>
+            <param name="windowName">The unique name of dialog's hosting window.</param>
+            <returns>The created <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/>.</returns>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManager.ConfigureDialogWindowContent(System.String,MagicMvvm.Dialogs.IDialogHostWindow,MagicMvvm.Dialogs.IDialogParameters)">
+            <summary>
+            Configure <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/> content.
+            </summary>
+            <param name="dialogName">The name of the dialog to show.</param>
+            <param name="hostWindow">The hosting hostWindow.</param>
+            <param name="parameters">The parameters to pass to the dialog.</param>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManager.ConfigureDialogWindowEvents(MagicMvvm.Dialogs.IDialogHostWindow,System.Action{MagicMvvm.Dialogs.IDialogResult})">
+            <summary>
+            Configure <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/> and <see cref="T:MagicMvvm.Dialogs.IDialogAware"/> events.
+            </summary>
+            <param name="hostWindow">The hosting window.</param>
+            <param name="callback">The action to perform when the dialog is closed.</param>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManager.ConfigureDialogWindowProperties(MagicMvvm.Dialogs.IDialogHostWindow,System.Windows.FrameworkElement,MagicMvvm.Dialogs.IDialogAware)">
+            <summary>
+            Configure <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/> properties.
+            </summary>
+            <param name="hostWindow">The hosting window.</param>
+            <param name="dialogContent">The dialog to show.</param>
+            <param name="viewModel">The dialog's ViewModel.</param>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.IDialogHostWindow">
+            <summary>
+            Interface for a dialog hosting window.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.IDialogHostWindow.Height">
+            <summary>
+            Height of the dialog host window
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.IDialogHostWindow.Width">
+            <summary>
+            Width of the dialog host window
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.IDialogHostWindow.Content">
+            <summary>
+            Dialog content.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.IDialogHostWindow.Close">
+            <summary>
+            Close the dialog host window.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.IDialogHostWindow.Owner">
+            <summary>
+            The dialog host window's owner.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.IDialogHostWindow.Show">
+            <summary>
+            Show a non-modal dialog.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.IDialogHostWindow.ShowDialog">
+            <summary>
+            Show a modal dialog.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.IDialogHostWindow.DataContext">
+            <summary>
+            The data context of the dialog host window.
+            </summary>
+            <remarks>
+            The data context must implement <see cref="T:MagicMvvm.Dialogs.IDialogAware"/>.
+            </remarks>
+        </member>
+        <member name="E:MagicMvvm.Dialogs.IDialogHostWindow.Loaded">
+            <summary>
+            Called when the dialog host window is loaded.
+            </summary>
+        </member>
+        <member name="E:MagicMvvm.Dialogs.IDialogHostWindow.Closed">
+            <summary>
+            Called when the dialog host window is closed.
+            </summary>
+        </member>
+        <member name="E:MagicMvvm.Dialogs.IDialogHostWindow.Closing">
+            <summary>
+            Called when the dialog host window is closing.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.IDialogHostWindow.Result">
+            <summary>
+            The result of the dialog.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.Dialogs.IDialogHostWindow.Style">
+            <summary>
+            The dialog host window style.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.DialogManagerExtensions">
+            <summary>
+            Extension methods for <see cref="T:MagicMvvm.Dialogs.IDialogManager"/>
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.RegisterDialog``1(MagicMvvm.Dialogs.IDialogManager)">
+            <summary>
+            Register dialog inside registrar.
+            </summary>
+            <remarks>
+            The name of type <typeparamref name="TDialogView"/> will be used as a unique dialog name inside registrar.
+            </remarks>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
+            <typeparam name="TDialogView">View of dialog which is inherited from <see cref="T:System.Windows.FrameworkElement"/></typeparam>
+            <returns>The <see cref="T:MagicMvvm.Dialogs.IDialogManager"/>, for registering several dialogs easily.</returns>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.RegisterDialog``1(MagicMvvm.Dialogs.IDialogManager,System.String)">
+            <summary>
+            Register dialog inside registrar.
+            </summary>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
+            <param name="dialogName">The unique name of the dialog.</param>
+            <typeparam name="TDialogView">View of dialog which is inherited from <see cref="T:System.Windows.FrameworkElement"/></typeparam>
+            <returns>The <see cref="T:MagicMvvm.Dialogs.IDialogManager"/>, for registering several dialogs easily.</returns>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.RegisterDialogHostWindow``1(MagicMvvm.Dialogs.IDialogManager,System.String)">
+            <summary>
+            Register dialog host window inside registrar.
+            </summary>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
+            <param name="windowName">The unique name of the dialog's hosting window.</param>
+            <typeparam name="TDialogWindow">View of dialog's hosting window which is class that implements <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/></typeparam>
+            <returns>The <see cref="T:MagicMvvm.Dialogs.IDialogManager"/>, for registering several host windows easily.</returns>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.Show(MagicMvvm.Dialogs.IDialogManager,System.String)">
+            <summary>
+            Shows a non-modal dialog.
+            </summary>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
+            <param name="name">The unique name of the dialog to show.</param>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.Show(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Dialogs.IDialogParameters)">
+            <summary>
+            Shows a non-modal dialog.
+            </summary>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
+            <param name="name">The unique name of the dialog to show.</param>
+            <param name="parameters">The parameters to pass to the dialog.</param>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.Show(MagicMvvm.Dialogs.IDialogManager,System.String,System.Action{MagicMvvm.Dialogs.IDialogResult})">
+            <summary>
+            Shows a non-modal dialog.
+            </summary>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
+            <param name="name">The unique name of the dialog to show.</param>
+            <param name="callback">The action to perform when the dialog is closed.</param>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.Show(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Dialogs.IDialogParameters,System.Action{MagicMvvm.Dialogs.IDialogResult})">
+            <summary>
+            Shows a non-modal dialog.
+            </summary>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
+            <param name="name">The unique name of the dialog to show.</param>
+            <param name="parameters">The parameters to pass to the dialog.</param>
+            <param name="callback">The action to perform when the dialog is closed.</param>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Dialogs.IDialogManager,System.String)">
+            <summary>
+            Shows a modal dialog.
+            </summary>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
+            <param name="name">The unique name of the dialog to show.</param>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Dialogs.IDialogParameters)">
+            <summary>
+            Shows a modal dialog.
+            </summary>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
+            <param name="name">The unique name of the dialog to show.</param>
+            <param name="parameters">>The parameters to pass to the dialog.</param>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Dialogs.IDialogManager,System.String,System.Action{MagicMvvm.Dialogs.IDialogResult})">
+            <summary>
+            Shows a modal dialog.
+            </summary>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
+            <param name="name">The unique name of the dialog to show.</param>
+            <param name="callback">The action to perform when the dialog is closed.</param>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Dialogs.IDialogParameters,System.Action{MagicMvvm.Dialogs.IDialogResult})">
+            <summary>
+            Shows a modal dialog.
+            </summary>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
+            <param name="name">The unique name of the dialog to show.</param>
+            <param name="parameters">The parameters to pass to the dialog.</param>
+            <param name="callback">The action to perform when the dialog is closed.</param>
+        </member>
+        <member name="T:MagicMvvm.Navigation.NavigationManagerExtensions">
+            <summary>
+            Extension methods for <see cref="T:MagicMvvm.Navigation.INavigationManager"/>
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.RegisterView(MagicMvvm.Navigation.INavigationManager,System.String,System.String)">
+            <summary>
+            Register view name and view source inside registrar. Configures specified view for navigation.
+            </summary>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/></param>
+            <param name="viewName">The view name to register.</param>
+            <param name="viewSourceUri">The URI of specified view as a string representation.</param>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationManager"/>, for adding several views easily.</returns>
+        </member>
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.RegisterView``1(MagicMvvm.Navigation.INavigationManager,System.String)">
+            <summary>
+            Register view name and view source inside registrar. Configures specified view for navigation.
+            </summary>
+            <remarks>
+            The name of type <typeparamref name="TView"/> will be used as a unique view name inside registrar.
+            </remarks>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/></param>
+            <param name="viewSourceUri">The URI of specified view as a string representation</param>
+            <typeparam name="TView">Type of the view. It will be used as a view name to register.</typeparam>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationManager"/>, for adding several views easily.</returns>
+        </member>
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.RegisterView``1(MagicMvvm.Navigation.INavigationManager,System.Uri)">
+            <summary>
+            Register view name and view source inside registrar. Configures specified view for navigation.
+            </summary>
+            <remarks>
+            The name of type <typeparamref name="TView"/> will be used as a unique view name inside registrar.
+            </remarks>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/></param>
+            <param name="viewSource">The URI of specified view.</param>
+            <typeparam name="TView">Type of view. It will be used as a view name to register.</typeparam>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationManager"/>, for adding several views easily.</returns>
+        </member>
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.RequestNavigate(MagicMvvm.Navigation.INavigationManager,System.String,System.String)">
+            <summary>
+            Navigates the specified view to the region.
+            </summary>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/></param>
+            <param name="regionName">The name of the region to call Navigate on.</param>
+            <param name="viewName">The name of the view that registered for navigation inside manager.</param>
+        </member>
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.RequestNavigate(MagicMvvm.Navigation.INavigationManager,System.String,System.String,System.Action)">
+            <summary>
+            Navigates the specified view to the region.
+            </summary>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/></param>
+            <param name="regionName">The name of the region to call Navigate on.</param>
+            <param name="viewName">The name of the view that registered for navigation inside manager.</param>
+            <param name="navigationCallback">The navigation callback that will be executed after the navigation is completed.</param>
+        </member>
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.RequestNavigate(MagicMvvm.Navigation.INavigationManager,System.String,System.String,MagicMvvm.Navigation.INavigationParameters)">
+            <summary>
+            Navigates the specified view to the region.
+            </summary>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/></param>
+            <param name="regionName">The name of the region to call Navigate on.</param>
+            <param name="viewName">The name of the view that registered for navigation inside manager.</param>
+            <param name="navigationParameters">Navigation parameters to pass arguments between views.</param>
+        </member>
+        <member name="T:MagicMvvm.Navigation.NavigationManager">
+            <summary>
+            Implements <see cref="T:MagicMvvm.Navigation.INavigationManager"/> to handle navigation between views.
+            </summary>
+            <remarks>
+            Register type as a singleton inside container.
+            </remarks>
+        </member>
+        <member name="T:MagicMvvm.ViewModelBase">
+            <summary>
+            Base view model
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.ViewModelBase.InvokeInUiThread(System.Action)">
+            <summary>
+            Invoke <see cref="T:System.Action"/> in default UI thread.
+            </summary>
+            <param name="action"></param>
+        </member>
+        <member name="M:MagicMvvm.ViewModelBase.InvokeInUiThreadAsync(System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Threading.CancellationToken)">
+            <summary>
+            Invoke asynchronous <see cref="T:System.Action"/> in default UI thread.
+            </summary>
+            <param name="action"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -13,7 +13,7 @@ namespace MagicMvvm.Dialogs
         string Title { get; }
 
         /// <summary>
-        /// Instructs the <see cref="IDialogHostWindow"/> to close the dialog.
+        /// Instructs the IDialogHostWindow to close the dialog.
         /// </summary>
         event Action<IDialogResult> RequestClose;
 
