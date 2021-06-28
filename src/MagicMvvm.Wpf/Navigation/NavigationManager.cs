@@ -54,6 +54,7 @@ namespace MagicMvvm.Navigation
                 {
                     var viewSource = new Uri(key.Replace(".baml", ".xaml"), UriKind.RelativeOrAbsolute);
                     _viewsCollection.Add(viewName, viewSource);
+                    break;
                 }
             }
             return this;
