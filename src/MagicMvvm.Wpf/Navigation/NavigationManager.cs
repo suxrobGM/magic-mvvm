@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -27,16 +29,33 @@ namespace MagicMvvm.Navigation
             if (string.IsNullOrEmpty(regionName))
                 throw new ArgumentNullException(nameof(regionName));
 
+            if (viewInstance == null)
+                throw new ArgumentNullException(nameof(viewInstance));
+
             _regionsCollection.Add(regionName, viewInstance);
             return this;
         }
 
-        public INavigationManager RegisterView(string viewName, Uri viewSource)
+        public INavigationManager RegisterView<TView>(string viewName)
         {
             if (string.IsNullOrEmpty(viewName))
                 throw new ArgumentNullException(nameof(viewName));
 
-            _viewsCollection.Add(viewName, viewSource);
+            var viewTypeName = typeof(TView).Name.ToLower();
+            var assembly = typeof(TView).Assembly;
+            var stream = assembly.GetManifestResourceStream(assembly.GetName().Name + ".g.resources");
+            using var reader = new ResourceReader(stream ?? throw new InvalidOperationException("Could not locate application resource files"));
+
+            foreach (DictionaryEntry entry in reader)
+            {
+                var key = (string)entry.Key;
+
+                if (key.Contains(viewTypeName))
+                {
+                    var viewSource = new Uri(key.Replace(".baml", ".xaml"), UriKind.RelativeOrAbsolute);
+                    _viewsCollection.Add(viewName, viewSource);
+                }
+            }
             return this;
         }
 
@@ -44,10 +63,10 @@ namespace MagicMvvm.Navigation
             INavigationParameters navigationParameters)
         {
             if (!_viewsCollection.ContainsKey(viewName))
-                throw new ArgumentException($"The name of view {viewName} was not registered inside registrar");
+                throw new InvalidOperationException($"The name of view {viewName} was not registered inside registrar");
 
             if (!_regionsCollection.ContainsKey(regionName))
-                throw new ArgumentException($"The name of region {regionName} was not registered inside registrar");
+                throw new InvalidOperationException($"The name of region {regionName} was not registered inside registrar");
 
             var regionViewObj = _regionsCollection[regionName];
             var navContext = new NavigationContext(navigationParameters);

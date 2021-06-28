@@ -10,6 +10,6 @@ namespace MagicMvvm.Navigation
     /// </remarks>
     public interface INavigationParameters : IParameters
     {
-        
+
     }
 }

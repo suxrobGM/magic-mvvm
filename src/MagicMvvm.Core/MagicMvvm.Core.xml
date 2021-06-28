@@ -1307,6 +1307,7 @@
             </summary>
             <param name="dialogName">The unique name of the dialog.</param>
             <typeparam name="TDialogView">View of dialog which is inherited from FrameworkElement</typeparam>
+            <exception cref="T:System.ArgumentNullException">Throws exception if <paramref name="dialogName"/> is null or empty</exception>
             <returns>The <see cref="T:MagicMvvm.Dialogs.IDialogManager"/>, for registering several dialogs easily.</returns>
         </member>
         <member name="M:MagicMvvm.Dialogs.IDialogManager.RegisterDialogHostWindow``1(System.String)">
@@ -1315,25 +1316,28 @@
             </summary>
             <param name="windowName">The unique name of the dialog's hosting window.</param>
             <typeparam name="TDialogWindow">View of dialog's hosting window which is class that implements IDialogHostWindow</typeparam>
+            <exception cref="T:System.ArgumentNullException">Throws exception if <paramref name="windowName"/> is null or empty</exception>
             <returns>The <see cref="T:MagicMvvm.Dialogs.IDialogManager"/>, for registering several host windows easily.</returns>
         </member>
         <member name="M:MagicMvvm.Dialogs.IDialogManager.Show(System.String,MagicMvvm.Dialogs.IDialogParameters,System.Action{MagicMvvm.Dialogs.IDialogResult},System.String)">
             <summary>
             Shows a non-modal dialog.
             </summary>
-            <param name="name">The unique name of the dialog to show.</param>
+            <param name="dialogName">The unique name of the dialog to show.</param>
             <param name="parameters">The parameters to pass to the dialog.</param>
             <param name="callback">The action to perform when the dialog is closed.</param>
             <param name="windowName">The unique name of dialog's hosting window.</param>
+            <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="dialogName"/> was not registered in internal registrar</exception>
         </member>
         <member name="M:MagicMvvm.Dialogs.IDialogManager.ShowDialog(System.String,MagicMvvm.Dialogs.IDialogParameters,System.Action{MagicMvvm.Dialogs.IDialogResult},System.String)">
             <summary>
             Shows a modal dialog.
             </summary>
-            <param name="name">The unique name of the dialog to show.</param>
+            <param name="dialogName">The unique name of the dialog to show.</param>
             <param name="parameters">The parameters to pass to the dialog.</param>
             <param name="callback">The action to perform when the dialog is closed.</param>
             <param name="windowName">The unique name of dialog's hosting window.</param>
+            <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="dialogName"/> was not registered in internal registrar</exception>
         </member>
         <member name="T:MagicMvvm.Dialogs.IDialogParameters">
             <summary>
@@ -1456,7 +1460,7 @@
         </member>
         <member name="T:MagicMvvm.Navigation.INavigationManager">
             <summary>
-            Interface of navigation manager. 
+            Interface of navigation manager.
             </summary>
             <remarks>
             Register type as a singleton inside container.
@@ -1464,18 +1468,21 @@
         </member>
         <member name="M:MagicMvvm.Navigation.INavigationManager.RegisterRegionWithView(System.String,System.Object)">
             <summary>
-            Register region name and region view's instance inside registrar. Associate a view with a region, using a concrete instance of the view. 
+            Register region name and region view's instance inside registrar. Associate a view with a region, using a concrete instance of the view.
             </summary>
             <param name="regionName">The name of the region to associate the view with.</param>
             <param name="viewInstance">The instance of the view which associated with region name.</param>
+            <exception cref="T:System.ArgumentNullException">Throws exception if <paramref name="regionName"/> or <paramref name="viewInstance"/> is null or empty</exception>
             <returns>The <see cref="T:MagicMvvm.Navigation.INavigationManager"/>, for adding several views easily</returns>
         </member>
-        <member name="M:MagicMvvm.Navigation.INavigationManager.RegisterView(System.String,System.Uri)">
+        <member name="M:MagicMvvm.Navigation.INavigationManager.RegisterView``1(System.String)">
             <summary>
             Register view name and view source inside registrar. Configures specified view for navigation.
             </summary>
-            <param name="viewName">The view name</param>
-            <param name="viewSource">The URI of specified view</param>
+            <param name="viewName">The unique view name</param>
+            <typeparam name="TView">Type of the view</typeparam>
+            <exception cref="T:System.ArgumentNullException">Throws exception if <paramref name="viewName"/> is null or empty</exception>
+            <exception cref="T:System.InvalidOperationException">Throws exception if application does not have any resource files or could not locate to resource files</exception>
             <returns>The <see cref="T:MagicMvvm.Navigation.INavigationManager"/>, for adding several views easily</returns>
         </member>
         <member name="M:MagicMvvm.Navigation.INavigationManager.RequestNavigate(System.String,System.String,System.Action,MagicMvvm.Navigation.INavigationParameters)">
@@ -1486,6 +1493,7 @@
             <param name="viewName">The name of the view that registered for navigation inside manager.</param>
             <param name="navigationCallback">The navigation callback that will be executed after the navigation is completed.</param>
             <param name="navigationParameters">Navigation parameters to pass arguments between views.</param>
+            <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="viewName"/> or <paramref name="regionName"/> was not registered in internal registrar</exception>
         </member>
         <member name="T:MagicMvvm.Navigation.INavigationParameters">
             <summary>
@@ -1502,7 +1510,7 @@
         </member>
         <member name="M:MagicMvvm.Navigation.NavigationContext.#ctor(MagicMvvm.Navigation.INavigationParameters)">
             <summary>
-            Initializes a new instance of the <see cref="T:MagicMvvm.Navigation.NavigationContext"/> class for a region name and a 
+            Initializes a new instance of the <see cref="T:MagicMvvm.Navigation.NavigationContext"/> class for a region name and a
             <see cref="T:System.Uri"/>.
             </summary>
             <param name="navigationParameters">The navigation parameters.</param>

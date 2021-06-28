@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31410.414
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicMvvm.Core", "src\MagicMvvm.Core\MagicMvvm.Core.csproj", "{8F472812-A1BD-42BF-8716-A5C737FDDF18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMvvm.Wpf", "src\MagicMvvm.Wpf\MagicMvvm.Wpf.csproj", "{9881CE1C-9A65-4C25-92D5-FA048E59F59B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicMvvm.Wpf", "src\MagicMvvm.Wpf\MagicMvvm.Wpf.csproj", "{9881CE1C-9A65-4C25-92D5-FA048E59F59B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -7,9 +7,9 @@ namespace MagicMvvm.Navigation
     /// </summary>
     public class NavigationContext
     {
-        
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="NavigationContext"/> class for a region name and a 
+        /// Initializes a new instance of the <see cref="NavigationContext"/> class for a region name and a
         /// <see cref="Uri"/>.
         /// </summary>
         /// <param name="navigationParameters">The navigation parameters.</param>
@@ -23,7 +23,7 @@ namespace MagicMvvm.Navigation
         /// </summary>
         /// <value>The URI query.</value>
         public INavigationParameters Parameters { get; }
-        
+
     }
-    
+
 }

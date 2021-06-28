@@ -5,7 +5,7 @@
 	<UseWPF>true</UseWPF>
 	<AssemblyName>MagicMvvm.Wpf</AssemblyName>
 	<RootNamespace>MagicMvvm</RootNamespace>
-	<Version>1.0.1</Version>
+	<Version>1.1.0</Version>
 	<Authors>Sukhrob Ilyosbekov</Authors>
 	<Company>Smart Meal Service</Company>
 	<PackageProjectUrl>https://github.com/suxrobGM/MagicMvvm</PackageProjectUrl>

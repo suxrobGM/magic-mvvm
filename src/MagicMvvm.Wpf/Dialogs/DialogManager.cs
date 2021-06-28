@@ -43,20 +43,20 @@ namespace MagicMvvm.Dialogs
         }
 
 
-        public void Show(string name, IDialogParameters parameters, Action<IDialogResult> callback, string windowName)
+        public void Show(string dialogName, IDialogParameters parameters, Action<IDialogResult> callback, string windowName)
         {
-            ShowDialogInternal(name, parameters, callback, false, windowName);
+            ShowDialogInternal(dialogName, parameters, callback, false, windowName);
         }
 
-        public void ShowDialog(string name, IDialogParameters parameters, Action<IDialogResult> callback, string windowName)
+        public void ShowDialog(string dialogName, IDialogParameters parameters, Action<IDialogResult> callback, string windowName)
         {
-            ShowDialogInternal(name, parameters, callback, true, windowName);
+            ShowDialogInternal(dialogName, parameters, callback, true, windowName);
         }
 
         private void ShowDialogInternal(string dialogName, IDialogParameters parameters, Action<IDialogResult> callback, bool isModal, string windowName = null)
         {
             if (!_dialogsCollection.ContainsKey(dialogName))
-                throw new ArgumentException($"The name of dialog {dialogName} was not registered inside registrar");
+                throw new InvalidOperationException($"The name of dialog {dialogName} was not registered inside registrar");
 
             parameters ??= new DialogParameters();
 
