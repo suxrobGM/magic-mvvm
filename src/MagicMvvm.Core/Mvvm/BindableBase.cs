@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using MagicMvvm.Annotations;
 
 namespace MagicMvvm
 {
@@ -67,7 +66,6 @@ namespace MagicMvvm
         /// <param name="propertyName">Name of the property used to notify listeners. This
         /// value is optional and can be provided automatically when invoked from compilers
         /// that support <see cref="CallerMemberNameAttribute"/>.</param>
-        [NotifyPropertyChangedInvocator]
         protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
@@ -76,7 +74,7 @@ namespace MagicMvvm
         /// <summary>
         /// Raises all property's PropertyChanged event.
         /// </summary>
-        /// <param name="propertiesNames"></param>
+        /// <param name="propertiesNames">Name of properties</param>
         protected void RaisePropertiesChanged(params string[] propertiesNames)
         {
             foreach (var propertyName in propertiesNames)
@@ -92,19 +90,6 @@ namespace MagicMvvm
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
         {
             PropertyChanged?.Invoke(this, args);
-        }
-
-        /// <summary>
-        /// Raises all property's PropertyChanged event.
-        /// </summary>
-        /// <param name="propertiesNames"></param>
-        [NotifyPropertyChangedInvocator]
-        protected void OnPropertiesChanged(params string[] propertiesNames)
-        {
-            foreach (var propertyName in propertiesNames)
-            {
-                RaisePropertyChanged(propertyName);
-            }
         }
     }
 }
