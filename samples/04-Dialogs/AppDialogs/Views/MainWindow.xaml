@@ -1,0 +1,43 @@
+﻿<Window x:Class="AppDialogs.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Sample app with dialogs"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Height="450"
+        Width="800">
+    <Grid>
+        <Button Content="Show modal dialog A"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="10,10,0,0"
+                Height="25"
+                Width="155"
+                Command="{Binding ShowDialogCommand}"
+                CommandParameter="A">
+        </Button>
+
+        <Button Content="Show non-modal dialog B"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="10,46,0,0"
+                Height="25"
+                Width="155"
+                Command="{Binding ShowDialogCommand}"
+                CommandParameter="B">
+        </Button>
+
+        <Button Content="Show autoclose dialog C"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="10,82,0,0"
+                Height="25"
+                Width="155"
+                Command="{Binding ShowDialogCommand}"
+                CommandParameter="C">
+        </Button>
+    </Grid>
+</Window>
