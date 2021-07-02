@@ -10,7 +10,7 @@ namespace AppDialogs.ViewModels.Dialogs
             Title = "Dialog C";
         }
 
-        public async override void OnDialogOpened(IDialogParameters parameters)
+        public override async void OnDialogOpened(IDialogParameters parameters)
         {
             // Auto close dialog after performing some long-running actions
             await Task.Delay(4000);
