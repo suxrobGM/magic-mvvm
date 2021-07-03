@@ -72,20 +72,20 @@
             <param name="windowName">The unique name of dialog's hosting window.</param>
             <returns>The created <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/>.</returns>
         </member>
-        <member name="M:MagicMvvm.Dialogs.DialogManager.ConfigureDialogWindowContent(System.String,MagicMvvm.Dialogs.IDialogHostWindow,MagicMvvm.Dialogs.IDialogParameters)">
+        <member name="M:MagicMvvm.Dialogs.DialogManager.ConfigureDialogWindowContent(System.String,MagicMvvm.Dialogs.IDialogHostWindow)">
             <summary>
             Configure <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/> content.
             </summary>
             <param name="dialogName">The name of the dialog to show.</param>
             <param name="hostWindow">The hosting hostWindow.</param>
-            <param name="parameters">The parameters to pass to the dialog.</param>
         </member>
-        <member name="M:MagicMvvm.Dialogs.DialogManager.ConfigureDialogWindowEvents(MagicMvvm.Dialogs.IDialogHostWindow,System.Action{MagicMvvm.Dialogs.IDialogResult})">
+        <member name="M:MagicMvvm.Dialogs.DialogManager.ConfigureDialogWindowEvents(MagicMvvm.Dialogs.IDialogHostWindow,System.Action{MagicMvvm.Dialogs.IDialogResult},MagicMvvm.Dialogs.IDialogParameters)">
             <summary>
             Configure <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/> and <see cref="T:MagicMvvm.Dialogs.IDialogAware"/> events.
             </summary>
             <param name="hostWindow">The hosting window.</param>
             <param name="callback">The action to perform when the dialog is closed.</param>
+            <param name="parameters">The parameters to pass to the dialog.</param>
         </member>
         <member name="M:MagicMvvm.Dialogs.DialogManager.ConfigureDialogWindowProperties(MagicMvvm.Dialogs.IDialogHostWindow,System.Windows.FrameworkElement,MagicMvvm.Dialogs.IDialogAware)">
             <summary>

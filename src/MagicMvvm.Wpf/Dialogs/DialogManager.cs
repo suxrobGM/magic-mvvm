@@ -61,8 +61,8 @@ namespace MagicMvvm.Dialogs
             parameters ??= new DialogParameters();
 
             var dialogWindow = CreateDialogWindow(windowName);
-            ConfigureDialogWindowEvents(dialogWindow, callback);
-            ConfigureDialogWindowContent(dialogName, dialogWindow, parameters);
+            ConfigureDialogWindowEvents(dialogWindow, callback, parameters);
+            ConfigureDialogWindowContent(dialogName, dialogWindow);
             ShowDialogWindow(dialogWindow, isModal);
         }
 
@@ -104,8 +104,7 @@ namespace MagicMvvm.Dialogs
         /// </summary>
         /// <param name="dialogName">The name of the dialog to show.</param>
         /// <param name="hostWindow">The hosting hostWindow.</param>
-        /// <param name="parameters">The parameters to pass to the dialog.</param>
-        protected virtual void ConfigureDialogWindowContent(string dialogName, IDialogHostWindow hostWindow, IDialogParameters parameters)
+        protected virtual void ConfigureDialogWindowContent(string dialogName, IDialogHostWindow hostWindow)
         {
             var dialogViewType = _dialogsCollection[dialogName];
             var dialogView = Activator.CreateInstance(dialogViewType);
@@ -118,7 +117,6 @@ namespace MagicMvvm.Dialogs
                 throw new NullReferenceException("A dialog's ViewModel must implement the IDialogAware interface");
 
             ConfigureDialogWindowProperties(hostWindow, dialogContent, viewModel);
-            viewModel.OnDialogOpened(parameters);
         }
 
         /// <summary>
@@ -126,7 +124,8 @@ namespace MagicMvvm.Dialogs
         /// </summary>
         /// <param name="hostWindow">The hosting window.</param>
         /// <param name="callback">The action to perform when the dialog is closed.</param>
-        protected virtual void ConfigureDialogWindowEvents(IDialogHostWindow hostWindow, Action<IDialogResult> callback)
+        /// <param name="parameters">The parameters to pass to the dialog.</param>
+        protected virtual void ConfigureDialogWindowEvents(IDialogHostWindow hostWindow, Action<IDialogResult> callback, IDialogParameters parameters)
         {
             void RequestCloseHandler(IDialogResult dialogResult)
             {
@@ -139,7 +138,10 @@ namespace MagicMvvm.Dialogs
                 hostWindow.Loaded -= LoadedHandler;
 
                 if (hostWindow.DataContext is IDialogAware viewModel)
+                {
                     viewModel.RequestClose += RequestCloseHandler;
+                    viewModel.OnDialogOpened(parameters);
+                }
             }
 
             void ClosingHandler(object o, CancelEventArgs e)
