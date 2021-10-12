@@ -1,3 +1,5 @@
+![BuildShield](https://github.com/suxrobGM/MagicMvvm/actions/workflows/dotnet.yml/badge.svg)
+
 # MagicMvvm
 MagicMvvm is lightweight library for building rapid MVVM applications. Project inspired from [Prism](https://github.com/PrismLibrary/Prism) and used the best Prism practices, and made a lightweight library. The main difference from Prism is that supporting any IoC container (IoC container agnostic). You can use this library with any IoC container.
 Currently only WPF platform is supported.
@@ -19,6 +21,8 @@ Currently only WPF platform is supported.
 | -------- | ------- | ------- |
 | Cross Platform | [MagicMvvm.Core][CoreNuGet] | [![CoreNuGetShield]][CoreNuGet] | 
 | WPF | [MagicMvvm.Wpf][WpfNuGet] | [![WpfNuGetShield]][WpfNuGet] | 
+| Blazor | Coming soon |  | 
+| Xamarin.Forms | Coming soon |  |
 
 
 ## Installation
