@@ -1,4 +1,4 @@
-name: CI nuget package
+name: CI DotNet
 
 on:
   push:
