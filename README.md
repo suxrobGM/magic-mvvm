@@ -22,6 +22,7 @@ Currently only WPF platform is supported.
 | Cross Platform | [MagicMvvm.Core][CoreNuGet] | [![CoreNuGetShield]][CoreNuGet] | 
 | WPF | [MagicMvvm.Wpf][WpfNuGet] | [![WpfNuGetShield]][WpfNuGet] | 
 | Blazor | Coming soon |  | 
+| Xamarin.Forms | Coming soon |  |
 
 
 ## Installation
