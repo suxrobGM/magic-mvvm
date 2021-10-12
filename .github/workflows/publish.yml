@@ -1,4 +1,4 @@
-name: Deploy NuGet
+name: publish package
 
 on:
   release:
@@ -17,7 +17,7 @@ jobs:
         dotnet-version: 3.1.x
         
     - name: Create NuGet package
-      run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/Abhith/Code.Library/releases/tag/${{ github.event.release.tag_name }}"
+      run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/suxrobGM/MagicMvvm/releases/tag/${{ github.event.release.tag_name }}"
       working-directory: ./src
       
     - name: Archive NuGet Package
