@@ -22,6 +22,6 @@ jobs:
     - name: Build with dotnet
       run: dotnet build --configuration Release
     #  working-directory: ./src/MagicMvvm.Wpf
-    #- name: Test
-    #  run: dotnet test --no-build --verbosity normal
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
     #  working-directory: ./tests
