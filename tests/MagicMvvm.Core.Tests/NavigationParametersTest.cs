@@ -1,12 +1,29 @@
-﻿namespace MagicMvvm.Core.Tests
+﻿using MagicMvvm.Common;
+using Xunit;
+
+namespace MagicMvvm.Core.Tests
 {
-    public class NavigationParametersTest
+    public class NavigationParametersTest : IClassFixture<NavigationParametersFixture>
     {
-        private NavigationParametersFixture _navigationParametersFixture;
+        private readonly IParameters _parameters;
 
         public NavigationParametersTest(NavigationParametersFixture navigationParametersFixture)
         {
-            _navigationParametersFixture = navigationParametersFixture;
+            _parameters = navigationParametersFixture.Parameters;
+        }
+        
+        [Fact]
+        public void AddNewValue()
+        {
+            _parameters.Add("TestKey", "TestValue");
+            Assert.Equal(6, _parameters.Count);
+            Assert.Equal("TestValue",_parameters["TestKey"]);
+        }
+
+        [Fact]
+        public void GetValue()
+        {
+            Assert.Equal("Value1", _parameters.GetValue<string>("Key1"));
         }
     }
 }
