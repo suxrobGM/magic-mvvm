@@ -28,7 +28,12 @@ namespace MagicMvvm.Navigation
 
         public INavigationManager RegisterView<TView>(string viewName)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(viewName))
+                throw new ArgumentNullException(nameof(viewName));
+            
+            
+            
+            return this;
         }
 
         public void RequestNavigate(string regionName, string viewName, Action navigationCallback,
