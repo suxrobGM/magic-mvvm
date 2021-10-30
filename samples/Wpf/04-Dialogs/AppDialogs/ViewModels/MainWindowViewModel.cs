@@ -52,6 +52,11 @@ namespace AppDialogs.ViewModels
                 // Show modal dialog "DialogC"
                 _dialogManager.ShowDialog("DialogC");
             }
+            else if (dialog == "D")
+            {
+                // Show modal dialog "DialogD"
+                _dialogManager.ShowDialog("DialogD");
+            }
         }
 
         #endregion

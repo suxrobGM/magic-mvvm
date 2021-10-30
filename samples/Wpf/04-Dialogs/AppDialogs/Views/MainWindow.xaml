@@ -39,5 +39,14 @@
                 Command="{Binding ShowDialogCommand}"
                 CommandParameter="C">
         </Button>
+        <Button Content="Show custom dialog D"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="10,117,0,0"
+                Height="25"
+                Width="155"
+                Command="{Binding ShowDialogCommand}"
+                CommandParameter="D">
+        </Button>
     </Grid>
 </Window>

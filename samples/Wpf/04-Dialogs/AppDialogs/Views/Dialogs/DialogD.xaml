@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="AppDialogs.Views.Dialogs.DialogD"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:attached="clr-namespace:MagicMvvm.Dialogs;assembly=MagicMvvm.Wpf"
+             attached:DialogHost.WindowStyle="{StaticResource dialogHostStyle}"
+             attached:DialogHost.MatchParentSize="True"
+             mc:Ignorable="d"
+             Height="200"
+             Width="400">
+    <Grid Background="AliceBlue">
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextWrapping="Wrap"
+                   Text="Dialog D with custom stylized dialog host window">
+        </TextBlock>
+        <Button Content="Close"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="0,60,0,0"
+                Height="25"
+                Width="70"
+                Command="{Binding CloseDialogCommand}"/>
+
+    </Grid>
+</UserControl>

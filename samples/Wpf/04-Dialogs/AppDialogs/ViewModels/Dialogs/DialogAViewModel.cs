@@ -8,11 +8,5 @@ namespace AppDialogs.ViewModels.Dialogs
         {
             Title = "Dialog A";
         }
-
-        public override void OnDialogOpened(IDialogParameters parameters)
-        {
-            //await Task.Delay(4000);
-            //CloseDialog();
-        }
     }
 }

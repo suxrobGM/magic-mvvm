@@ -5,13 +5,13 @@ using AppDialogs.ViewModels.Dialogs;
 namespace AppDialogs.Views.Dialogs
 {
     /// <summary>
-    /// Interaction logic for DialogC.xaml
+    /// Interaction logic for DialogD.xaml
     /// </summary>
-    public partial class DialogC : UserControl
+    public partial class DialogD : UserControl
     {
-        public DialogC()
+        public DialogD()
         {
-            DataContext = App.Container.Resolve<DialogCViewModel>();
+            DataContext = App.Container.Resolve<DialogDViewModel>();
             InitializeComponent();
         }
     }

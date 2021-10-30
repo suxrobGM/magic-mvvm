@@ -47,25 +47,23 @@ namespace AppDialogs
             // Note: It's important to register as a singelton otherwise you will get different instance of managers.
             Container.Register<IDialogManager, DialogManager>(Reuse.Singleton);
 
-            // Register views
+            // Register main window
             Container.Register<MainWindow>(Reuse.Singleton);
-            Container.Register<DialogA>(Reuse.Singleton);
-            Container.Register<DialogB>(Reuse.Singleton);
-            Container.Register<DialogC>(Reuse.Singleton);
 
             // Register view models
             Container.Register<MainWindowViewModel>(Reuse.Singleton);
             Container.Register<DialogAViewModel>(Reuse.Singleton);
             Container.Register<DialogBViewModel>(Reuse.Singleton);
             Container.Register<DialogCViewModel>(Reuse.Singleton);
+            Container.Register<DialogDViewModel>(Reuse.Singleton);
         }
 
         /// <summary>
-        /// Registers all navigation views.
+        /// Registers all dialog views.
         /// </summary>
         protected virtual void RegisterDialogs()
         {
-            // Resolve singleton instance of the navigation manager from container.
+            // Resolve singleton instance of the dialog manager from container.
             var dialogManager = Container.Resolve<IDialogManager>();
 
             // Register all dialog views with unique names.
@@ -73,6 +71,7 @@ namespace AppDialogs
             dialogManager.RegisterDialog<DialogA>();
             dialogManager.RegisterDialog<DialogB>();
             dialogManager.RegisterDialog<DialogC>();
+            dialogManager.RegisterDialog<DialogD>();
         }
 
         #endregion
