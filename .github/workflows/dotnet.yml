@@ -16,12 +16,13 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.x
+        dotnet-version: '5.0.x'
+        
     - name: Restore dependencies
       run: dotnet restore
+      
     - name: Build with dotnet
       run: dotnet build --configuration Release
-    #  working-directory: ./src/MagicMvvm.Wpf
+
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    #  working-directory: ./tests
