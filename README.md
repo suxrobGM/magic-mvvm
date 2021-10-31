@@ -3,7 +3,7 @@
 
 # MagicMvvm
 MagicMvvm is lightweight library for building rapid MVVM applications. Project inspired from [Prism](https://github.com/PrismLibrary/Prism) and used the best Prism practices, and made a lightweight library. The main difference from Prism is that supporting any IoC container (IoC container agnostic). You can use this library with any IoC container.
-Currently only WPF platform is supported.
+Currently WPF, Blazor and Xamarin.Forms platforms are supported.
 
 ## Features
 * IoC container agnostic.
