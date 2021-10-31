@@ -1,0 +1,42 @@
+name: publish packages
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+        
+    - name: Create NuGet package
+      run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/suxrobGM/MagicMvvm/releases/tag/${{ github.event.release.tag_name }}"
+      working-directory: ./src
+      
+    - name: Archive MagicMvvm.Core Package
+      uses: actions/upload-artifact@v1
+      with:
+        name: Code.Library
+        path: ./src/MagicMvvm.Core/bin/Release/MagicMvvm.Core.${{ github.event.release.tag_name }}.nupkg
+        
+    - name: Archive MagicMvvm.Wpf Package
+      uses: actions/upload-artifact@v1
+      with:
+        name: MagicMvvm.Wpf
+        path: ./src/MagicMvvm.Wpf/bin/Release/MagicMvvm.Wpf.${{ github.event.release.tag_name }}.nupkg
+        
+    - name: Archive MagicMvvm.Blazor Package
+      uses: actions/upload-artifact@v1
+      with:
+        name: MagicMvvm.Blazor
+        path: ./src/MagicMvvm.Blazor/bin/Release/MagicMvvm.Blazor.${{ github.event.release.tag_name }}.nupkg
+        
+    - name: Publish Nuget Package
+      run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --no-symbols true
