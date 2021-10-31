@@ -33,6 +33,13 @@
                         Command="{Binding NavigateCommand}"
                         CommandParameter="B">
                 </Button>
+                <Button Content="Navigate to Page C"
+                        Margin="10,0,0,0"
+                        Width="150"
+                        Height="30"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="C">
+                </Button>
             </StackPanel>
 
         </StackPanel>

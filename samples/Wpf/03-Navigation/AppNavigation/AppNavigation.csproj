@@ -11,4 +11,11 @@
 	<PackageReference Include="MagicMvvm.Wpf" Version="1.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Views\Pages\PageC.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

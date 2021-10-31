@@ -45,6 +45,16 @@ namespace AppNavigation.ViewModels
             {
                 _navigationManager.RequestNavigate("MainRegion", "PageB");
             }
+            else if (page == "C")
+            {
+                var navigationParameters = new NavigationParameters()
+                {
+                    {"paramKey1", "paramValue1"},
+                    {"paramKey2", "paramValue2"},
+                    {"paramKey3", "paramValue3"},
+                };
+                _navigationManager.RequestNavigate("MainRegion", "PageC", navigationParameters);
+            }
         }
 
         #endregion

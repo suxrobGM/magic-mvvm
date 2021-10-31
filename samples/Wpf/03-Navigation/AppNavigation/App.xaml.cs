@@ -48,15 +48,14 @@ namespace AppNavigation
             // Note: It's important to register as a singelton otherwise you will get different navigation managers when you try to navigate to views.
             Container.Register<INavigationManager, NavigationManager>(Reuse.Singleton);
 
-            // Register views
+            // Register main window
             Container.Register<MainWindow>(Reuse.Singleton);
-            Container.Register<PageA>(Reuse.Singleton);
-            Container.Register<PageB>(Reuse.Singleton);
 
             // Register view models
             Container.Register<MainWindowViewModel>(Reuse.Singleton);
             Container.Register<PageAViewModel>(Reuse.Singleton);
             Container.Register<PageBViewModel>(Reuse.Singleton);
+            Container.Register<PageCViewModel>(Reuse.Singleton);
         }
 
         /// <summary>
@@ -71,6 +70,7 @@ namespace AppNavigation
             // It will register navigation paths in internal registrar of the navigation manager.
             navigationManager.RegisterView<PageA>();
             navigationManager.RegisterView<PageB>();
+            navigationManager.RegisterView<PageC>();
         }
 
         #endregion

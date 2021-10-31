@@ -13,7 +13,6 @@ namespace AppNavigation.ViewModels.Pages
 
         #endregion
 
-
         #region Bindable properties
 
         private string _pageContent;
