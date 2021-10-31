@@ -31,7 +31,7 @@ Currently WPF, Blazor and Xamarin.Forms platforms are supported.
 Check out project documentation [here](https://github.com/suxrobGM/MagicMvvm/wiki)
 
 ## Samples
-Check out sample applications [here](https://github.com/suxrobGM/MagicMvvm/tree/main/samples)
+Explore sample applications [here](https://github.com/suxrobGM/MagicMvvm/tree/main/samples)
 
 
 ## License and copyright
