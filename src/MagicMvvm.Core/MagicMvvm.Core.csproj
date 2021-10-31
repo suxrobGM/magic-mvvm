@@ -18,12 +18,17 @@
 
   <PropertyGroup>
     <NoWarn>1701;1702;1591</NoWarn>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
 	<None Include="..\..\LICENSE">
 	  <Pack>True</Pack>
 	  <PackagePath></PackagePath>
+	</None>
+	<None Include="..\..\README.md">
+	  <Pack>True</Pack>
+	  <PackagePath>\</PackagePath>
 	</None>
   </ItemGroup>
 
