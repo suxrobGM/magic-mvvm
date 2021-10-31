@@ -4,7 +4,12 @@ namespace BasicApp.ViewModels
 {
     public class CounterViewModel : ViewModelBase
     {
-        public int CurrentCount { get; set; }
+		private int _currentCount;
+        public int CurrentCount
+		{
+		    get => _currentCount;
+			set => SetProperty(ref _currentCount, value);
+		}
 
         public void IncrementCount()
         {
