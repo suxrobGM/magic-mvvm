@@ -1,5 +1,4 @@
 ﻿using MagicMvvm;
-using MagicMvvm.Blazor;
 
 namespace BasicApp.ViewModels
 {
