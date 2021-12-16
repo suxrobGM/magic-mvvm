@@ -4,9 +4,9 @@ namespace MagicMvvm.Core.Tests;
 
 public class ParametersFixture
 {
-    protected ParametersFixture(IParameters parameters)
+    public ParametersFixture()
     {
-        Parameters = parameters;
+        Parameters = new Parameters();
         Parameters.Add("Key1", "Value1");
         Parameters.Add("Key2", "Value2");
         Parameters.Add("Key3", "Value3");
