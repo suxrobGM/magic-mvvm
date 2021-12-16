@@ -45,13 +45,13 @@ internal static class UriHelper
 
     public static IParameters GetSegmentParameters(string uriSegment, IParameters parameters)
     {
-        var navParameters = UriHelper.GetSegmentParameters(uriSegment);
+        var navParameters = GetSegmentParameters(uriSegment);
 
         if (parameters != null)
         {
-            foreach (var navigationParameter in parameters)
+            foreach (var parameter in parameters)
             {
-                navParameters.Add(navigationParameter.Key, navigationParameter.Value);
+                navParameters.Add(parameter.Key, parameter.Value);
             }
         }
 

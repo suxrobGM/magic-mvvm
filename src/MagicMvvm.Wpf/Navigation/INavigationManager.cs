@@ -33,7 +33,7 @@ public interface INavigationManager
     /// <param name="regionName">The name of the region to call Navigate on.</param>
     /// <param name="viewName">The name of the view that registered for navigation inside manager.</param>
     /// <param name="navigationCallback">The navigation callback that will be executed after the navigation is completed.</param>
-    /// <param name="navigationParameters">Navigation parameters to pass arguments between views.</param>
+    /// <param name="parameters">Navigation parameters to pass arguments between views.</param>
     /// <exception cref="InvalidOperationException">Throws exception if <paramref name="viewName"/> or <paramref name="regionName"/> was not registered in internal registrar</exception>
-    void RequestNavigate(string regionName, string viewName, Action navigationCallback, IParameters navigationParameters);
+    void RequestNavigate(string regionName, string viewName, Action navigationCallback, IParameters parameters);
 }

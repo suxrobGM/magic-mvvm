@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Linq;
+using MagicMvvm.Dialogs.Xaml;
 
 namespace MagicMvvm.Dialogs;
 

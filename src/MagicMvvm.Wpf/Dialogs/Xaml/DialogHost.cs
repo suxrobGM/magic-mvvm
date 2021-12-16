@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Dialogs;
+﻿namespace MagicMvvm.Dialogs.Xaml;
 
 /// <summary>
 /// This class contains <see cref="IDialogHostWindow"/> attached properties.

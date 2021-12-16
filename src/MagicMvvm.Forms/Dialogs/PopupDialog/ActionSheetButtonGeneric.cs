@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MagicMvvm.Forms.Dialogs;
+﻿namespace MagicMvvm.Forms.Dialogs;
 
 /// <summary>
 /// Provides a Generic Implementation for IActionSheetButton

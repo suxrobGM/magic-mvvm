@@ -13,7 +13,7 @@ public sealed class DialogManager : IDialogManager
     /// <summary>
     /// Gets the key for specifying or retrieving popup overlay style from Application Resources.
     /// </summary>
-    public const string PopupOverlayStyle = "PrismDialogMaskStyle";
+    public const string PopupOverlayStyle = "DialogMaskStyle";
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DialogManager"/> class.

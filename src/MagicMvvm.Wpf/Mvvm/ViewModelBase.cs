@@ -56,11 +56,11 @@ public abstract class ViewModelBase : BindableBase, INavigationAware
         }, DispatcherPriority.Normal, token).Task;
     }
 
-    public virtual void OnNavigatedTo(NavigationContext navigationContext)
+    public virtual void OnNavigatedTo(IParameters parameters)
     {
     }
 
-    public virtual void OnNavigatedFrom(NavigationContext navigationContext)
+    public virtual void OnNavigatedFrom(IParameters parameters)
     {
     }
 }

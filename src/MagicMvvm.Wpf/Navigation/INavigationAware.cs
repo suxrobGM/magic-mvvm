@@ -8,12 +8,12 @@ public interface INavigationAware
     /// <summary>
     /// Called when the implementer has been navigated to.
     /// </summary>
-    /// <param name="navigationContext">The navigation context.</param>
-    void OnNavigatedTo(NavigationContext navigationContext);
+    /// <param name="parameters">Navigation parameters</param>
+    void OnNavigatedTo(IParameters parameters);
 
     /// <summary>
     /// Called when the implementer is being navigated away from.
     /// </summary>
-    /// <param name="navigationContext">The navigation context.</param>
-    void OnNavigatedFrom(NavigationContext navigationContext);
+    /// <param name="parameters">Navigation parameters</param>
+    void OnNavigatedFrom(IParameters parameters);
 }

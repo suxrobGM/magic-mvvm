@@ -535,7 +535,7 @@
             <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/></param>
             <param name="regionName">The name of the region to call Navigate on.</param>
             <param name="viewName">The name of the view that registered for navigation inside manager.</param>
-            <param name="navigationParameters">Navigation parameters to pass arguments between views.</param>
+            <param name="parameters">Navigation parameters to pass arguments between views.</param>
             <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="viewName"/> or <paramref name="regionName"/> was not registered in internal registrar</exception>
         </member>
         <member name="T:MagicMvvm.Navigation.INavigationAware">
@@ -589,7 +589,7 @@
             <param name="regionName">The name of the region to call Navigate on.</param>
             <param name="viewName">The name of the view that registered for navigation inside manager.</param>
             <param name="navigationCallback">The navigation callback that will be executed after the navigation is completed.</param>
-            <param name="navigationParameters">Navigation parameters to pass arguments between views.</param>
+            <param name="parameters">Navigation parameters to pass arguments between views.</param>
             <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="viewName"/> or <paramref name="regionName"/> was not registered in internal registrar</exception>
         </member>
         <member name="T:MagicMvvm.Navigation.INavigationParameters">
@@ -610,7 +610,7 @@
             Initializes a new instance of the <see cref="T:MagicMvvm.Navigation.NavigationContext"/> class for a region name and a
             <see cref="T:System.Uri"/>.
             </summary>
-            <param name="navigationParameters">The navigation parameters.</param>
+            <param name="parameters">The navigation parameters.</param>
         </member>
         <member name="P:MagicMvvm.Navigation.NavigationContext.Parameters">
             <summary>

@@ -57,7 +57,7 @@ public class NavigationManager : INavigationManager
     }
 
     public void RequestNavigate(string regionName, string viewName, Action navigationCallback,
-        IParameters navigationParameters)
+        IParameters parameters)
     {
         if (!_viewsCollection.ContainsKey(viewName))
             throw new InvalidOperationException($"The name of view {viewName} was not registered inside registrar");
@@ -66,11 +66,10 @@ public class NavigationManager : INavigationManager
             throw new InvalidOperationException($"The name of region {regionName} was not registered inside registrar");
 
         var regionViewObj = _regionsCollection[regionName];
-        var navContext = new NavigationContext(navigationParameters);
         var prevViewModelNavigationAware = ((regionViewObj as ContentControl)?.Content as ContentControl)?.DataContext as INavigationAware ??
                                            ((regionViewObj as ContentControl)?.Content as Page)?.DataContext as INavigationAware;
 
-        prevViewModelNavigationAware?.OnNavigatedFrom(navContext);
+        prevViewModelNavigationAware?.OnNavigatedFrom(parameters);
 
         var viewObj = Application.LoadComponent(_viewsCollection[viewName]);
         var regionContent = regionViewObj.GetType().GetProperty("Content");
@@ -79,7 +78,7 @@ public class NavigationManager : INavigationManager
         var nextViewModelNavigationAware = (viewObj as ContentControl)?.DataContext as INavigationAware ??
                                            (viewObj as Page)?.DataContext as INavigationAware;
 
-        nextViewModelNavigationAware?.OnNavigatedTo(navContext);
+        nextViewModelNavigationAware?.OnNavigatedTo(parameters);
         navigationCallback?.Invoke();
     }
 }
