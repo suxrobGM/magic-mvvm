@@ -1,23 +1,22 @@
-﻿using MagicMvvm.Blazor.Parameters;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace MagicMvvm.Blazor;
 
 /// <summary>
-/// Base class for razor components.
+/// Base view for the layout components.
 /// </summary>
 /// <typeparam name="T">Type of the view model.</typeparam>
-public abstract class ViewBase<T> : ComponentBase, IDisposable
+public class LayoutViewBase<T> : LayoutComponentBase, IDisposable
     where T : ViewModelBase
 {
-    private ILogger<ViewBase<T>> logger;
+    private ILogger<LayoutViewBase<T>> logger;
 
-    protected ViewBase()
+    protected LayoutViewBase()
     {
     }
 
-    protected ViewBase(IServiceProvider serviceProvider)
+    protected LayoutViewBase(IServiceProvider serviceProvider)
     {
         ServiceProvider = serviceProvider;
     }
@@ -35,20 +34,11 @@ public abstract class ViewBase<T> : ComponentBase, IDisposable
 
     #region Internal methods
 
-    private void SetBindingContext()
+    private void ConfigureBindingContext()
     {
         Model = ServiceProvider.GetRequiredService<T>();
         Model.PropertyChanged += DataContext_PropertyChanged;
-        logger = ServiceProvider.GetService<ILogger<ViewBase<T>>>();
-    }
-
-    private void SetParameters()
-    {
-        if (Model is null)
-            throw new InvalidOperationException("View model is not set");
-
-        var parameterSetter = ServiceProvider.GetRequiredService<IParameterSetter>();
-        parameterSetter.ResolveAndSet(this, Model);
+        logger = ServiceProvider.GetService<ILogger<LayoutViewBase<T>>>();
     }
 
     private void DataContext_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -64,8 +54,7 @@ public abstract class ViewBase<T> : ComponentBase, IDisposable
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        SetBindingContext();
-        SetParameters();
+        ConfigureBindingContext();
         Model?.OnInitialized();
     }
 
@@ -119,10 +108,10 @@ public abstract class ViewBase<T> : ComponentBase, IDisposable
             Model.PropertyChanged -= DataContext_PropertyChanged;
         }
 
-        //logger?.LogTrace("Disposed view of the {ClassName}", typeof(T).Name);
+        logger?.LogTrace("Disposed view of the {ClassName}", typeof(T).Name);
     }
 
-    ~ViewBase()
+    ~LayoutViewBase()
     {
         Dispose(false);
     }

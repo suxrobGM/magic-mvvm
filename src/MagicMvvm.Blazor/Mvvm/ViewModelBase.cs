@@ -1,7 +1,12 @@
-﻿namespace MagicMvvm;
+﻿namespace MagicMvvm.Blazor;
 
+/// <summary>
+/// Base ViewModel
+/// </summary>
 public abstract class ViewModelBase : BindableBase
 {
+    #region Lifecycle methods
+
     /// <summary>
     ///     Notifies the component that its state has changed. When applicable, this will
     ///     cause the component to be re-rendered.
@@ -131,4 +136,6 @@ public abstract class ViewModelBase : BindableBase
     {
         return Task.CompletedTask;
     }
+
+    #endregion
 }

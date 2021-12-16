@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MagicMvvm.Blazor.Parameters;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MagicMvvm;
+namespace MagicMvvm.Blazor;
 
 public static class ServiceCollectionExtensions
 {
@@ -11,6 +12,10 @@ public static class ServiceCollectionExtensions
     /// <returns>The <see cref="IServiceCollection"/></returns>
     public static IServiceCollection AddMvvmBlazor(this IServiceCollection services)
     {
+        services.AddSingleton<IParameterResolver, ParameterResolver>();
+        services.AddSingleton<IParameterCache, ParameterCache>();
+        services.AddSingleton<IParameterSetter, ParameterSetter>();
+            
         var viewModelType = typeof(ViewModelBase);
         var definedTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(i => i.DefinedTypes);
 
