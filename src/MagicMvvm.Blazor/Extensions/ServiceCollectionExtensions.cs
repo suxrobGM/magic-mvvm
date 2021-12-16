@@ -1,30 +1,27 @@
-﻿using System;
-using System.Linq;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace MagicMvvm
+namespace MagicMvvm;
+
+public static class ServiceCollectionExtensions
 {
-    public static class ServiceCollectionExtensions
+    /// <summary>
+    /// Adds MVVM support.
+    /// </summary>
+    /// <param name="services">Instance of <see cref="IServiceCollection"/>.</param>
+    /// <returns>The <see cref="IServiceCollection"/></returns>
+    public static IServiceCollection AddMvvmBlazor(this IServiceCollection services)
     {
-        /// <summary>
-        /// Adds MVVM support.
-        /// </summary>
-        /// <param name="services">Instance of <see cref="IServiceCollection"/>.</param>
-        /// <returns>The <see cref="IServiceCollection"/></returns>
-        public static IServiceCollection AddMvvmBlazor(this IServiceCollection services)
-        {
-            var viewModelType = typeof(ViewModelBase);
-            var definedTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(i => i.DefinedTypes);
+        var viewModelType = typeof(ViewModelBase);
+        var definedTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(i => i.DefinedTypes);
 
-            foreach (var type in definedTypes)
+        foreach (var type in definedTypes)
+        {
+            if (viewModelType.IsAssignableFrom(type) &&
+                type.IsClass && !type.IsAbstract)
             {
-                if (viewModelType.IsAssignableFrom(type) &&
-                    type.IsClass && !type.IsAbstract)
-                {
-                    services.AddScoped(type);
-                }
+                services.AddScoped(type);
             }
-            return services;
         }
+        return services;
     }
 }
