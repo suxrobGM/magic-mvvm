@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace MagicMvvm.Blazor.Parameters;
+namespace MagicMvvm.Parameters;
 
 internal class ParameterResolver : IParameterResolver
 {

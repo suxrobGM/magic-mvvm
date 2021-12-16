@@ -5,7 +5,7 @@
 	<UseWPF>true</UseWPF>
 	<AssemblyName>MagicMvvm.Wpf</AssemblyName>
 	<RootNamespace>MagicMvvm</RootNamespace>
-	<Version>2.0.1</Version>
+	<Version>2.0.2</Version>
 	<Authors>Sukhrob Ilyosbekov</Authors>
 	<PackageProjectUrl>https://github.com/suxrobGM/MagicMvvm</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/suxrobGM/MagicMvvm</RepositoryUrl>

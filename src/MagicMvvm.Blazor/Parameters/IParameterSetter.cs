@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Blazor.Parameters;
+﻿namespace MagicMvvm.Parameters;
 
 internal interface IParameterSetter
 {

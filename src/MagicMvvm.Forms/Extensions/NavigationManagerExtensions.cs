@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Forms.Navigation;
+﻿namespace MagicMvvm.Navigation;
 
 /// <summary>
 /// Extension methods for the <see cref="INavigationManager"/>

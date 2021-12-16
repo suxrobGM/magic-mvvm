@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace MagicMvvm.Forms.Dialogs;
+namespace MagicMvvm.Dialogs;
 
 public interface IDialogContainer
 {

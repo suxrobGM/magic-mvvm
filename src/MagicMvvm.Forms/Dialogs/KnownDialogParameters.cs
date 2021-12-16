@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Forms.Dialogs;
+﻿namespace MagicMvvm.Dialogs;
 
 /// <summary>
 /// Predefined dialog parameters

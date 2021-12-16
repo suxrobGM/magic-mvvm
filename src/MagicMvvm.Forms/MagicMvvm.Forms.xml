@@ -4,111 +4,111 @@
         <name>MagicMvvm.Forms</name>
     </assembly>
     <members>
-        <member name="T:MagicMvvm.Forms.AppModel.IKeyboardMapper">
+        <member name="T:MagicMvvm.AppModel.IKeyboardMapper">
             <summary>
-            An abstraction to map <see cref="T:MagicMvvm.Forms.AppModel.KeyboardType"/> to the <see cref="T:Xamarin.Forms.Keyboard"/>;
+            An abstraction to map <see cref="T:MagicMvvm.AppModel.KeyboardType"/> to the <see cref="T:Xamarin.Forms.Keyboard"/>;
             </summary>
         </member>
-        <member name="M:MagicMvvm.Forms.AppModel.IKeyboardMapper.Map(MagicMvvm.Forms.AppModel.KeyboardType)">
+        <member name="M:MagicMvvm.AppModel.IKeyboardMapper.Map(MagicMvvm.AppModel.KeyboardType)">
             <summary>
-            Maps the <see cref="T:MagicMvvm.Forms.AppModel.KeyboardType"/> to a <see cref="T:Xamarin.Forms.Keyboard"/>
-            </summary>
-            <param name="keyboardType">The Keyboard type.</param>
-            <returns>The <see cref="T:Xamarin.Forms.Keyboard"/>.</returns>
-        </member>
-        <member name="T:MagicMvvm.Forms.AppModel.KeyboardMapper">
-            <summary>
-            The default implementation of the <see cref="T:MagicMvvm.Forms.AppModel.IKeyboardMapper"/>.
-            </summary>
-        </member>
-        <member name="M:MagicMvvm.Forms.AppModel.KeyboardMapper.Map(MagicMvvm.Forms.AppModel.KeyboardType)">
-            <summary>
-            Maps the <see cref="T:MagicMvvm.Forms.AppModel.KeyboardType"/> to a <see cref="T:Xamarin.Forms.Keyboard"/>
+            Maps the <see cref="T:MagicMvvm.AppModel.KeyboardType"/> to a <see cref="T:Xamarin.Forms.Keyboard"/>
             </summary>
             <param name="keyboardType">The Keyboard type.</param>
             <returns>The <see cref="T:Xamarin.Forms.Keyboard"/>.</returns>
         </member>
-        <member name="T:MagicMvvm.Forms.AppModel.KeyboardType">
+        <member name="T:MagicMvvm.AppModel.KeyboardMapper">
+            <summary>
+            The default implementation of the <see cref="T:MagicMvvm.AppModel.IKeyboardMapper"/>.
+            </summary>
+        </member>
+        <member name="M:MagicMvvm.AppModel.KeyboardMapper.Map(MagicMvvm.AppModel.KeyboardType)">
+            <summary>
+            Maps the <see cref="T:MagicMvvm.AppModel.KeyboardType"/> to a <see cref="T:Xamarin.Forms.Keyboard"/>
+            </summary>
+            <param name="keyboardType">The Keyboard type.</param>
+            <returns>The <see cref="T:Xamarin.Forms.Keyboard"/>.</returns>
+        </member>
+        <member name="T:MagicMvvm.AppModel.KeyboardType">
             <summary>
             Keyboard type
             </summary>
         </member>
-        <member name="F:MagicMvvm.Forms.AppModel.KeyboardType.Chat">
+        <member name="F:MagicMvvm.AppModel.KeyboardType.Chat">
             <summary>
             Gets an instance of type "ChatKeyboard".
             </summary>
         </member>
-        <member name="F:MagicMvvm.Forms.AppModel.KeyboardType.Default">
+        <member name="F:MagicMvvm.AppModel.KeyboardType.Default">
             <summary>
             Gets an instance of type "Keyboard".
             </summary>
         </member>
-        <member name="F:MagicMvvm.Forms.AppModel.KeyboardType.Email">
+        <member name="F:MagicMvvm.AppModel.KeyboardType.Email">
             <summary>
             Gets an instance of type "EmailKeyboard".
             </summary>
         </member>
-        <member name="F:MagicMvvm.Forms.AppModel.KeyboardType.Numeric">
+        <member name="F:MagicMvvm.AppModel.KeyboardType.Numeric">
             <summary>
             Gets an instance of type "NumericKeyboard".
             </summary>
         </member>
-        <member name="F:MagicMvvm.Forms.AppModel.KeyboardType.Plain">
+        <member name="F:MagicMvvm.AppModel.KeyboardType.Plain">
             <summary>
             Returns a new keyboard with None Xamarin.Forms.KeyboardFlags.
             </summary>
         </member>
-        <member name="F:MagicMvvm.Forms.AppModel.KeyboardType.Telephone">
+        <member name="F:MagicMvvm.AppModel.KeyboardType.Telephone">
             <summary>
             Gets an instance of type "TelephoneKeyboard".
             </summary>
         </member>
-        <member name="F:MagicMvvm.Forms.AppModel.KeyboardType.Text">
+        <member name="F:MagicMvvm.AppModel.KeyboardType.Text">
             <summary>
             Gets an instance of type "TextKeyboard".
             </summary>
         </member>
-        <member name="F:MagicMvvm.Forms.AppModel.KeyboardType.Url">
+        <member name="F:MagicMvvm.AppModel.KeyboardType.Url">
             <summary>
             Gets an instance of type "UrlKeyboard".
             </summary>
         </member>
-        <member name="T:MagicMvvm.Forms.Common.ApplicationProvider">
+        <member name="T:MagicMvvm.Common.ApplicationProvider">
             <summary>
             Provides Application components.
             </summary>
         </member>
-        <member name="T:MagicMvvm.Forms.Common.IApplicationProvider">
+        <member name="T:MagicMvvm.Common.IApplicationProvider">
             <summary>
             Defines a contract for providing Application components.
             </summary>
         </member>
-        <member name="P:MagicMvvm.Forms.Common.IApplicationProvider.MainPage">
+        <member name="P:MagicMvvm.Common.IApplicationProvider.MainPage">
             <summary>
             Gets the main page of the Application.
             </summary>
         </member>
-        <member name="P:MagicMvvm.Forms.Common.IApplicationProvider.CurrentShell">
+        <member name="P:MagicMvvm.Common.IApplicationProvider.CurrentShell">
             <summary>
             Gets current shell.
             </summary>
         </member>
-        <member name="T:MagicMvvm.Forms.Dialogs.DialogManager">
+        <member name="T:MagicMvvm.Dialogs.DialogManager">
             <summary>
             Provides the ability to display dialogs from ViewModels.
             </summary>
         </member>
-        <member name="F:MagicMvvm.Forms.Dialogs.DialogManager.PopupOverlayStyle">
+        <member name="F:MagicMvvm.Dialogs.DialogManager.PopupOverlayStyle">
             <summary>
             Gets the key for specifying or retrieving popup overlay style from Application Resources.
             </summary>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.DialogManager.#ctor">
+        <member name="M:MagicMvvm.Dialogs.DialogManager.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:MagicMvvm.Forms.Dialogs.DialogManager"/> class.
+            Initializes a new instance of the <see cref="T:MagicMvvm.Dialogs.DialogManager"/> class.
             </summary>
         </member>
-        <member name="T:MagicMvvm.Forms.Dialogs.IDialogManager">
+        <member name="T:MagicMvvm.Dialogs.IDialogManager">
             <summary>
             Interface to show dialogs.
             </summary>
@@ -116,7 +116,7 @@
             Register type as a singleton inside container.
             </remarks>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IDialogManager.ShowDialog(System.String,MagicMvvm.Common.IParameters,System.Action{MagicMvvm.Forms.Dialogs.IDialogResult})">
+        <member name="M:MagicMvvm.Dialogs.IDialogManager.ShowDialog(System.String,MagicMvvm.Common.IParameters,System.Action{MagicMvvm.Dialogs.IDialogResult})">
             <summary>
             Displays a dialog.
             </summary>
@@ -135,208 +135,208 @@
             </code>
             </example>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IDialogManager.RegisterDialog``1(System.String)">
+        <member name="M:MagicMvvm.Dialogs.IDialogManager.RegisterDialog``1(System.String)">
             <summary>
             Registers the dialog.
             </summary>
             <param name="dialogName">The unique name of the dialog.</param>
             <typeparam name="T">View of dialog which is inherited from View</typeparam>
             <exception cref="T:System.ArgumentNullException">Throws exception if <paramref name="dialogName"/> is null or empty</exception>
-            <returns>The <see cref="T:MagicMvvm.Forms.Dialogs.IDialogManager"/>, for registering several dialogs easily.</returns>
+            <returns>The <see cref="T:MagicMvvm.Dialogs.IDialogManager"/>, for registering several dialogs easily.</returns>
         </member>
-        <member name="T:MagicMvvm.Forms.Dialogs.KnownDialogParameters">
+        <member name="T:MagicMvvm.Dialogs.KnownDialogParameters">
             <summary>
             Predefined dialog parameters
             </summary>
         </member>
-        <member name="T:MagicMvvm.Forms.Dialogs.ActionSheetButton">
+        <member name="T:MagicMvvm.Dialogs.ActionSheetButton">
             <summary>
-            Represents a button displayed in <see cref="M:MagicMvvm.Forms.Dialogs.IPopupDialog.DisplayActionSheetAsync(System.String,MagicMvvm.Forms.Dialogs.IActionSheetButton[])"/>
+            Represents a button displayed in <see cref="M:MagicMvvm.Dialogs.IPopupDialog.DisplayActionSheetAsync(System.String,MagicMvvm.Dialogs.IActionSheetButton[])"/>
             </summary>
         </member>
-        <member name="P:MagicMvvm.Forms.Dialogs.ActionSheetButton.Action">
+        <member name="P:MagicMvvm.Dialogs.ActionSheetButton.Action">
             <summary>
             Action to perform when the button is pressed
             </summary>
             <value>The action.</value>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.ActionSheetButton.OnButtonPressed">
+        <member name="M:MagicMvvm.Dialogs.ActionSheetButton.OnButtonPressed">
             <summary>
             Executes the action to take when the button is pressed
             </summary>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.ActionSheetButton.CreateCancelButton(System.String)">
+        <member name="M:MagicMvvm.Dialogs.ActionSheetButton.CreateCancelButton(System.String)">
             <summary>
-            Create a new instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/> that display as "cancel button"
+            Create a new instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/> that display as "cancel button"
             </summary>
             <param name="text">Button text</param>
-            <returns>An instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/></returns>
+            <returns>An instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.ActionSheetButton.CreateCancelButton(System.String,System.Action)">
+        <member name="M:MagicMvvm.Dialogs.ActionSheetButton.CreateCancelButton(System.String,System.Action)">
             <summary>
-            Create a new instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/> that display as "cancel button"
+            Create a new instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/> that display as "cancel button"
             </summary>
             <param name="text">Button text</param>
             <param name="action">Action to execute when button pressed</param>
-            <returns>An instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/></returns>
+            <returns>An instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.ActionSheetButton.CreateCancelButton``1(System.String,System.Action{``0},``0)">
+        <member name="M:MagicMvvm.Dialogs.ActionSheetButton.CreateCancelButton``1(System.String,System.Action{``0},``0)">
             <summary>
-            Create a new instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/> that display as "cancel button"
+            Create a new instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/> that display as "cancel button"
             </summary>
             <param name="text">Button text</param>
             <param name="action">Action to execute when button pressed</param>
             <param name="parameter">Parameter to pass the Action when the button is pressed</param>
-            <returns>An instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/></returns>
+            <returns>An instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.ActionSheetButton.CreateDestroyButton(System.String)">
+        <member name="M:MagicMvvm.Dialogs.ActionSheetButton.CreateDestroyButton(System.String)">
             <summary>
-            Create a new instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/> that display as "destroy button"
+            Create a new instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/> that display as "destroy button"
             </summary>
             <param name="text">Button text</param>
-            <returns>An instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/></returns>
+            <returns>An instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.ActionSheetButton.CreateDestroyButton(System.String,System.Action)">
+        <member name="M:MagicMvvm.Dialogs.ActionSheetButton.CreateDestroyButton(System.String,System.Action)">
             <summary>
-            Create a new instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/> that display as "destroy button"
-            </summary>
-            <param name="text">Button text</param>
-            <param name="action">Action to execute when button pressed</param>
-            <returns>An instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/></returns>
-        </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.ActionSheetButton.CreateDestroyButton``1(System.String,System.Action{``0},``0)">
-            <summary>
-            Create a new instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/> that display as "destroy button"
+            Create a new instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/> that display as "destroy button"
             </summary>
             <param name="text">Button text</param>
             <param name="action">Action to execute when button pressed</param>
-            <param name="parameter">Parameter to pass the action when the button is pressed</param>
-            <returns>An instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/></returns>
+            <returns>An instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.ActionSheetButton.CreateButton(System.String,System.Action)">
+        <member name="M:MagicMvvm.Dialogs.ActionSheetButton.CreateDestroyButton``1(System.String,System.Action{``0},``0)">
             <summary>
-            Create a new instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/> that display as "other button"
-            </summary>
-            <param name="text">Button text</param>
-            <param name="action">Action to execute when button pressed</param>
-            <returns>An instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/></returns>
-        </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.ActionSheetButton.CreateButton``1(System.String,System.Action{``0},``0)">
-            <summary>
-            Create a new instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/> that display as "other button"
+            Create a new instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/> that display as "destroy button"
             </summary>
             <param name="text">Button text</param>
             <param name="action">Action to execute when button pressed</param>
             <param name="parameter">Parameter to pass the action when the button is pressed</param>
-            <returns>An instance of <see cref="T:MagicMvvm.Forms.Dialogs.ActionSheetButton"/></returns>
+            <returns>An instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/></returns>
         </member>
-        <member name="T:MagicMvvm.Forms.Dialogs.ActionSheetButtonBase">
+        <member name="M:MagicMvvm.Dialogs.ActionSheetButton.CreateButton(System.String,System.Action)">
+            <summary>
+            Create a new instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/> that display as "other button"
+            </summary>
+            <param name="text">Button text</param>
+            <param name="action">Action to execute when button pressed</param>
+            <returns>An instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/></returns>
+        </member>
+        <member name="M:MagicMvvm.Dialogs.ActionSheetButton.CreateButton``1(System.String,System.Action{``0},``0)">
+            <summary>
+            Create a new instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/> that display as "other button"
+            </summary>
+            <param name="text">Button text</param>
+            <param name="action">Action to execute when button pressed</param>
+            <param name="parameter">Parameter to pass the action when the button is pressed</param>
+            <returns>An instance of <see cref="T:MagicMvvm.Dialogs.ActionSheetButton"/></returns>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.ActionSheetButtonBase">
             <summary>
             ActionSheetButton Base class
             </summary>
         </member>
-        <member name="P:MagicMvvm.Forms.Dialogs.ActionSheetButtonBase._isCancel">
+        <member name="P:MagicMvvm.Dialogs.ActionSheetButtonBase._isCancel">
             <summary>
-            Gets a value indicating whether this <see cref="T:MagicMvvm.Forms.Dialogs.IActionSheetButton"/>
+            Gets a value indicating whether this <see cref="T:MagicMvvm.Dialogs.IActionSheetButton"/>
             is cancel.
             </summary>
             <value><c>true</c> if is cancel; otherwise, <c>false</c>.</value>
         </member>
-        <member name="P:MagicMvvm.Forms.Dialogs.ActionSheetButtonBase._isDestroy">
+        <member name="P:MagicMvvm.Dialogs.ActionSheetButtonBase._isDestroy">
             <summary>
-            Gets a value indicating whether this <see cref="T:MagicMvvm.Forms.Dialogs.IActionSheetButton"/>
+            Gets a value indicating whether this <see cref="T:MagicMvvm.Dialogs.IActionSheetButton"/>
             is destroy.
             </summary>
             <value><c>true</c> if is destroy; otherwise, <c>false</c>.</value>
         </member>
-        <member name="P:MagicMvvm.Forms.Dialogs.ActionSheetButtonBase._text">
+        <member name="P:MagicMvvm.Dialogs.ActionSheetButtonBase._text">
             <summary>
-            The backing text for <see cref="T:MagicMvvm.Forms.Dialogs.IActionSheetButton"/>
+            The backing text for <see cref="T:MagicMvvm.Dialogs.IActionSheetButton"/>
             </summary>
             <value>The text.</value>
         </member>
-        <member name="P:MagicMvvm.Forms.Dialogs.ActionSheetButtonBase.IsCancel">
+        <member name="P:MagicMvvm.Dialogs.ActionSheetButtonBase.IsCancel">
             <summary>
             The button will be used as a Cancel Button
             </summary>
             <value><c>true</c> if is cancel; otherwise, <c>false</c>.</value>
         </member>
-        <member name="P:MagicMvvm.Forms.Dialogs.ActionSheetButtonBase.IsDestroy">
+        <member name="P:MagicMvvm.Dialogs.ActionSheetButtonBase.IsDestroy">
             <summary>
             The button will be used as a Destroy Button
             </summary>
             <value><c>true</c> if is destroy; otherwise, <c>false</c>.</value>
         </member>
-        <member name="P:MagicMvvm.Forms.Dialogs.ActionSheetButtonBase.Text">
+        <member name="P:MagicMvvm.Dialogs.ActionSheetButtonBase.Text">
             <summary>
             Executes the action to take when the button is pressed
             </summary>
             <value>The text.</value>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.ActionSheetButtonBase.OnButtonPressed">
+        <member name="M:MagicMvvm.Dialogs.ActionSheetButtonBase.OnButtonPressed">
             <summary>
             Executes the action.
             </summary>
         </member>
-        <member name="T:MagicMvvm.Forms.Dialogs.ActionSheetButton`1">
+        <member name="T:MagicMvvm.Dialogs.ActionSheetButton`1">
             <summary>
             Provides a Generic Implementation for IActionSheetButton
             </summary>
         </member>
-        <member name="P:MagicMvvm.Forms.Dialogs.ActionSheetButton`1.Action">
+        <member name="P:MagicMvvm.Dialogs.ActionSheetButton`1.Action">
             <summary>
             Generic Action to perform
             </summary>
             <value>The action.</value>
         </member>
-        <member name="P:MagicMvvm.Forms.Dialogs.ActionSheetButton`1.Parameter">
+        <member name="P:MagicMvvm.Dialogs.ActionSheetButton`1.Parameter">
             <summary>
             Typed Parameter
             </summary>
             <value>The parameter.</value>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.ActionSheetButton`1.OnButtonPressed">
+        <member name="M:MagicMvvm.Dialogs.ActionSheetButton`1.OnButtonPressed">
             <summary>
             Executes the action to take when the button is pressed
             </summary>
         </member>
-        <member name="T:MagicMvvm.Forms.Dialogs.IActionSheetButton">
+        <member name="T:MagicMvvm.Dialogs.IActionSheetButton">
             <summary>
-            Convenient contract to enable executing commands directly when using <see cref="M:MagicMvvm.Forms.Dialogs.IPopupDialog.DisplayActionSheetAsync(System.String,MagicMvvm.Forms.Dialogs.IActionSheetButton[])"/>
+            Convenient contract to enable executing commands directly when using <see cref="M:MagicMvvm.Dialogs.IPopupDialog.DisplayActionSheetAsync(System.String,MagicMvvm.Dialogs.IActionSheetButton[])"/>
             </summary>
         </member>
-        <member name="P:MagicMvvm.Forms.Dialogs.IActionSheetButton.IsDestroy">
+        <member name="P:MagicMvvm.Dialogs.IActionSheetButton.IsDestroy">
             <summary>
             The button will be used as destroy
             </summary>
         </member>
-        <member name="P:MagicMvvm.Forms.Dialogs.IActionSheetButton.IsCancel">
+        <member name="P:MagicMvvm.Dialogs.IActionSheetButton.IsCancel">
             <summary>
             The button will be used as cancel
             </summary>
         </member>
-        <member name="P:MagicMvvm.Forms.Dialogs.IActionSheetButton.Text">
+        <member name="P:MagicMvvm.Dialogs.IActionSheetButton.Text">
             <summary>
             Text to display in the action sheet
             </summary>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IActionSheetButton.PressButton">
+        <member name="M:MagicMvvm.Dialogs.IActionSheetButton.PressButton">
             <summary>
             Presses the button.
             </summary>
         </member>
-        <member name="T:MagicMvvm.Forms.Dialogs.IPopupDialog">
+        <member name="T:MagicMvvm.Dialogs.IPopupDialog">
             <summary>
             A service which provides access to the DisplayAlert and DisplayActionSheet off of the Xamarin.Forms.Page class.
             </summary>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IPopupDialog.CanShowDialog">
+        <member name="M:MagicMvvm.Dialogs.IPopupDialog.CanShowDialog">
             <summary>
             Determines if the dialog can be shown.
             </summary>
             <returns>True if you can show the dialog; False if the dialog cannot be shown</returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IPopupDialog.DisplayAlertAsync(System.String,System.String,System.String,System.String)">
+        <member name="M:MagicMvvm.Dialogs.IPopupDialog.DisplayAlertAsync(System.String,System.String,System.String,System.String)">
             <summary>
             Presents an alert dialog to the application user with an accept and a cancel button.
             </summary>
@@ -349,7 +349,7 @@
             <param name="cancelButton">Text for the cancel button.</param>
             <returns><c>true</c> if non-destructive button pressed; otherwise <c>false</c>/></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IPopupDialog.DisplayAlertAsync(System.String,System.String,System.String,System.String,Xamarin.Forms.FlowDirection)">
+        <member name="M:MagicMvvm.Dialogs.IPopupDialog.DisplayAlertAsync(System.String,System.String,System.String,System.String,Xamarin.Forms.FlowDirection)">
             <summary>
             Presents an alert dialog to the application user with an accept and a cancel button.
             </summary>
@@ -363,7 +363,7 @@
             <param name="flowDirection">The Text flow direction.</param>
             <returns><c>true</c> if non-destructive button pressed; otherwise <c>false</c>/></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IPopupDialog.DisplayAlertAsync(System.String,System.String,System.String)">
+        <member name="M:MagicMvvm.Dialogs.IPopupDialog.DisplayAlertAsync(System.String,System.String,System.String)">
             <summary>
             Presents an alert dialog to the application user with a single cancel button.
             </summary>
@@ -375,7 +375,7 @@
             <param name="cancelButton">Text for the cancel button.</param>
             <returns></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IPopupDialog.DisplayAlertAsync(System.String,System.String,System.String,Xamarin.Forms.FlowDirection)">
+        <member name="M:MagicMvvm.Dialogs.IPopupDialog.DisplayAlertAsync(System.String,System.String,System.String,Xamarin.Forms.FlowDirection)">
             <summary>
             Presents an alert dialog to the application user with a single cancel button.
             </summary>
@@ -388,7 +388,7 @@
             <param name="flowDirection">The Text flow direction.</param>
             <returns></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IPopupDialog.DisplayActionSheetAsync(System.String,System.String,System.String,System.String[])">
+        <member name="M:MagicMvvm.Dialogs.IPopupDialog.DisplayActionSheetAsync(System.String,System.String,System.String,System.String[])">
             <summary>
             Displays a native platform action sheet, allowing the application user to choose from several buttons.
             </summary>
@@ -398,7 +398,7 @@
             <param name="otherButtons">Text for other buttons.</param>
             <returns>Text for the pressed button</returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IPopupDialog.DisplayActionSheetAsync(System.String,System.String,System.String,Xamarin.Forms.FlowDirection,System.String[])">
+        <member name="M:MagicMvvm.Dialogs.IPopupDialog.DisplayActionSheetAsync(System.String,System.String,System.String,Xamarin.Forms.FlowDirection,System.String[])">
             <summary>
             Displays a native platform action sheet, allowing the application user to choose from several buttons.
             </summary>
@@ -409,7 +409,7 @@
             <param name="otherButtons">Text for other buttons.</param>
             <returns>Text for the pressed button</returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IPopupDialog.DisplayActionSheetAsync(System.String,MagicMvvm.Forms.Dialogs.IActionSheetButton[])">
+        <member name="M:MagicMvvm.Dialogs.IPopupDialog.DisplayActionSheetAsync(System.String,MagicMvvm.Dialogs.IActionSheetButton[])">
             <summary>
             Displays a native platform action sheet, allowing the application user to choose from several buttons.
             </summary>
@@ -421,7 +421,7 @@
             <param name="buttons">Buttons displayed in action sheet</param>
             <returns></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IPopupDialog.DisplayActionSheetAsync(System.String,Xamarin.Forms.FlowDirection,MagicMvvm.Forms.Dialogs.IActionSheetButton[])">
+        <member name="M:MagicMvvm.Dialogs.IPopupDialog.DisplayActionSheetAsync(System.String,Xamarin.Forms.FlowDirection,MagicMvvm.Dialogs.IActionSheetButton[])">
             <summary>
             Displays a native platform action sheet, allowing the application user to choose from several buttons.
             </summary>
@@ -434,7 +434,7 @@
             <param name="buttons">Buttons displayed in action sheet</param>
             <returns></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.IPopupDialog.DisplayPromptAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,MagicMvvm.Forms.AppModel.KeyboardType,System.String)">
+        <member name="M:MagicMvvm.Dialogs.IPopupDialog.DisplayPromptAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,MagicMvvm.AppModel.KeyboardType,System.String)">
             <summary>
             Displays a native platform prompt, allowing the application user to enter a string.
             </summary>
@@ -448,27 +448,27 @@
             <param name="initialValue">Pre-defined response that will be displayed, and which can be edited</param>
             <returns><c>string</c> entered by the user. <c>null</c> if cancel is pressed</returns>
         </member>
-        <member name="T:MagicMvvm.Forms.Dialogs.PopupDialog">
+        <member name="T:MagicMvvm.Dialogs.PopupDialog">
             <summary>
-            Implementation of the <see cref="T:MagicMvvm.Forms.Dialogs.IPopupDialog"/>
+            Implementation of the <see cref="T:MagicMvvm.Dialogs.IPopupDialog"/>
             </summary>
         </member>
-        <member name="F:MagicMvvm.Forms.Dialogs.PopupDialog._applicationProvider">
+        <member name="F:MagicMvvm.Dialogs.PopupDialog._applicationProvider">
             <summary>
-            Gets the <see cref="T:MagicMvvm.Forms.Common.IApplicationProvider"/>.
+            Gets the <see cref="T:MagicMvvm.Common.IApplicationProvider"/>.
             </summary>
         </member>
-        <member name="F:MagicMvvm.Forms.Dialogs.PopupDialog._keyboardMapper">
+        <member name="F:MagicMvvm.Dialogs.PopupDialog._keyboardMapper">
             <summary>
-            Gets the <see cref="T:MagicMvvm.Forms.AppModel.IKeyboardMapper"/>.
+            Gets the <see cref="T:MagicMvvm.AppModel.IKeyboardMapper"/>.
             </summary>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.PopupDialog.#ctor">
+        <member name="M:MagicMvvm.Dialogs.PopupDialog.#ctor">
             <summary>
-            Creates a new <see cref="T:MagicMvvm.Forms.Dialogs.IPopupDialog"/>
+            Creates a new <see cref="T:MagicMvvm.Dialogs.IPopupDialog"/>
             </summary>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.PopupDialog.DisplayAlertAsync(System.String,System.String,System.String,System.String)">
+        <member name="M:MagicMvvm.Dialogs.PopupDialog.DisplayAlertAsync(System.String,System.String,System.String,System.String)">
             <summary>
             Presents an alert dialog to the application user with an accept and a cancel button.
             </summary>
@@ -481,7 +481,7 @@
             <param name="cancelButton">Text for the cancel button.</param>
             <returns><c>true</c> if non-destructive button pressed; otherwise <c>false</c>/></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.PopupDialog.DisplayAlertAsync(System.String,System.String,System.String,System.String,Xamarin.Forms.FlowDirection)">
+        <member name="M:MagicMvvm.Dialogs.PopupDialog.DisplayAlertAsync(System.String,System.String,System.String,System.String,Xamarin.Forms.FlowDirection)">
             <summary>
             Presents an alert dialog to the application user with an accept and a cancel button.
             </summary>
@@ -495,7 +495,7 @@
             <param name="flowDirection">The Text flow direction.</param>
             <returns><c>true</c> if non-destructive button pressed; otherwise <c>false</c>/></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.PopupDialog.DisplayAlertAsync(System.String,System.String,System.String)">
+        <member name="M:MagicMvvm.Dialogs.PopupDialog.DisplayAlertAsync(System.String,System.String,System.String)">
             <summary>
             Presents an alert dialog to the application user with a single cancel button.
             </summary>
@@ -507,7 +507,7 @@
             <param name="cancelButton">Text for the cancel button.</param>
             <returns></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.PopupDialog.DisplayAlertAsync(System.String,System.String,System.String,Xamarin.Forms.FlowDirection)">
+        <member name="M:MagicMvvm.Dialogs.PopupDialog.DisplayAlertAsync(System.String,System.String,System.String,Xamarin.Forms.FlowDirection)">
             <summary>
             Presents an alert dialog to the application user with a single cancel button.
             </summary>
@@ -520,7 +520,7 @@
             <param name="flowDirection">The Text flow direction.</param>
             <returns></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.PopupDialog.DisplayActionSheetAsync(System.String,System.String,System.String,System.String[])">
+        <member name="M:MagicMvvm.Dialogs.PopupDialog.DisplayActionSheetAsync(System.String,System.String,System.String,System.String[])">
             <summary>
             Displays a native platform action sheet, allowing the application user to choose from several buttons.
             </summary>
@@ -530,7 +530,7 @@
             <param name="otherButtons">Text for other buttons.</param>
             <returns>Text for the pressed button</returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.PopupDialog.DisplayActionSheetAsync(System.String,System.String,System.String,Xamarin.Forms.FlowDirection,System.String[])">
+        <member name="M:MagicMvvm.Dialogs.PopupDialog.DisplayActionSheetAsync(System.String,System.String,System.String,Xamarin.Forms.FlowDirection,System.String[])">
             <summary>
             Displays a native platform action sheet, allowing the application user to choose from several buttons.
             </summary>
@@ -541,7 +541,7 @@
             <param name="otherButtons">Text for other buttons.</param>
             <returns>Text for the pressed button</returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.PopupDialog.DisplayActionSheetAsync(System.String,MagicMvvm.Forms.Dialogs.IActionSheetButton[])">
+        <member name="M:MagicMvvm.Dialogs.PopupDialog.DisplayActionSheetAsync(System.String,MagicMvvm.Dialogs.IActionSheetButton[])">
             <summary>
             Displays a native platform action sheet, allowing the application user to choose from several buttons.
             </summary>
@@ -553,7 +553,7 @@
             <param name="buttons">Buttons displayed in action sheet</param>
             <returns></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.PopupDialog.DisplayActionSheetAsync(System.String,Xamarin.Forms.FlowDirection,MagicMvvm.Forms.Dialogs.IActionSheetButton[])">
+        <member name="M:MagicMvvm.Dialogs.PopupDialog.DisplayActionSheetAsync(System.String,Xamarin.Forms.FlowDirection,MagicMvvm.Dialogs.IActionSheetButton[])">
             <summary>
             Displays a native platform action sheet, allowing the application user to choose from several buttons.
             </summary>
@@ -566,7 +566,7 @@
             <param name="buttons">Buttons displayed in action sheet</param>
             <returns></returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.PopupDialog.DisplayPromptAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,MagicMvvm.Forms.AppModel.KeyboardType,System.String)">
+        <member name="M:MagicMvvm.Dialogs.PopupDialog.DisplayPromptAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,MagicMvvm.AppModel.KeyboardType,System.String)">
             <summary>
             Displays a native platform prompt, allowing the application user to enter a string.
             </summary>
@@ -580,24 +580,24 @@
             <param name="initialValue">Pre-defined response that will be displayed, and which can be edited</param>
             <returns><c>string</c> entered by the user. <c>null</c> if cancel is pressed</returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.PopupDialog.CanShowDialog">
+        <member name="M:MagicMvvm.Dialogs.PopupDialog.CanShowDialog">
             <summary>
             Determines if the dialog can be shown.
             </summary>
             <returns>True if you can show the dialog; False if the dialog cannot be shown</returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Forms.Dialogs.IDialogManager,System.String)">
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Dialogs.IDialogManager,System.String)">
             <summary>
             Displays a dialog.
             </summary>
-            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Forms.Dialogs.IDialogManager"/></param>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
             <param name="name">The unique name of the dialog to display.</param>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Forms.Dialogs.IDialogManager,System.String,MagicMvvm.Common.IParameters)">
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Common.IParameters)">
             <summary>
             Displays a dialog.
             </summary>
-            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Forms.Dialogs.IDialogManager"/></param>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
             <param name="name">The unique name of the dialog to display.</param>
             <param name="parameters">Parameters that the dialog can use for custom functionality.</param>
             <example>
@@ -612,182 +612,95 @@
             </code>
             </example>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Forms.Dialogs.IDialogManager,System.String,System.Action{MagicMvvm.Forms.Dialogs.IDialogResult})">
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Dialogs.IDialogManager,System.String,System.Action{MagicMvvm.Dialogs.IDialogResult})">
             <summary>
             Displays a dialog.
             </summary>
-            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Forms.Dialogs.IDialogManager"/></param>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
             <param name="name">The unique name of the dialog to display.</param>
             <param name="callback">The action to be invoked upon successful or failed completion of displaying the dialog.</param>
         </member>
-        <member name="M:MagicMvvm.Forms.Dialogs.DialogManagerExtensions.RegisterDialog``1(MagicMvvm.Forms.Dialogs.IDialogManager)">
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.RegisterDialog``1(MagicMvvm.Dialogs.IDialogManager)">
             <summary>
             Registers the dialog.
             </summary>
             <remarks>
             The name of dialog type <typeparamref name="T"/> will be used a unique name to display dialog
             </remarks>
-            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Forms.Dialogs.IDialogManager"/></param>
+            <param name="dialogManager">Instance of <see cref="T:MagicMvvm.Dialogs.IDialogManager"/></param>
             <typeparam name="T">View of dialog which is inherited from View</typeparam>
-            <returns>The <see cref="T:MagicMvvm.Forms.Dialogs.IDialogManager"/>, for registering several dialogs easily.</returns>
+            <returns>The <see cref="T:MagicMvvm.Dialogs.IDialogManager"/>, for registering several dialogs easily.</returns>
         </member>
-        <member name="T:MagicMvvm.Forms.Navigation.NavigationManagerExtensions">
+        <member name="T:MagicMvvm.Navigation.NavigationManagerExtensions">
             <summary>
-            Extension methods for the <see cref="T:MagicMvvm.Forms.Navigation.INavigationManager"/>
+            Extension methods for the <see cref="T:MagicMvvm.Navigation.INavigationManager"/>
             </summary>
         </member>
-        <member name="M:MagicMvvm.Forms.Navigation.NavigationManagerExtensions.RegisterPage``1(MagicMvvm.Forms.Navigation.INavigationManager)">
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.RegisterPage``1(MagicMvvm.Navigation.INavigationManager)">
             <summary>
             Register page for the navigation.
             </summary>
-            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Forms.Navigation.INavigationManager"/>.</param>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/>.</param>
             <typeparam name="TView">Type of the view</typeparam>
-            <returns>The <see cref="T:MagicMvvm.Forms.Navigation.INavigationManager"/>, for adding several views easily</returns>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationManager"/>, for adding several views easily</returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Navigation.NavigationManagerExtensions.NavigateToAsync(MagicMvvm.Forms.Navigation.INavigationManager,System.String)">
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.NavigateToAsync(MagicMvvm.Navigation.INavigationManager,System.String)">
             <summary>
             Navigates to the specified page.
             </summary>
-            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Forms.Navigation.INavigationManager"/>.</param>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/>.</param>
             <param name="pageName">The name of the page that registered for navigation manager.</param>
-            <returns>The <see cref="T:MagicMvvm.Forms.Navigation.INavigationResult"/>.</returns>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationResult"/>.</returns>
             <exception cref="T:System.InvalidOperationException">
                 Throws exception if <paramref name="pageName"/> is not registered in navigation manager.
             </exception>
         </member>
-        <member name="M:MagicMvvm.Forms.Navigation.NavigationManagerExtensions.NavigateToAsync(MagicMvvm.Forms.Navigation.INavigationManager,System.String,MagicMvvm.Common.IParameters)">
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.NavigateToAsync(MagicMvvm.Navigation.INavigationManager,System.String,MagicMvvm.Common.IParameters)">
             <summary>
             Navigates to the specified page.
             </summary>
-            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Forms.Navigation.INavigationManager"/>.</param>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/>.</param>
             <param name="pageName">The name of the page that registered for navigation manager.</param>
             <param name="navigationParameters">Navigation parameters to pass arguments between views.</param>
-            <returns>The <see cref="T:MagicMvvm.Forms.Navigation.INavigationResult"/>.</returns>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationResult"/>.</returns>
             <exception cref="T:System.InvalidOperationException">
                 Throws exception if <paramref name="pageName"/> is not registered in navigation manager.
             </exception>
         </member>
-        <member name="M:MagicMvvm.Forms.Navigation.NavigationManagerExtensions.NavigateToAsync(MagicMvvm.Forms.Navigation.INavigationManager,System.String,System.Action)">
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.NavigateToAsync(MagicMvvm.Navigation.INavigationManager,System.String,System.Action)">
             <summary>
             Navigates to the specified page.
             </summary>
-            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Forms.Navigation.INavigationManager"/>.</param>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/>.</param>
             <param name="pageName">The name of the page that registered for navigation manager.</param>
             <param name="navigationCallback">The navigation callback that will be executed after the navigation is completed.</param>
-            <returns>The <see cref="T:MagicMvvm.Forms.Navigation.INavigationResult"/>.</returns>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationResult"/>.</returns>
             <exception cref="T:System.InvalidOperationException">
                 Throws exception if <paramref name="pageName"/> is not registered in navigation manager.
             </exception>
         </member>
-        <member name="M:MagicMvvm.Forms.Navigation.NavigationManagerExtensions.GoBackAsync(MagicMvvm.Forms.Navigation.INavigationManager)">
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.GoBackAsync(MagicMvvm.Navigation.INavigationManager)">
             <summary>
             Performs backward navigation.
             </summary>
-            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Forms.Navigation.INavigationManager"/>.</param>
-            <returns>The <see cref="T:MagicMvvm.Forms.Navigation.INavigationResult"/>.</returns>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/>.</param>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationResult"/>.</returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Navigation.NavigationManagerExtensions.GoBackAsync(MagicMvvm.Forms.Navigation.INavigationManager,System.Action)">
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.GoBackAsync(MagicMvvm.Navigation.INavigationManager,System.Action)">
             <summary>
             Performs backward navigation.
             </summary>
-            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Forms.Navigation.INavigationManager"/>.</param>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/>.</param>
             <param name="navigationCallback">The navigation callback that will be executed after the navigation is completed.</param>
-            <returns>The <see cref="T:MagicMvvm.Forms.Navigation.INavigationResult"/>.</returns>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationResult"/>.</returns>
         </member>
-        <member name="M:MagicMvvm.Forms.Navigation.NavigationManagerExtensions.GoBackAsync(MagicMvvm.Forms.Navigation.INavigationManager,MagicMvvm.Common.IParameters)">
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.GoBackAsync(MagicMvvm.Navigation.INavigationManager,MagicMvvm.Common.IParameters)">
             <summary>
             Performs backward navigation.
             </summary>
-            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Forms.Navigation.INavigationManager"/>.</param>
+            <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/>.</param>
             <param name="navigationParameters">Navigation parameters to pass arguments between views.</param>
-            <returns>The <see cref="T:MagicMvvm.Forms.Navigation.INavigationResult"/>.</returns>
-        </member>
-        <member name="T:MagicMvvm.Forms.Navigation.INavigationManager">
-            <summary>
-            Navigation manager for handling navigations
-            </summary>
-            <remarks>
-            Register type as a singleton if you are using IoC container.
-            </remarks>
-        </member>
-        <member name="M:MagicMvvm.Forms.Navigation.INavigationManager.RegisterPage``1(System.String)">
-            <summary>
-            Registers page for the navigation.
-            </summary>
-            <param name="pageName">The unique page name</param>
-            <returns>Instance of <see cref="T:MagicMvvm.Forms.Navigation.INavigationManager"/>, for easily adding several pages</returns>
-            <typeparam name="T">Type of the page</typeparam>
-            <exception cref="T:System.ArgumentNullException">
-                Throws exception if <paramref name="pageName"/> is null or empty
-            </exception>
-            <exception cref="T:System.InvalidOperationException">
-                Throws exception if page with name <paramref name="pageName"/> is already registered.
-            </exception>
-        </member>
-        <member name="M:MagicMvvm.Forms.Navigation.INavigationManager.NavigateToAsync(System.String,System.Action,MagicMvvm.Common.IParameters)">
-            <summary>
-            Navigates to the specified page.
-            </summary>
-            <param name="pageName">The name of the page that registered for navigation manager.</param>
-            <param name="navigationCallback">The navigation callback that will be executed after the navigation is completed.</param>
-            <param name="parameters">Navigation parameters to pass arguments between views.</param>
-            <returns>The <see cref="T:MagicMvvm.Forms.Navigation.INavigationResult"/>.</returns>
-            <exception cref="T:System.InvalidOperationException">
-                Throws exception if <paramref name="pageName"/> was not registered in navigation manager
-            </exception>
-        </member>
-        <member name="M:MagicMvvm.Forms.Navigation.INavigationManager.GoBackAsync(System.Action,MagicMvvm.Common.IParameters)">
-            <summary>
-            Performs backward navigation.
-            </summary>
-            <param name="navigationCallback">The navigation callback that will be executed after the navigation is completed.</param>
-            <param name="parameters">Navigation parameters to pass arguments between views.</param>
-            <returns>The <see cref="T:MagicMvvm.Forms.Navigation.INavigationResult"/>.</returns>
-        </member>
-        <member name="T:MagicMvvm.Forms.Navigation.INavigationResult">
-            <summary>
-            Describes navigation result.
-            </summary>
-        </member>
-        <member name="T:MagicMvvm.Forms.Navigation.IShellNavigationManager">
-            <summary>
-            Navigation manager for handling navigations between pages in shell application.
-            </summary>
-            <remarks>
-            Register type as a singleton if you are using IoC container.
-            </remarks>
-        </member>
-        <member name="M:MagicMvvm.Forms.Navigation.IShellNavigationManager.RegisterShell``1(``0)">
-            <summary>
-            Registers shell.
-            </summary>
-            <param name="instance">Instance of the shell</param>
-            <typeparam name="T">Type of the shell</typeparam>
-            <exception cref="T:System.ArgumentNullException">
-                Throws exception if <paramref name="instance"/> is null.
-            </exception>
-            <returns>Instance of <see cref="T:MagicMvvm.Forms.Navigation.INavigationManager"/>, for easily adding several shells.</returns>
-        </member>
-        <member name="T:MagicMvvm.Forms.Navigation.NavigationManager">
-            <summary>
-            Implements <see cref="T:MagicMvvm.Forms.Navigation.INavigationManager"/> to handle navigation between pages.
-            </summary>
-            <remarks>
-            Register type as a singleton if you are using IoC container.
-            </remarks>
-        </member>
-        <member name="T:MagicMvvm.Forms.Navigation.ShellNavigationManager">
-            <summary>
-            Implements <see cref="T:MagicMvvm.Forms.Navigation.IShellNavigationManager"/> to handle navigation between pages in the shell.
-            </summary>
-            <remarks>
-            Register type as a singleton if you are using IoC container.
-            </remarks>
-        </member>
-        <member name="T:MagicMvvm.Forms.ViewModelBase">
-            <summary>
-            Base ViewModel
-            </summary>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationResult"/>.</returns>
         </member>
         <member name="T:MagicMvvm.Navigation.INavigationAware">
             <summary>
@@ -805,6 +718,93 @@
             Called when the implementer is being navigated away from.
             </summary>
             <param name="parameters">The navigation parameters.</param>
+        </member>
+        <member name="T:MagicMvvm.Navigation.INavigationManager">
+            <summary>
+            Navigation manager for handling navigations
+            </summary>
+            <remarks>
+            Register type as a singleton if you are using IoC container.
+            </remarks>
+        </member>
+        <member name="M:MagicMvvm.Navigation.INavigationManager.RegisterPage``1(System.String)">
+            <summary>
+            Registers page for the navigation.
+            </summary>
+            <param name="pageName">The unique page name</param>
+            <returns>Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/>, for easily adding several pages</returns>
+            <typeparam name="T">Type of the page</typeparam>
+            <exception cref="T:System.ArgumentNullException">
+                Throws exception if <paramref name="pageName"/> is null or empty
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+                Throws exception if page with name <paramref name="pageName"/> is already registered.
+            </exception>
+        </member>
+        <member name="M:MagicMvvm.Navigation.INavigationManager.NavigateToAsync(System.String,System.Action,MagicMvvm.Common.IParameters)">
+            <summary>
+            Navigates to the specified page.
+            </summary>
+            <param name="pageName">The name of the page that registered for navigation manager.</param>
+            <param name="navigationCallback">The navigation callback that will be executed after the navigation is completed.</param>
+            <param name="parameters">Navigation parameters to pass arguments between views.</param>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationResult"/>.</returns>
+            <exception cref="T:System.InvalidOperationException">
+                Throws exception if <paramref name="pageName"/> was not registered in navigation manager
+            </exception>
+        </member>
+        <member name="M:MagicMvvm.Navigation.INavigationManager.GoBackAsync(System.Action,MagicMvvm.Common.IParameters)">
+            <summary>
+            Performs backward navigation.
+            </summary>
+            <param name="navigationCallback">The navigation callback that will be executed after the navigation is completed.</param>
+            <param name="parameters">Navigation parameters to pass arguments between views.</param>
+            <returns>The <see cref="T:MagicMvvm.Navigation.INavigationResult"/>.</returns>
+        </member>
+        <member name="T:MagicMvvm.Navigation.INavigationResult">
+            <summary>
+            Describes navigation result.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.Navigation.IShellNavigationManager">
+            <summary>
+            Navigation manager for handling navigations between pages in shell application.
+            </summary>
+            <remarks>
+            Register type as a singleton if you are using IoC container.
+            </remarks>
+        </member>
+        <member name="M:MagicMvvm.Navigation.IShellNavigationManager.RegisterShell``1(``0)">
+            <summary>
+            Registers shell.
+            </summary>
+            <param name="instance">Instance of the shell</param>
+            <typeparam name="T">Type of the shell</typeparam>
+            <exception cref="T:System.ArgumentNullException">
+                Throws exception if <paramref name="instance"/> is null.
+            </exception>
+            <returns>Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/>, for easily adding several shells.</returns>
+        </member>
+        <member name="T:MagicMvvm.Navigation.NavigationManager">
+            <summary>
+            Implements <see cref="T:MagicMvvm.Navigation.INavigationManager"/> to handle navigation between pages.
+            </summary>
+            <remarks>
+            Register type as a singleton if you are using IoC container.
+            </remarks>
+        </member>
+        <member name="T:MagicMvvm.Navigation.ShellNavigationManager">
+            <summary>
+            Implements <see cref="T:MagicMvvm.Navigation.IShellNavigationManager"/> to handle navigation between pages in the shell.
+            </summary>
+            <remarks>
+            Register type as a singleton if you are using IoC container.
+            </remarks>
+        </member>
+        <member name="T:MagicMvvm.ViewModelBase">
+            <summary>
+            Base ViewModel
+            </summary>
         </member>
     </members>
 </doc>

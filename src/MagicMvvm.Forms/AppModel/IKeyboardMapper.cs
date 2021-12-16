@@ -1,6 +1,4 @@
-﻿using Xamarin.Forms;
-
-namespace MagicMvvm.Forms.AppModel;
+﻿namespace MagicMvvm.AppModel;
 
 /// <summary>
 /// An abstraction to map <see cref="KeyboardType"/> to the <see cref="Keyboard"/>;

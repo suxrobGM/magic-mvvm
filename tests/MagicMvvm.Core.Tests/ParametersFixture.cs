@@ -1,6 +1,6 @@
 ﻿using MagicMvvm.Common;
 
-namespace MagicMvvm.Core.Tests;
+namespace MagicMvvm.Tests;
 
 public class ParametersFixture
 {

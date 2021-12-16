@@ -1,6 +1,4 @@
-﻿using MagicMvvm.Navigation;
-
-namespace MagicMvvm.Forms.Navigation;
+﻿namespace MagicMvvm.Navigation;
 
 /// <summary>
 /// Implements <see cref="INavigationManager"/> to handle navigation between pages.

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MagicMvvm.Blazor" Version="1.2.0" />
+    <PackageReference Include="MagicMvvm.Blazor" Version="2.0.1" />
   </ItemGroup>
 
 </Project>

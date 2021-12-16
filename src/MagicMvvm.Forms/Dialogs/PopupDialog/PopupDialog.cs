@@ -1,7 +1,7 @@
 ﻿using System.Net.Mime;
-using MagicMvvm.Forms.AppModel;
+using MagicMvvm.AppModel;
 
-namespace MagicMvvm.Forms.Dialogs;
+namespace MagicMvvm.Dialogs;
 
 /// <summary>
 /// Implementation of the <see cref="IPopupDialog"/>

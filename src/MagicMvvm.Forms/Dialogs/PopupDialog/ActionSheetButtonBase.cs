@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Forms.Dialogs;
+﻿namespace MagicMvvm.Dialogs;
 
 /// <summary>
 /// ActionSheetButton Base class

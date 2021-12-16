@@ -1,6 +1,6 @@
-﻿using MagicMvvm.Forms.Dialogs.Xaml;
+﻿using MagicMvvm.Dialogs.Xaml;
 
-namespace MagicMvvm.Forms.Dialogs;
+namespace MagicMvvm.Dialogs;
 
 /// <summary>
 /// Provides the ability to display dialogs from ViewModels.

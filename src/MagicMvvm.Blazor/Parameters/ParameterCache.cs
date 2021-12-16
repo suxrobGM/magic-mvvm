@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MagicMvvm.Blazor.Parameters;
+namespace MagicMvvm.Parameters;
 
 internal class ParameterCache : IParameterCache
 {

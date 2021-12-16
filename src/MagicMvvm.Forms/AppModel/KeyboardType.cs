@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Forms.AppModel;
+﻿namespace MagicMvvm.AppModel;
 
 /// <summary>
 /// Keyboard type

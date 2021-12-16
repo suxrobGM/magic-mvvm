@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Forms.Dialogs;
+﻿namespace MagicMvvm.Dialogs;
 
 internal class DialogResult : IDialogResult
 {
