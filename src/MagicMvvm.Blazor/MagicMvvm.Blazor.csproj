@@ -14,6 +14,7 @@
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageTags>mvvm, blazor, MagicMvvm, prism</PackageTags>
         <DocumentationFile>.\MagicMvvm.Blazor.xml</DocumentationFile>
+        <LangVersion>10</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup>

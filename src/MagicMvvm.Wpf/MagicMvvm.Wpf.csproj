@@ -15,6 +15,7 @@
 	<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	<PackageTags>mvvm, wpf, MagicMvvm, prism, xaml</PackageTags>
 	<DocumentationFile>.\MagicMvvm.Wpf.xml</DocumentationFile>
+	<LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -39,6 +40,12 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Dialogs\DialogHost\DialogHostWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

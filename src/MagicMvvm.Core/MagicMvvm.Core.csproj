@@ -14,6 +14,7 @@
 	<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	<PackageTags>mvvm, wpf, MagicMvvm, prism, xaml</PackageTags>
 	<DocumentationFile>.\MagicMvvm.Core.xml</DocumentationFile>
+	<LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup>
