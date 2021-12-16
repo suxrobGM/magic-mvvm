@@ -1,7 +1,7 @@
 ﻿namespace MagicMvvm.Dialogs;
 
 /// <summary>
-/// An <see cref="IDialogResult"/> that contains <see cref="IDialogParameters"/> from the dialog
+/// An <see cref="IDialogResult"/> that contains <see cref="IParameters"/> from the dialog
 /// and the <see cref="ButtonResult"/> of the dialog.
 /// </summary>
 public class DialogResult : IDialogResult
