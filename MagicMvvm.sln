@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D2402E59
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicMvvm.Core.Tests", "tests\MagicMvvm.Core.Tests\MagicMvvm.Core.Tests.csproj", "{6F286D05-DCE0-4313-AFB2-B9006AF4263D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMvvm.Forms", "src\MagicMvvm.Forms\MagicMvvm.Forms.csproj", "{002A859D-F8C0-46AA-BBE3-54C7BCC30344}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{6F286D05-DCE0-4313-AFB2-B9006AF4263D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F286D05-DCE0-4313-AFB2-B9006AF4263D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F286D05-DCE0-4313-AFB2-B9006AF4263D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{002A859D-F8C0-46AA-BBE3-54C7BCC30344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{002A859D-F8C0-46AA-BBE3-54C7BCC30344}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{002A859D-F8C0-46AA-BBE3-54C7BCC30344}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{002A859D-F8C0-46AA-BBE3-54C7BCC30344}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{9881CE1C-9A65-4C25-92D5-FA048E59F59B} = {4610BD2A-AE40-4FE2-9DF7-C0952ED279D1}
 		{718FF4C8-A3F6-4ED2-AD6F-3A00EF609B05} = {4610BD2A-AE40-4FE2-9DF7-C0952ED279D1}
 		{6F286D05-DCE0-4313-AFB2-B9006AF4263D} = {D2402E59-B557-4215-B7DF-BED2A7091AA6}
+		{002A859D-F8C0-46AA-BBE3-54C7BCC30344} = {4610BD2A-AE40-4FE2-9DF7-C0952ED279D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3587D4A-CBB9-422A-84C1-C97507AFF199}
