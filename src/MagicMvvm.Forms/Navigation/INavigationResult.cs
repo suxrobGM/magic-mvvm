@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MagicMvvm.Forms.Navigation;
+﻿namespace MagicMvvm.Forms.Navigation;
 
 /// <summary>
 /// Describes navigation result.

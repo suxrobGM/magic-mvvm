@@ -4,7 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <AssemblyName>MagicMvvm.Blazor</AssemblyName>
         <RootNamespace>MagicMvvm</RootNamespace>
-        <Version>1.2.0</Version>
+        <Version>2.0.0</Version>
         <Authors>Sukhrob Ilyosbekov</Authors>
         <PackageProjectUrl>https://github.com/suxrobGM/MagicMvvm</PackageProjectUrl>
         <RepositoryUrl>https://github.com/suxrobGM/MagicMvvm</RepositoryUrl>
@@ -16,16 +16,16 @@
         <DocumentationFile>.\MagicMvvm.Blazor.xml</DocumentationFile>
         <LangVersion>10</LangVersion>
     </PropertyGroup>
-
+    
     <PropertyGroup>
         <NoWarn>1701;1702;1591</NoWarn>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
-
+    
     <ItemGroup>
         <ProjectReference Include="..\MagicMvvm.Core\MagicMvvm.Core.csproj" />
     </ItemGroup>
-
+    
     <ItemGroup>
         <None Include="..\..\LICENSE">
             <Pack>True</Pack>
@@ -36,7 +36,7 @@
           <PackagePath>\</PackagePath>
         </None>
     </ItemGroup>
-
+    
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.11" />
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />

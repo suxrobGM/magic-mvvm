@@ -5,7 +5,7 @@
 	<UseWPF>true</UseWPF>
 	<AssemblyName>MagicMvvm.Wpf</AssemblyName>
 	<RootNamespace>MagicMvvm</RootNamespace>
-	<Version>1.2.0</Version>
+	<Version>2.0.0</Version>
 	<Authors>Sukhrob Ilyosbekov</Authors>
 	<PackageProjectUrl>https://github.com/suxrobGM/MagicMvvm</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/suxrobGM/MagicMvvm</RepositoryUrl>
@@ -40,12 +40,6 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Dialogs\DialogHost\DialogHostWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
 
 </Project>

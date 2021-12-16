@@ -14,7 +14,7 @@ public abstract class DialogViewModelBase : IDialogAware
     {
         RequestClose?.Invoke(dialogResult ?? new DialogResult());
     }
-        
+
     public virtual bool CanCloseDialog()
     {
         return true;

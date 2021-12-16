@@ -1,9 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-
-namespace MagicMvvm.Forms.Navigation;
+﻿namespace MagicMvvm.Forms.Navigation;
 
 /// <summary>
 /// Navigation manager for handling navigations
