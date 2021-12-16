@@ -120,7 +120,7 @@
         </member>
         <member name="T:MagicMvvm.Dialogs.DialogResult">
             <summary>
-            An <see cref="T:MagicMvvm.Dialogs.IDialogResult"/> that contains <see cref="!:IDialogParameters"/> from the dialog
+            An <see cref="T:MagicMvvm.Dialogs.IDialogResult"/> that contains <see cref="T:MagicMvvm.Common.IParameters"/> from the dialog
             and the <see cref="T:MagicMvvm.Dialogs.ButtonResult"/> of the dialog.
             </summary>
         </member>
@@ -306,7 +306,7 @@
         </member>
         <member name="T:MagicMvvm.Dialogs.IDialogResult">
             <summary>
-            Contains <see cref="!:IDialogParameters"/> from the dialog
+            Contains <see cref="T:MagicMvvm.Common.IParameters"/> from the dialog
             and the <see cref="T:MagicMvvm.Dialogs.ButtonResult"/> of the dialog.
             </summary>
         </member>
