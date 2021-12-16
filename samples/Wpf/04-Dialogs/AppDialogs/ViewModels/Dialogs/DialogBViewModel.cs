@@ -1,4 +1,6 @@
-﻿namespace AppDialogs.ViewModels.Dialogs
+﻿using MagicMvvm;
+
+namespace AppDialogs.ViewModels.Dialogs
 {
     public class DialogBViewModel : DialogViewModelBase
     {
@@ -6,5 +8,7 @@
         {
             Title = "Dialog B";
         }
+
+        public override string Title { get; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using MagicMvvm;
 using MagicMvvm.Commands;
+using MagicMvvm.Common;
 using MagicMvvm.Navigation;
 
 namespace AppNavigation.ViewModels
@@ -47,7 +48,7 @@ namespace AppNavigation.ViewModels
             }
             else if (page == "C")
             {
-                var navigationParameters = new NavigationParameters()
+                var navigationParameters = new Parameters()
                 {
                     {"paramKey1", "paramValue1"},
                     {"paramKey2", "paramValue2"},

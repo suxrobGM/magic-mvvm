@@ -1,9 +1,9 @@
 ﻿using MagicMvvm;
-using MagicMvvm.Navigation;
+using MagicMvvm.Common;
 
 namespace AppNavigation.ViewModels.Pages
 {
-    public class PageCViewModel : ViewModelBase, INavigationAware
+    public class PageCViewModel : ViewModelBase
     {
         public PageCViewModel()
         {
@@ -18,29 +18,29 @@ namespace AppNavigation.ViewModels.Pages
         }
 
         // Called when navigated to the current page
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public override void OnNavigatedTo(IParameters parameters)
         {
             PageContent += "\nPage parameters:";
 
             // Tries to get navigation parameter where sent as key "paramKey1"
-            if (navigationContext.Parameters.TryGetValue("paramKey1", out string paramValue1))
+            if (parameters.TryGetValue("paramKey1", out string paramValue1))
             {
                 PageContent += $"\n{paramValue1}";
             }
 
-            if (navigationContext.Parameters.TryGetValue("paramKey2", out string paramValue2))
+            if (parameters.TryGetValue("paramKey2", out string paramValue2))
             {
                 PageContent += $"\n{paramValue2}";
             }
 
-            if (navigationContext.Parameters.TryGetValue("paramKey3", out string paramValue3))
+            if (parameters.TryGetValue("paramKey3", out string paramValue3))
             {
                 PageContent += $"\n{paramValue3}";
             }
         }
 
         // Called when navigated away from this page
-        public void OnNavigatedFrom(NavigationContext navigationContext)
+        public override void OnNavigatedFrom(IParameters parameters)
         {
         }
     }

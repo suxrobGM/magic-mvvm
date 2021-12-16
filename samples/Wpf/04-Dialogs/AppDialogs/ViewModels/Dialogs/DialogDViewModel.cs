@@ -1,5 +1,6 @@
 ﻿using MagicMvvm.Commands;
 using System.Windows.Input;
+using MagicMvvm;
 
 namespace AppDialogs.ViewModels.Dialogs
 {
@@ -12,5 +13,6 @@ namespace AppDialogs.ViewModels.Dialogs
         }
 
         public ICommand CloseDialogCommand { get;}
+        public override string Title { get; }
     }
 }
