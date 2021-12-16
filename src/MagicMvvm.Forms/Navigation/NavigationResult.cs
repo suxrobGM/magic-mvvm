@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Forms.Navigation;
+﻿namespace MagicMvvm.Navigation;
 
 public class NavigationResult : INavigationResult
 {

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace MagicMvvm.Forms.Dialogs;
+namespace MagicMvvm.Dialogs;
 
 [Serializable]
 public class DialogException : Exception

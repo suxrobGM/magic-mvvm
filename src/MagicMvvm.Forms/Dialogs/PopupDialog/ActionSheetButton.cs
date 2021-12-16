@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Forms.Dialogs;
+﻿namespace MagicMvvm.Dialogs;
 
 /// <summary>
 /// Represents a button displayed in <see cref="IPopupDialog.DisplayActionSheetAsync(string, IActionSheetButton[])"/>

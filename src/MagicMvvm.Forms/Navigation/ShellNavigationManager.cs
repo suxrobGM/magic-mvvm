@@ -1,7 +1,6 @@
-﻿using MagicMvvm.Forms.Dialogs;
-using MagicMvvm.Navigation;
+﻿using MagicMvvm.Dialogs;
 
-namespace MagicMvvm.Forms.Navigation;
+namespace MagicMvvm.Navigation;
 
 /// <summary>
 /// Implements <see cref="IShellNavigationManager"/> to handle navigation between pages in the shell.

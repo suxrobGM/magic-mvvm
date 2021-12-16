@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Blazor;
+﻿namespace MagicMvvm;
 
 /// <summary>
 /// Base ViewModel

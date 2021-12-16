@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Forms.Dialogs;
+﻿namespace MagicMvvm.Dialogs;
 
 /// <summary>
 /// Convenient contract to enable executing commands directly when using <see cref="IPopupDialog.DisplayActionSheetAsync(string, IActionSheetButton[])"/>

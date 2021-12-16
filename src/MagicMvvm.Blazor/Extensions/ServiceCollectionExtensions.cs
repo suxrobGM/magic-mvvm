@@ -1,7 +1,7 @@
-﻿using MagicMvvm.Blazor.Parameters;
+﻿using MagicMvvm.Parameters;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MagicMvvm.Blazor;
+namespace MagicMvvm;
 
 public static class ServiceCollectionExtensions
 {

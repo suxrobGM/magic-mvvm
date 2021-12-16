@@ -1,6 +1,4 @@
-﻿
-
-namespace MagicMvvm.Forms.AppModel;
+﻿namespace MagicMvvm.AppModel;
 
 /// <summary>
 /// The default implementation of the <see cref="IKeyboardMapper"/>.

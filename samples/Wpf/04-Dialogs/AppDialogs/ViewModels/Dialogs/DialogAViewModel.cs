@@ -1,4 +1,4 @@
-﻿using MagicMvvm.Dialogs;
+﻿using MagicMvvm;
 
 namespace AppDialogs.ViewModels.Dialogs
 {
@@ -8,5 +8,7 @@ namespace AppDialogs.ViewModels.Dialogs
         {
             Title = "Dialog A";
         }
+
+        public override string Title { get; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace MagicMvvm.Forms.Dialogs;
+namespace MagicMvvm.Dialogs;
 
 internal class RelativeContentSizeConverter : IValueConverter
 {

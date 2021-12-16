@@ -1,8 +1,8 @@
-﻿using MagicMvvm.Blazor.Parameters;
+﻿using MagicMvvm.Parameters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace MagicMvvm.Blazor;
+namespace MagicMvvm;
 
 /// <summary>
 /// Base class for razor components.

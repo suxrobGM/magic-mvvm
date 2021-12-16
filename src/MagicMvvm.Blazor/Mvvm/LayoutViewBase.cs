@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace MagicMvvm.Blazor;
+namespace MagicMvvm;
 
 /// <summary>
 /// Base view for the layout components.

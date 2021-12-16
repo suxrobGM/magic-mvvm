@@ -1,6 +1,6 @@
-﻿using MagicMvvm.Forms.Dialogs;
+﻿using MagicMvvm.Dialogs;
 
-namespace MagicMvvm.Forms;
+namespace MagicMvvm;
 
 public abstract class DialogViewModelBase : BindableBase, IDialogAware
 {

@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Forms.Navigation;
+﻿namespace MagicMvvm.Navigation;
 
 /// <summary>
 /// Navigation manager for handling navigations

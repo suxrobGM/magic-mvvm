@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Forms.Dialogs.Xaml;
+﻿namespace MagicMvvm.Dialogs.Xaml;
 
 public static class DialogLayout
 {

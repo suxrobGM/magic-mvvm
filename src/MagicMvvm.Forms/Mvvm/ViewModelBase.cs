@@ -1,6 +1,6 @@
 ﻿using MagicMvvm.Navigation;
 
-namespace MagicMvvm.Forms;
+namespace MagicMvvm;
 
 /// <summary>
 /// Base ViewModel

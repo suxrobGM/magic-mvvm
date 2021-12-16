@@ -49,28 +49,6 @@
             Yes.
             </summary>
         </member>
-        <member name="T:MagicMvvm.Dialogs.DialogHost">
-            <summary>
-            This class contains <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/> attached properties.
-            </summary>
-        </member>
-        <member name="F:MagicMvvm.Dialogs.DialogHost.WindowStyleProperty">
-            <summary>
-            Identifies the WindowStyle attached property.
-            </summary>
-            <remarks>
-            This attached property is used to specify the style of a <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/>.
-            </remarks>
-        </member>
-        <member name="F:MagicMvvm.Dialogs.DialogHost.MatchParentSizeProperty">
-            <summary>
-            Identifies the MatchParentSize attached property.
-            </summary>
-            <remarks>
-            This attached property is used to indicate that change width and height of <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/> to match parent size.
-            By default, the width and height are sized to match the content size.
-            </remarks>
-        </member>
         <member name="T:MagicMvvm.Dialogs.DialogHostWindow">
             <summary>
             Default dialog host.
@@ -124,7 +102,7 @@
             <param name="dialogName">The name of the dialog to show.</param>
             <param name="hostWindow">The hosting hostWindow.</param>
         </member>
-        <member name="M:MagicMvvm.Dialogs.DialogManager.ConfigureDialogWindowEvents(MagicMvvm.Dialogs.IDialogHostWindow,System.Action{MagicMvvm.Dialogs.IDialogResult},MagicMvvm.Dialogs.IDialogParameters)">
+        <member name="M:MagicMvvm.Dialogs.DialogManager.ConfigureDialogWindowEvents(MagicMvvm.Dialogs.IDialogHostWindow,System.Action{MagicMvvm.Dialogs.IDialogResult},MagicMvvm.Common.IParameters)">
             <summary>
             Configure <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/> and <see cref="T:MagicMvvm.Dialogs.IDialogAware"/> events.
             </summary>
@@ -140,28 +118,9 @@
             <param name="dialogContent">The dialog to show.</param>
             <param name="viewModel">The dialog's ViewModel.</param>
         </member>
-        <member name="T:MagicMvvm.Dialogs.DialogParameters">
-            <summary>
-            Represents Dialog parameters.
-            </summary>
-            <remarks>
-            This class can be used to to pass object parameters during the showing and closing of Dialogs.
-            </remarks>
-        </member>
-        <member name="M:MagicMvvm.Dialogs.DialogParameters.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:MagicMvvm.Dialogs.DialogParameters"/> class.
-            </summary>
-        </member>
-        <member name="M:MagicMvvm.Dialogs.DialogParameters.#ctor(System.String)">
-            <summary>
-            Constructs a list of parameters.
-            </summary>
-            <param name="query">Query string to be parsed.</param>
-        </member>
         <member name="T:MagicMvvm.Dialogs.DialogResult">
             <summary>
-            An <see cref="T:MagicMvvm.Dialogs.IDialogResult"/> that contains <see cref="T:MagicMvvm.Dialogs.IDialogParameters"/> from the dialog
+            An <see cref="T:MagicMvvm.Dialogs.IDialogResult"/> that contains <see cref="T:MagicMvvm.Common.IParameters"/> from the dialog
             and the <see cref="T:MagicMvvm.Dialogs.ButtonResult"/> of the dialog.
             </summary>
         </member>
@@ -186,7 +145,7 @@
             </summary>
             <param name="result">The result of the dialog.</param>
         </member>
-        <member name="M:MagicMvvm.Dialogs.DialogResult.#ctor(MagicMvvm.Dialogs.ButtonResult,MagicMvvm.Dialogs.IDialogParameters)">
+        <member name="M:MagicMvvm.Dialogs.DialogResult.#ctor(MagicMvvm.Dialogs.ButtonResult,MagicMvvm.Common.IParameters)">
             <summary>
             Initializes a new instance of the <see cref="T:MagicMvvm.Dialogs.DialogResult"/> class.
             </summary>
@@ -219,7 +178,7 @@
             Called when the dialog is closed.
             </summary>
         </member>
-        <member name="M:MagicMvvm.Dialogs.IDialogAware.OnDialogOpened(MagicMvvm.Dialogs.IDialogParameters)">
+        <member name="M:MagicMvvm.Dialogs.IDialogAware.OnDialogOpened(MagicMvvm.Common.IParameters)">
             <summary>
             Called when the dialog is opened.
             </summary>
@@ -325,7 +284,7 @@
             <exception cref="T:System.ArgumentNullException">Throws exception if <paramref name="windowName"/> is null or empty</exception>
             <returns>The <see cref="T:MagicMvvm.Dialogs.IDialogManager"/>, for registering several host windows easily.</returns>
         </member>
-        <member name="M:MagicMvvm.Dialogs.IDialogManager.Show(System.String,MagicMvvm.Dialogs.IDialogParameters,System.Action{MagicMvvm.Dialogs.IDialogResult},System.String)">
+        <member name="M:MagicMvvm.Dialogs.IDialogManager.Show(System.String,MagicMvvm.Common.IParameters,System.Action{MagicMvvm.Dialogs.IDialogResult},System.String)">
             <summary>
             Shows a non-modal dialog.
             </summary>
@@ -335,7 +294,7 @@
             <param name="windowName">The unique name of dialog's hosting window.</param>
             <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="dialogName"/> was not registered in internal registrar</exception>
         </member>
-        <member name="M:MagicMvvm.Dialogs.IDialogManager.ShowDialog(System.String,MagicMvvm.Dialogs.IDialogParameters,System.Action{MagicMvvm.Dialogs.IDialogResult},System.String)">
+        <member name="M:MagicMvvm.Dialogs.IDialogManager.ShowDialog(System.String,MagicMvvm.Common.IParameters,System.Action{MagicMvvm.Dialogs.IDialogResult},System.String)">
             <summary>
             Shows a modal dialog.
             </summary>
@@ -345,18 +304,9 @@
             <param name="windowName">The unique name of dialog's hosting window.</param>
             <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="dialogName"/> was not registered in internal registrar</exception>
         </member>
-        <member name="T:MagicMvvm.Dialogs.IDialogParameters">
-            <summary>
-            Represents Dialog parameters.
-            </summary>
-            <remarks>
-            A class that implements this interface can be used to pass
-            object parameters during the showing and closing of Dialogs.
-            </remarks>
-        </member>
         <member name="T:MagicMvvm.Dialogs.IDialogResult">
             <summary>
-            Contains <see cref="T:MagicMvvm.Dialogs.IDialogParameters"/> from the dialog
+            Contains <see cref="T:MagicMvvm.Common.IParameters"/> from the dialog
             and the <see cref="T:MagicMvvm.Dialogs.ButtonResult"/> of the dialog.
             </summary>
         </member>
@@ -369,6 +319,28 @@
             <summary>
             The result of the dialog.
             </summary>
+        </member>
+        <member name="T:MagicMvvm.Dialogs.Xaml.DialogHost">
+            <summary>
+            This class contains <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/> attached properties.
+            </summary>
+        </member>
+        <member name="F:MagicMvvm.Dialogs.Xaml.DialogHost.WindowStyleProperty">
+            <summary>
+            Identifies the WindowStyle attached property.
+            </summary>
+            <remarks>
+            This attached property is used to specify the style of a <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/>.
+            </remarks>
+        </member>
+        <member name="F:MagicMvvm.Dialogs.Xaml.DialogHost.MatchParentSizeProperty">
+            <summary>
+            Identifies the MatchParentSize attached property.
+            </summary>
+            <remarks>
+            This attached property is used to indicate that change width and height of <see cref="T:MagicMvvm.Dialogs.IDialogHostWindow"/> to match parent size.
+            By default, the width and height are sized to match the content size.
+            </remarks>
         </member>
         <member name="T:MagicMvvm.Dialogs.DialogManagerExtensions">
             <summary>
@@ -414,7 +386,7 @@
             <param name="dialogName">The unique name of the dialog to show.</param>
             <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="dialogName"/> was not registered in internal registrar</exception>
         </member>
-        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.Show(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Dialogs.IDialogParameters)">
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.Show(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Common.IParameters)">
             <summary>
             Shows a non-modal dialog.
             </summary>
@@ -432,7 +404,7 @@
             <param name="callback">The action to perform when the dialog is closed.</param>
             <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="dialogName"/> was not registered in internal registrar</exception>
         </member>
-        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.Show(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Dialogs.IDialogParameters,System.Action{MagicMvvm.Dialogs.IDialogResult})">
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.Show(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Common.IParameters,System.Action{MagicMvvm.Dialogs.IDialogResult})">
             <summary>
             Shows a non-modal dialog.
             </summary>
@@ -450,7 +422,7 @@
             <param name="dialogName">The unique name of the dialog to show.</param>
             <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="dialogName"/> was not registered in internal registrar</exception>
         </member>
-        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Dialogs.IDialogParameters)">
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Common.IParameters)">
             <summary>
             Shows a modal dialog.
             </summary>
@@ -468,7 +440,7 @@
             <param name="callback">The action to perform when the dialog is closed.</param>
             <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="dialogName"/> was not registered in internal registrar</exception>
         </member>
-        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Dialogs.IDialogParameters,System.Action{MagicMvvm.Dialogs.IDialogResult})">
+        <member name="M:MagicMvvm.Dialogs.DialogManagerExtensions.ShowDialog(MagicMvvm.Dialogs.IDialogManager,System.String,MagicMvvm.Common.IParameters,System.Action{MagicMvvm.Dialogs.IDialogResult})">
             <summary>
             Shows a modal dialog.
             </summary>
@@ -528,14 +500,14 @@
             <param name="navigationCallback">The navigation callback that will be executed after the navigation is completed.</param>
             <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="viewName"/> or <paramref name="regionName"/> was not registered in internal registrar</exception>
         </member>
-        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.RequestNavigate(MagicMvvm.Navigation.INavigationManager,System.String,System.String,MagicMvvm.Navigation.INavigationParameters)">
+        <member name="M:MagicMvvm.Navigation.NavigationManagerExtensions.RequestNavigate(MagicMvvm.Navigation.INavigationManager,System.String,System.String,MagicMvvm.Common.IParameters)">
             <summary>
             Navigates the specified view to the region.
             </summary>
             <param name="navigationManager">Instance of <see cref="T:MagicMvvm.Navigation.INavigationManager"/></param>
             <param name="regionName">The name of the region to call Navigate on.</param>
             <param name="viewName">The name of the view that registered for navigation inside manager.</param>
-            <param name="parameters">Navigation parameters to pass arguments between views.</param>
+            <param name="navigationParameters">Navigation parameters to pass arguments between views.</param>
             <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="viewName"/> or <paramref name="regionName"/> was not registered in internal registrar</exception>
         </member>
         <member name="T:MagicMvvm.Navigation.INavigationAware">
@@ -543,17 +515,17 @@
             Provides a way for objects involved in navigation to be notified of navigation activities.
             </summary>
         </member>
-        <member name="M:MagicMvvm.Navigation.INavigationAware.OnNavigatedTo(MagicMvvm.Navigation.NavigationContext)">
+        <member name="M:MagicMvvm.Navigation.INavigationAware.OnNavigatedTo(MagicMvvm.Common.IParameters)">
             <summary>
             Called when the implementer has been navigated to.
             </summary>
-            <param name="navigationContext">The navigation context.</param>
+            <param name="parameters">Navigation parameters</param>
         </member>
-        <member name="M:MagicMvvm.Navigation.INavigationAware.OnNavigatedFrom(MagicMvvm.Navigation.NavigationContext)">
+        <member name="M:MagicMvvm.Navigation.INavigationAware.OnNavigatedFrom(MagicMvvm.Common.IParameters)">
             <summary>
             Called when the implementer is being navigated away from.
             </summary>
-            <param name="navigationContext">The navigation context.</param>
+            <param name="parameters">Navigation parameters</param>
         </member>
         <member name="T:MagicMvvm.Navigation.INavigationManager">
             <summary>
@@ -582,7 +554,7 @@
             <exception cref="T:System.InvalidOperationException">Throws exception if application does not have any resource files or could not locate to resource files</exception>
             <returns>The <see cref="T:MagicMvvm.Navigation.INavigationManager"/>, for adding several views easily</returns>
         </member>
-        <member name="M:MagicMvvm.Navigation.INavigationManager.RequestNavigate(System.String,System.String,System.Action,MagicMvvm.Navigation.INavigationParameters)">
+        <member name="M:MagicMvvm.Navigation.INavigationManager.RequestNavigate(System.String,System.String,System.Action,MagicMvvm.Common.IParameters)">
             <summary>
             Navigates the specified view to the region.
             </summary>
@@ -592,32 +564,6 @@
             <param name="parameters">Navigation parameters to pass arguments between views.</param>
             <exception cref="T:System.InvalidOperationException">Throws exception if <paramref name="viewName"/> or <paramref name="regionName"/> was not registered in internal registrar</exception>
         </member>
-        <member name="T:MagicMvvm.Navigation.INavigationParameters">
-            <summary>
-            Represents Navigation parameters.
-            </summary>
-            <remarks>
-            This class can be used to to pass object parameters during Navigation.
-            </remarks>
-        </member>
-        <member name="T:MagicMvvm.Navigation.NavigationContext">
-            <summary>
-            Encapsulates information about a navigation request.
-            </summary>
-        </member>
-        <member name="M:MagicMvvm.Navigation.NavigationContext.#ctor(MagicMvvm.Navigation.INavigationParameters)">
-            <summary>
-            Initializes a new instance of the <see cref="T:MagicMvvm.Navigation.NavigationContext"/> class for a region name and a
-            <see cref="T:System.Uri"/>.
-            </summary>
-            <param name="parameters">The navigation parameters.</param>
-        </member>
-        <member name="P:MagicMvvm.Navigation.NavigationContext.Parameters">
-            <summary>
-            Gets the <see cref="T:MagicMvvm.Navigation.NavigationParameters"/> extracted from the URI and the object parameters passed in navigation.
-            </summary>
-            <value>The URI query.</value>
-        </member>
         <member name="T:MagicMvvm.Navigation.NavigationManager">
             <summary>
             Implements <see cref="T:MagicMvvm.Navigation.INavigationManager"/> to handle navigation between views.
@@ -625,25 +571,6 @@
             <remarks>
             Register type as a singleton inside container.
             </remarks>
-        </member>
-        <member name="T:MagicMvvm.Navigation.NavigationParameters">
-            <summary>
-            Represents Navigation parameters.
-            </summary>
-            <remarks>
-            This class can be used to to pass object parameters during Navigation.
-            </remarks>
-        </member>
-        <member name="M:MagicMvvm.Navigation.NavigationParameters.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:MagicMvvm.Navigation.NavigationParameters"/> class.
-            </summary>
-        </member>
-        <member name="M:MagicMvvm.Navigation.NavigationParameters.#ctor(System.String)">
-            <summary>
-            Constructs a list of parameters
-            </summary>
-            <param name="query">Query string to be parsed</param>
         </member>
         <member name="T:MagicMvvm.DialogViewModelBase">
             <summary>

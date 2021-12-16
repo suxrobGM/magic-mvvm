@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Forms.Common;
+﻿namespace MagicMvvm.Common;
 
 /// <summary>
 /// Defines a contract for providing Application components.

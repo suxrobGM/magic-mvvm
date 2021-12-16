@@ -24,7 +24,7 @@ Currently WPF, Blazor and Xamarin.Forms platforms are supported.
 | Cross Platform | [MagicMvvm.Core][CoreNuGet] | [![CoreNuGetShield]][CoreNuGet] |
 | WPF | [MagicMvvm.Wpf][WpfNuGet] | [![WpfNuGetShield]][WpfNuGet] |
 | Blazor | [MagicMvvm.Blazor][BlazorNuGet] | [![BlazorNuGetShield]][BlazorNuGet]  |
-| Xamarin.Forms | Coming soon |  |
+| Xamarin.Forms | [MagicMvvm.Forms][FormsNuGet] | [![FormsNuGetShield]][FormsNuGet] |
 
 
 ## Documentation
@@ -41,6 +41,8 @@ Copyright Sukhrob Ilyosbekov 2021. Distributed under the [MIT License](https://g
 [CoreNuGet]: https://www.nuget.org/packages/MagicMvvm.Core/
 [WpfNuGet]: https://www.nuget.org/packages/MagicMvvm.Wpf/
 [BlazorNuGet]: https://www.nuget.org/packages/MagicMvvm.Blazor/
+[FormsNuGet]: https://www.nuget.org/packages/MagicMvvm.Forms/
 [CoreNuGetShield]: https://img.shields.io/nuget/vpre/MagicMvvm.Core.svg
 [WpfNuGetShield]: https://img.shields.io/nuget/vpre/MagicMvvm.Wpf.svg
 [BlazorNuGetShield]: https://img.shields.io/nuget/vpre/MagicMvvm.Blazor.svg
+[FormsNuGetShield]: https://img.shields.io/nuget/vpre/MagicMvvm.Forms.svg

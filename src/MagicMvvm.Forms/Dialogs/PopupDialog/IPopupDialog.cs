@@ -1,7 +1,7 @@
 ﻿using System.Net.Mime;
-using MagicMvvm.Forms.AppModel;
+using MagicMvvm.AppModel;
 
-namespace MagicMvvm.Forms.Dialogs;
+namespace MagicMvvm.Dialogs;
 
 /// <summary>
 /// A service which provides access to the DisplayAlert and DisplayActionSheet off of the Xamarin.Forms.Page class.

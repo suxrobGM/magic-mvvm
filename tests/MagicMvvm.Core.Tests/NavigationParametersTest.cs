@@ -1,7 +1,7 @@
 ﻿using MagicMvvm.Common;
 using Xunit;
 
-namespace MagicMvvm.Core.Tests;
+namespace MagicMvvm.Tests;
 
 public class ParametersTest : IClassFixture<ParametersFixture>
 {

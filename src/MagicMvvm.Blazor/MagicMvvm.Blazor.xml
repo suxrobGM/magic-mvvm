@@ -11,13 +11,29 @@
             <param name="services">Instance of <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</param>
             <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></returns>
         </member>
+        <member name="T:MagicMvvm.LayoutViewBase`1">
+            <summary>
+            Base view for the layout components.
+            </summary>
+            <typeparam name="T">Type of the view model.</typeparam>
+        </member>
+        <member name="P:MagicMvvm.LayoutViewBase`1.Model">
+            <summary>
+            Binding data context.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.LayoutViewBase`1.ServiceProvider">
+            <summary>
+            Injectable service provider.
+            </summary>
+        </member>
         <member name="T:MagicMvvm.ViewBase`1">
             <summary>
             Base class for razor components.
             </summary>
             <typeparam name="T">Type of the view model.</typeparam>
         </member>
-        <member name="P:MagicMvvm.ViewBase`1.DataContext">
+        <member name="P:MagicMvvm.ViewBase`1.Model">
             <summary>
             Binding data context.
             </summary>
@@ -25,6 +41,11 @@
         <member name="P:MagicMvvm.ViewBase`1.ServiceProvider">
             <summary>
             Injectable service provider.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.ViewModelBase">
+            <summary>
+            Base ViewModel
             </summary>
         </member>
         <member name="M:MagicMvvm.ViewModelBase.StateHasChanged">
