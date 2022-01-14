@@ -1,5 +1,6 @@
-﻿using MagicMvvm.Parameters;
+﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using MagicMvvm.Parameters;
 
 namespace MagicMvvm;
 
@@ -15,16 +16,37 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IParameterResolver, ParameterResolver>();
         services.AddSingleton<IParameterCache, ParameterCache>();
         services.AddSingleton<IParameterSetter, ParameterSetter>();
-            
+
         var viewModelType = typeof(ViewModelBase);
         var definedTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(i => i.DefinedTypes);
 
         foreach (var type in definedTypes)
         {
+            var attr = type.GetCustomAttribute<ViewModelLifetimeAttribute>();
             if (viewModelType.IsAssignableFrom(type) &&
                 type.IsClass && !type.IsAbstract)
             {
-                services.AddScoped(type);
+                if (attr == null)
+                {
+                    services.AddScoped(type);
+                    continue;
+                }
+
+                switch (attr.ServiceLifetime)
+                {
+                    case ServiceLifetime.Scoped:
+                        services.AddScoped(type);
+                        break;
+                    case ServiceLifetime.Transient:
+                        services.AddTransient(type);
+                        break;
+                    case ServiceLifetime.Singleton:
+                        services.AddSingleton(type);
+                        break;
+                    default:
+                        services.AddScoped(type);
+                        break;
+                }
             }
         }
         return services;
