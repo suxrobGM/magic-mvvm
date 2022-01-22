@@ -1,6 +1,4 @@
 ﻿using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
-using MagicMvvm.Parameters;
 using MagicMvvm.Attributes;
 
 namespace MagicMvvm;
@@ -12,12 +10,8 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">Instance of <see cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/></returns>
-    public static IServiceCollection AddMvvmBlazor(this IServiceCollection services)
+    public static IServiceCollection AddMvvmMaui(this IServiceCollection services)
     {
-        services.AddSingleton<IParameterResolver, ParameterResolver>();
-        services.AddSingleton<IParameterCache, ParameterCache>();
-        services.AddSingleton<IParameterSetter, ParameterSetter>();
-
         var viewModelType = typeof(ViewModelBase);
         var definedTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(i => i.DefinedTypes);
 
