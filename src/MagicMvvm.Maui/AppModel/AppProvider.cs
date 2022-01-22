@@ -1,9 +1,9 @@
-﻿namespace MagicMvvm.Common;
+﻿namespace MagicMvvm.AppModel;
 
 /// <summary>
 /// Provides Application components.
 /// </summary>
-internal class ApplicationProvider : IApplicationProvider
+internal class AppProvider : IAppProvider
 {
     public Page MainPage => Application.Current?.MainPage;
     public Shell CurrentShell => Shell.Current;

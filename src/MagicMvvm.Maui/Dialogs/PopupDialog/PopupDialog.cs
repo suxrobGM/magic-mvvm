@@ -9,9 +9,9 @@ namespace MagicMvvm.Dialogs;
 public class PopupDialog : IPopupDialog
 {
     /// <summary>
-    /// Gets the <see cref="IApplicationProvider"/>.
+    /// Gets the <see cref="IAppProvider"/>.
     /// </summary>
-    protected readonly IApplicationProvider _applicationProvider;
+    protected readonly IAppProvider _applicationProvider;
 
     /// <summary>
     /// Gets the <see cref="IKeyboardMapper"/>.
@@ -25,7 +25,7 @@ public class PopupDialog : IPopupDialog
     //// <param name="keyboardMapper">The <see cref="IKeyboardMapper"/>.</param>
     public PopupDialog()
     {
-        _applicationProvider = new ApplicationProvider();
+        _applicationProvider = new AppProvider();
         _keyboardMapper = new KeyboardMapper();
     }
 

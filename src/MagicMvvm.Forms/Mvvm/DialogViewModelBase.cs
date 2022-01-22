@@ -6,9 +6,9 @@ public abstract class DialogViewModelBase : BindableBase, IDialogAware
 {
     public event Action<IParameters> RequestClose;
     
-    public void CloseDialog(IParameters dialogParameters = null)
+    public void CloseDialog(IParameters parameters = null)
     {
-        RequestClose?.Invoke(dialogParameters ?? new Parameters());
+        RequestClose?.Invoke(parameters ?? new Parameters());
     }
     
     public virtual bool CanCloseDialog()

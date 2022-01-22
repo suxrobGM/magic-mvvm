@@ -17,5 +17,5 @@ public interface IShellNavigationManager : INavigationManager
     ///     Throws exception if <paramref name="instance"/> is null.
     /// </exception>
     /// <returns>Instance of <see cref="INavigationManager"/>, for easily adding several shells.</returns>
-    INavigationManager RegisterShell<T>(T instance) where T : Shell;
+    internal INavigationManager RegisterShell<T>(T instance) where T : Shell;
 }

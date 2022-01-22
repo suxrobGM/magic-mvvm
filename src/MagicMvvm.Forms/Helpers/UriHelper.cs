@@ -1,4 +1,4 @@
-﻿namespace MagicMvvm.Common;
+﻿namespace MagicMvvm.Helpers;
 
 internal static class UriHelper
 {
