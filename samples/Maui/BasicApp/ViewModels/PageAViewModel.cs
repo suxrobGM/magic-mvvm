@@ -1,5 +1,6 @@
 ﻿using MagicMvvm;
 using MagicMvvm.Commands;
+using MagicMvvm.Common;
 using MagicMvvm.Navigation;
 
 namespace BasicApp.ViewModels;
@@ -27,5 +28,15 @@ internal class PageAViewModel : ViewModelBase
     private async Task GoBackAsync()
     {
         await _navigationManager.GoBackAsync(null, null);
+    }
+
+    public override void OnNavigatedFrom(IParameters parameters)
+    {
+        base.OnNavigatedFrom(parameters);
+    }
+
+    public override void OnNavigatedTo(IParameters parameters)
+    {
+        base.OnNavigatedTo(parameters);
     }
 }

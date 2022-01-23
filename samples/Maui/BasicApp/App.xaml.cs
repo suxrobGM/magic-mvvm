@@ -7,6 +7,8 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
-        MainPage = MauiProgram.GetService<MainPage>();
+
+        // Hierarchical Navigation
+        MainPage = new NavigationPage(MauiProgram.GetService<MainPage>());
     }
 }

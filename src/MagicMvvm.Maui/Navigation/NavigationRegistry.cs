@@ -4,11 +4,12 @@ internal class NavigationRegistry : INavigationRegistry
 {
     public static readonly NavigationRegistry Instance = new();
 
+    private readonly IDictionary<string, Type> _pages;
+
     private NavigationRegistry()
     {
+        _pages = new Dictionary<string, Type>();
     }
-
-    private readonly IDictionary<string, Type> _pages;
 
     public INavigationRegistry RegisterPage<T>(string pageName) where T : Page
     {

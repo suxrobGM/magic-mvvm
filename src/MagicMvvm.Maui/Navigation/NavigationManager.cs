@@ -30,8 +30,8 @@ public class NavigationManager : INavigationManager
             var targetPage = _appProvider.ServiceProvider.GetRequiredService(targetPageType) as Page;
             (currentPage?.BindingContext as INavigationAware)?.OnNavigatedFrom(parameters);
 
-            await _appProvider.MainPage.Navigation.PushAsync(targetPage);
-
+            await currentPage.Navigation.PushAsync(targetPage);
+            
             (targetPage?.BindingContext as INavigationAware)?.OnNavigatedTo(parameters);
             navigationCallback?.Invoke();
 

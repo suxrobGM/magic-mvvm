@@ -20,11 +20,12 @@ public static class MauiProgram
             });
 
         // Adds MagicMvvm
-        builder.Services
-            .AddMvvmMaui()
-            .AddPageForNavigation<PageA>(nameof(PageA))
-            .AddPageForNavigation<PageB>(nameof(PageB))
-            .Build();
+        builder.Services.AddMvvmMaui(o =>
+        {
+            o.Navigation.RegisterPage<PageA>(nameof(PageA));
+            o.Navigation.RegisterPage<PageB>(nameof(PageB));
+        });
+         
 
         var mauiApp = builder.Build();
         serviceProvider = mauiApp.Services;
