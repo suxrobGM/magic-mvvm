@@ -5,9 +5,9 @@
 /// </summary>
 public class AppProvider : IAppProvider
 {
-    public AppProvider(IServiceCollection services)
+    public AppProvider(IServiceProvider serviceProvider)
     {
-        ServiceProvider = services.BuildServiceProvider();
+        ServiceProvider = serviceProvider;
     }
 
     public Page MainPage => Application.Current?.MainPage;

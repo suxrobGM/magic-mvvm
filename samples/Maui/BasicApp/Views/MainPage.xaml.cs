@@ -1,7 +1,8 @@
-﻿using BasicApp.ViewModels;
+﻿using MagicMvvm;
+
 namespace BasicApp.Views;
 
-public partial class MainPage : ContentPage
+public partial class MainPage : ContentPage, IWiredView
 {
     public MainPage()
     {

@@ -11,46 +11,23 @@ namespace MagicMvvm.Navigation;
 /// </remarks>
 public sealed class ShellNavigationManager : NavigationManager, IShellNavigationManager
 {
-    private readonly IDictionary<string, object> _shells;
     private IParameters _parameters;
     private bool _modalDialogPushed;
     private bool _modalDialogPopped;
 
-    public ShellNavigationManager(IAppProvider appProvider) : base(appProvider)
+    public ShellNavigationManager(
+        IAppProvider appProvider,
+        INavigationRegistry navigationRegistry) 
+        : base(appProvider, navigationRegistry)
     {
-        _shells = new Dictionary<string, object>();
         _parameters = new Parameters();
-    }
-
-    public INavigationManager RegisterShell<T>(T instance)
-        where T : Shell
-    {
-        var shellName = typeof(T).Name;
-
-        if (instance is null)
-            throw new ArgumentNullException(nameof(instance));
-
-        if (_shells.ContainsKey(shellName))
-            throw new ArgumentException($"Already registered shell {shellName}");
-
-        _shells.Add(shellName, instance);
-        RegisterShellEvents(instance);
-        return this;
-    }
-
-    public override INavigationManager RegisterPage<T>(string pageName)
-    {
-        base.RegisterPage<T>(pageName);
-        Routing.RegisterRoute(pageName, typeof(T));
-        return this;
+        RegisterShellEvents(_appProvider.CurrentShell);
     }
 
     public override Task<INavigationResult> NavigateToAsync(string pageName, Action navigationCallback,
         IParameters parameters)
     {
-        if (!_pages.ContainsKey(pageName))
-            throw new InvalidOperationException($"The name of view {pageName} was not registered inside registrar");
-
+        var pageType = _navigationRegistry.GetPage(pageName);
         return NavigateToRouteAsync($"//{pageName}", navigationCallback, parameters);
     }
 
@@ -66,18 +43,11 @@ public sealed class ShellNavigationManager : NavigationManager, IShellNavigation
         {
             _parameters = parameters;
             var currentShell = _appProvider.CurrentShell;
-            var shellIsRegistered = _shells.Values.Contains(currentShell);
             var currentPage = currentShell.CurrentPage?.ToString();
             var pageName = string.Empty;
 
             if (route.StartsWith("//"))
                 pageName = route[2..];
-
-            if (!shellIsRegistered)
-            {
-                throw new InvalidOperationException(
-                    $"The current shell {currentShell.GetType().Name} is not registered");
-            }
 
             if (!string.IsNullOrEmpty(pageName) &&
                 !string.IsNullOrEmpty(currentPage) &&

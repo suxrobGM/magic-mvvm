@@ -11,36 +11,23 @@ namespace MagicMvvm.Navigation;
 public class NavigationManager : INavigationManager
 {
     protected readonly IAppProvider _appProvider;
-    protected readonly IDictionary<string, Type> _pages;
+    protected readonly INavigationRegistry _navigationRegistry;
 
-    public NavigationManager(IAppProvider appProvider)
+    public NavigationManager(IAppProvider appProvider, 
+        INavigationRegistry navigationRegistry)
     {
         _appProvider = appProvider;
-        _pages = new Dictionary<string, Type>();
-    }
-
-    public virtual INavigationManager RegisterPage<T>(string pageName) where T : Page
-    {
-        if (string.IsNullOrEmpty(pageName))
-            throw new ArgumentNullException(nameof(pageName));
-
-        if (_pages.ContainsKey(pageName))
-            throw new InvalidOperationException($"Page is already registered with name {pageName}");
-
-        _pages.Add(pageName, typeof(T));
-        return this;
+        _navigationRegistry = navigationRegistry;
     }
 
     public virtual async Task<INavigationResult> NavigateToAsync(string pageName, Action navigationCallback,
         IParameters parameters)
     {
-        if (!_pages.ContainsKey(pageName))
-            throw new InvalidOperationException($"Page with name {pageName} is not registered");
-
         try
         {
+            var targetPageType = _navigationRegistry.GetPage(pageName);
             var currentPage = _appProvider.MainPage;
-            var targetPage = _appProvider.ServiceProvider.GetRequiredService(_pages[pageName]) as Page;
+            var targetPage = _appProvider.ServiceProvider.GetRequiredService(targetPageType) as Page;
             (currentPage?.BindingContext as INavigationAware)?.OnNavigatedFrom(parameters);
 
             await _appProvider.MainPage.Navigation.PushAsync(targetPage);

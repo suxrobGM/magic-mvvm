@@ -21,7 +21,7 @@ public interface INavigationManager
     ///     Throws exception if page with name <paramref name="pageName"/> is already registered.
     /// </exception>
 
-    internal INavigationManager RegisterPage<T>(string pageName) where T : Page;
+    //internal INavigationManager RegisterPage<T>(string pageName) where T : Page;
 
     /// <summary>
     /// Navigates to the specified page.

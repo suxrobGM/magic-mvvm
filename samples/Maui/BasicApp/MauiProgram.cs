@@ -1,4 +1,5 @@
-﻿using MagicMvvm;
+﻿using BasicApp.Views;
+using MagicMvvm;
 
 namespace BasicApp;
 
@@ -19,7 +20,11 @@ public static class MauiProgram
             });
 
         // Adds MagicMvvm
-        builder.Services.AddMvvmMaui();
+        builder.Services
+            .AddMvvmMaui()
+            .AddPageForNavigation<PageA>(nameof(PageA))
+            .AddPageForNavigation<PageB>(nameof(PageB))
+            .Build();
 
         var mauiApp = builder.Build();
         serviceProvider = mauiApp.Services;

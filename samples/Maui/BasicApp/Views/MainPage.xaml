@@ -30,13 +30,27 @@
                 x:Name="CounterLabel"
                 HorizontalOptions="Center" />
 
-            <Button 
-                Text="Click me"
-                FontAttributes="Bold"
-                Grid.Row="3"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Command="{Binding CounterCommand}"
-                HorizontalOptions="Center" />
+            <StackLayout Grid.Row="3"
+                         Orientation="Horizontal"
+                         VerticalOptions="Center">
+                <Button 
+                    Text="Click me"
+                    FontAttributes="Bold"
+                    SemanticProperties.Hint="Counts the number of times you click"
+                    Command="{Binding CounterCommand}" />
+
+                <Button
+                    Text="Go To Page A"
+                    FontAttributes="Bold"
+                    Command="{Binding GoToPageCommand}"
+                    CommandParameter="PageA" />
+
+                <Button
+                    Text="Go To Page B"
+                    FontAttributes="Bold"
+                    Command="{Binding GoToPageCommand}"
+                    CommandParameter="PageB" />
+            </StackLayout>
 
             <Image Grid.Row="4"
                 Source="dotnet_bot.png"
@@ -44,7 +58,6 @@
                 WidthRequest="250"
                 HeightRequest="310"
                 HorizontalOptions="Center" />
-
         </Grid>
     </ScrollView>
 </ContentPage>

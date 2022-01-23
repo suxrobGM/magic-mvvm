@@ -40,29 +40,27 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IKeyboardMapper, KeyboardMapper>();
         services.AddScoped<IActionSheetButton, ActionSheetButton>();
-        services.AddSingleton<IMvvmBuilder, MvvmBuilder>();
-        services.AddSingleton<IAppProvider, AppProvider>();
         services.AddSingleton<INavigationManager, NavigationManager>();
         services.AddSingleton<IShellNavigationManager, ShellNavigationManager>();
         services.AddSingleton<IDialogManager, DialogManager>();
         services.AddSingleton<IPopupDialog, PopupDialog>();
+        services.AddSingleton<INavigationRegistry, NavigationRegistry>(i => NavigationRegistry.Instance);
         services.AddSingleton(options);
         RegisterTypes<ViewModelBase>(services); // register view models
          
-
-        var serviceProvider = services.BuildServiceProvider();
-
         // register views
         if (options.AutoWireViewModels)
         {
-            RegisterTypes<VisualElement>(services, WireViewModel);
+            RegisterTypes<IWiredView>(services, WireViewModel);
         }
         else
         {
-            RegisterTypes<VisualElement>(services);
+            RegisterTypes<IWiredView>(services);
         }
 
-        return serviceProvider.GetRequiredService<IMvvmBuilder>();
+        services.AddSingleton<IAppProvider, AppProvider>(i => new AppProvider(i));
+        services.AddSingleton<IMvvmBuilder, MvvmBuilder>();
+        return services.BuildServiceProvider().GetRequiredService<IMvvmBuilder>();
     }
 
     private static void RegisterTypes<T>(IServiceCollection services, 
@@ -71,70 +69,87 @@ public static class ServiceCollectionExtensions
         var dataType = typeof(T);
         var definedTypes = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(i => i.DefinedTypes)
-            .Where(i => i.IsClass && i.IsAbstract);
+            .Where(i => i.IsClass && !i.IsAbstract && dataType.IsAssignableFrom(i));
 
         foreach (var type in definedTypes)
         {
             var attr = type.GetCustomAttribute<ServiceLifetimeAttribute>();
-            if (dataType.IsAssignableFrom(type))
+            if (attr == null)
             {
-                if (attr == null)
+                if (factory != null)
                 {
-                    services.AddScoped(type, i => factory?.Invoke(i, type));
-                    continue;
+                    services.AddScoped(type, i => factory.Invoke(i, type));
                 }
+                else
+                {
+                    services.AddScoped(type);
+                }
+                
+                continue;
+            }
 
-                switch (attr.ServiceLifetime)
+            switch (attr.ServiceLifetime)
+            {
+                case ServiceLifetime.Scoped:
                 {
-                    case ServiceLifetime.Scoped:
-                        services.AddScoped(type, i => factory?.Invoke(i, type));
-                        break;
-                    case ServiceLifetime.Transient:
-                        services.AddTransient(type, i => factory?.Invoke(i, type));
-                        break;
-                    case ServiceLifetime.Singleton:
-                        services.AddSingleton(type, i => factory?.Invoke(i, type));
-                        break;
-                    default:
-                        services.AddScoped(type, i => factory?.Invoke(i, type));
-                        break;
+                    if (factory != null)
+                    {
+                        services.AddScoped(type, i => factory.Invoke(i, type));
+                    }
+                    else
+                    {
+                        services.AddScoped(type);
+                    }
+                    break;
                 }
+                case ServiceLifetime.Transient:
+                {
+                    if (factory != null)
+                    {
+                        services.AddTransient(type, i => factory.Invoke(i, type));
+                    }
+                    else
+                    {
+                        services.AddTransient(type);
+                    }
+                    break;
+                }
+                case ServiceLifetime.Singleton:
+                {
+                    if (factory != null)
+                    {
+                        services.AddSingleton(type, i => factory.Invoke(i, type));
+                    }
+                    else
+                    {
+                        services.AddSingleton(type);
+                    }
+                    break;
+                }
+                default:
+                {
+                    if (factory != null)
+                    {
+                        services.AddScoped(type, i => factory.Invoke(i, type));
+                    }
+                    else
+                    {
+                        services.AddScoped(type);
+                    }
+                    break;
+                }
+                    
             }
         }
     }
 
-    //private static void WireViewModels(IServiceProvider serviceProvider)
-    //{
-    //    var visualElementType = typeof(VisualElement);
-    //    var definedTypes = AppDomain.CurrentDomain.GetAssemblies()
-    //        .SelectMany(i => i.DefinedTypes)
-    //        .Where(i => i.IsClass && !i.IsAbstract);
-
-    //    foreach (var type in definedTypes)
-    //    {
-    //        if (type.IsAssignableFrom(visualElementType))
-    //        {
-    //            var viewModelType = definedTypes.FirstOrDefault(i =>
-    //                i.IsAssignableFrom(typeof(ViewModelBase)) &&
-    //                i.Name.Contains(type.Name) && 
-    //                i.Name.EndsWith("ViewModel"));
-
-    //            if (viewModelType == null)
-    //                continue;
-
-    //            var view = serviceProvider.GetService(type) as VisualElement;
-    //            var viewModel = serviceProvider.GetService(viewModelType);
-    //            view.BindingContext = viewModel;
-    //        }
-    //    }
-    //}
-
     private static object WireViewModel(IServiceProvider serviceProvider, Type viewType)
     {
+        var dataType = typeof(ViewModelBase);
         var viewModelType = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(i => i.DefinedTypes)
             .FirstOrDefault(i => i.IsClass && !i.IsAbstract &&
-                    i.IsAssignableFrom(typeof(ViewModelBase)) &&
+                    dataType.IsAssignableFrom(i) &&
                     i.Name.Contains(viewType.Name) &&
                     i.Name.EndsWith("ViewModel"));
 

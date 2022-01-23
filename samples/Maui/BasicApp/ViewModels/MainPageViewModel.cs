@@ -1,20 +1,20 @@
 ﻿using MagicMvvm;
 using MagicMvvm.Commands;
+using MagicMvvm.Navigation;
 
 namespace BasicApp.ViewModels;
 
 internal class MainPageViewModel : ViewModelBase
 {
-    private int count;
+    private readonly INavigationManager _navigationManager;
+    private int _count;
 
-    public MainPageViewModel()
+    public MainPageViewModel(INavigationManager navigationManager)
     {
+        _navigationManager = navigationManager;
         CounterText = "Current count: 0";
-        CounterCommand = new DelegateCommand(() =>
-        {
-            count++;
-            CounterText = $"Current count: {count}";
-        });
+        CounterCommand = new DelegateCommand(IncrementCounter);
+        GoToPageCommand = new DelegateCommand<string>(async (i) => await GoToPageAsync(i));
     }
 
     #region Binding properties
@@ -28,6 +28,22 @@ internal class MainPageViewModel : ViewModelBase
 
     #endregion
 
+    #region Commands
 
     public DelegateCommand CounterCommand { get; }
+    public DelegateCommand<string> GoToPageCommand { get; }
+
+    #endregion
+
+
+    private void IncrementCounter()
+    {
+        _count++;
+        CounterText = $"Current count: {_count}";
+    }
+
+    private async Task GoToPageAsync(string page)
+    {
+        await _navigationManager.NavigateToAsync(page, null, null);
+    }
 }
