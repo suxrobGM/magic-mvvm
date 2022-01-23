@@ -40,7 +40,7 @@ public class NavigationManager : INavigationManager
         try
         {
             var currentPage = _appProvider.MainPage;
-            var targetPage = Activator.CreateInstance(_pages[pageName]) as Page;
+            var targetPage = _appProvider.ServiceProvider.GetRequiredService(_pages[pageName]) as Page;
             (currentPage?.BindingContext as INavigationAware)?.OnNavigatedFrom(parameters);
 
             await _appProvider.MainPage.Navigation.PushAsync(targetPage);

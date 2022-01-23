@@ -59,11 +59,12 @@ public sealed class ShellNavigationManager : NavigationManager, IShellNavigation
     }
 
     private async Task<INavigationResult> NavigateToRouteAsync(string route, Action navigationCallback,
-        IParameters navigationParameters)
+        IParameters parameters)
     {
         try
         {
-            var currentShell = applicationProvider.CurrentShell;
+            _parameters = parameters;
+            var currentShell = _appProvider.CurrentShell;
             var shellIsRegistered = _shells.Values.Contains(currentShell);
             var currentPage = currentShell.CurrentPage?.ToString();
             var pageName = string.Empty;
@@ -77,8 +78,6 @@ public sealed class ShellNavigationManager : NavigationManager, IShellNavigation
                     $"The current shell {currentShell.GetType().Name} is not registered");
             }
 
-            _parameters = navigationParameters;
-
             if (!string.IsNullOrEmpty(pageName) &&
                 !string.IsNullOrEmpty(currentPage) &&
                 currentPage.EndsWith(pageName))
@@ -89,7 +88,7 @@ public sealed class ShellNavigationManager : NavigationManager, IShellNavigation
             }
             else
             {
-                await currentShell.GoToAsync($"{route}{navigationParameters}");
+                await currentShell.GoToAsync($"{route}{parameters}");
             }
 
             navigationCallback?.Invoke();

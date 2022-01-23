@@ -15,5 +15,8 @@ public interface IAppProvider
     /// </summary>
     Shell CurrentShell { get; }
 
+    /// <summary>
+    /// Gets application DI container.
+    /// </summary>
     IServiceProvider ServiceProvider { get; }
 }

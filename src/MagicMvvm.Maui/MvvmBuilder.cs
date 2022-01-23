@@ -47,9 +47,10 @@ internal class MvvmBuilder : IMvvmBuilder
         return this;
     }
 
-    public IMvvmBuilder RegisterShell<TView>(TView instance) where TView : Shell
+    public IMvvmBuilder RegisterShell<TView>() where TView : Shell
     {
-        _shellNavigationManager.RegisterShell(instance);
+        var shell = _appProvider.ServiceProvider.GetRequiredService<TView>();
+        _shellNavigationManager.RegisterShell(shell);
         return this;
     }
 
@@ -57,8 +58,8 @@ internal class MvvmBuilder : IMvvmBuilder
         where TView : VisualElement
         where TViewModel : ViewModelBase
     {
-        var view = _appProvider.ServiceProvider.GetService<TView>();
-        view.BindingContext = _appProvider.ServiceProvider.GetService<TViewModel>();
+        var view = _appProvider.ServiceProvider.GetRequiredService<TView>();
+        view.BindingContext = _appProvider.ServiceProvider.GetRequiredService<TViewModel>();
         return this;
     }
 }

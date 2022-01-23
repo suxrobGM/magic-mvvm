@@ -11,7 +11,7 @@ namespace MagicMvvm.Dialogs;
 public sealed class DialogManager : IDialogManager
 {
     private readonly IDictionary<string, Type> _dialogs;
-    private readonly IAppProvider _applicationProvider;
+    private readonly IAppProvider _appProvider;
 
     /// <summary>
     /// Gets the key for specifying or retrieving popup overlay style from Application Resources.
@@ -21,9 +21,9 @@ public sealed class DialogManager : IDialogManager
     /// <summary>
     /// Initializes a new instance of the <see cref="DialogManager"/> class.
     /// </summary>
-    public DialogManager()
+    public DialogManager(IAppProvider appProvider)
     {
-        _applicationProvider = new AppProvider();
+        _appProvider = appProvider;
         _dialogs = new Dictionary<string, Type>();
     }
 
@@ -36,13 +36,13 @@ public sealed class DialogManager : IDialogManager
         return this;
     }
 
-    public void ShowDialog(string name, IParameters parameters, Action<IDialogResult> callback)
+    public void ShowDialog(string dialogName, IParameters parameters, Action<IDialogResult> callback)
     {
         try
         {
-            parameters = UriHelper.GetSegmentParameters(name, parameters);
+            parameters = UriHelper.GetSegmentParameters(dialogName, parameters);
 
-            var view = CreateViewFor(UriHelper.GetSegmentName(name));
+            var view = CreateViewFor(UriHelper.GetSegmentName(dialogName));
             var dialogAware = InitializeDialog(view, parameters);
             var currentPage = GetCurrentContentPage();
 
@@ -147,10 +147,9 @@ public sealed class DialogManager : IDialogManager
         // }
     }
 
-    private View CreateViewFor(string name)
-    {
-        var viewType = _dialogs[name];
-        var view = (View)Activator.CreateInstance(viewType);
+    private View CreateViewFor(string dialogName)
+    { 
+        var view = _appProvider.ServiceProvider.GetRequiredService(_dialogs[dialogName]) as View;
         return view;
     }
 
@@ -237,7 +236,7 @@ public sealed class DialogManager : IDialogManager
                         return null;
                     }
 
-                    var mainPage = _applicationProvider.MainPage;
+                    var mainPage = _appProvider.MainPage;
                     if (mainPage is null)
                         return null;
 

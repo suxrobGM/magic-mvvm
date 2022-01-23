@@ -11,7 +11,7 @@ public class PopupDialog : IPopupDialog
     /// <summary>
     /// Gets the <see cref="IAppProvider"/>.
     /// </summary>
-    protected readonly IAppProvider _applicationProvider;
+    protected readonly IAppProvider _appProvider;
 
     /// <summary>
     /// Gets the <see cref="IKeyboardMapper"/>.
@@ -25,7 +25,7 @@ public class PopupDialog : IPopupDialog
     //// <param name="keyboardMapper">The <see cref="IKeyboardMapper"/>.</param>
     public PopupDialog()
     {
-        _applicationProvider = new AppProvider();
+        _appProvider = new AppProvider();
         _keyboardMapper = new KeyboardMapper();
     }
 
@@ -59,7 +59,7 @@ public class PopupDialog : IPopupDialog
     /// <returns><c>true</c> if non-destructive button pressed; otherwise <c>false</c>/></returns>
     public virtual Task<bool> DisplayAlertAsync(string title, string message, string acceptButton, string cancelButton, FlowDirection flowDirection)
     {
-        return _applicationProvider.MainPage.DisplayAlert(title, message, acceptButton, cancelButton, flowDirection);
+        return _appProvider.MainPage.DisplayAlert(title, message, acceptButton, cancelButton, flowDirection);
     }
 
     /// <summary>
@@ -74,7 +74,7 @@ public class PopupDialog : IPopupDialog
     /// <returns></returns>
     public virtual Task DisplayAlertAsync(string title, string message, string cancelButton)
     {
-        return _applicationProvider.MainPage.DisplayAlert(title, message, cancelButton);
+        return _appProvider.MainPage.DisplayAlert(title, message, cancelButton);
     }
 
     /// <summary>
@@ -90,7 +90,7 @@ public class PopupDialog : IPopupDialog
     /// <returns></returns>
     public virtual Task DisplayAlertAsync(string title, string message, string cancelButton, FlowDirection flowDirection)
     {
-        return _applicationProvider.MainPage.DisplayAlert(title, message, cancelButton, flowDirection);
+        return _appProvider.MainPage.DisplayAlert(title, message, cancelButton, flowDirection);
     }
 
     /// <summary>
@@ -117,7 +117,7 @@ public class PopupDialog : IPopupDialog
     /// <returns>Text for the pressed button</returns>
     public virtual Task<string> DisplayActionSheetAsync(string title, string cancelButton, string destroyButton, FlowDirection flowDirection, params string[] otherButtons)
     {
-        return _applicationProvider.MainPage.DisplayActionSheet(title, cancelButton, destroyButton, flowDirection, otherButtons);
+        return _appProvider.MainPage.DisplayActionSheet(title, cancelButton, destroyButton, flowDirection, otherButtons);
     }
 
     /// <summary>
@@ -179,7 +179,7 @@ public class PopupDialog : IPopupDialog
     public virtual Task<string> DisplayPromptAsync(string title, string message, string accept = "OK", string cancel = "Cancel", string placeholder = default, int maxLength = -1, KeyboardType keyboardType = KeyboardType.Default, string initialValue = "")
     {
         var keyboard = _keyboardMapper.Map(keyboardType);
-        return _applicationProvider.MainPage.DisplayPromptAsync(title, message, accept, cancel, placeholder, maxLength, keyboard, initialValue);
+        return _appProvider.MainPage.DisplayPromptAsync(title, message, accept, cancel, placeholder, maxLength, keyboard, initialValue);
     }
 
     /// <summary>
@@ -188,6 +188,6 @@ public class PopupDialog : IPopupDialog
     /// <returns>True if you can show the dialog; False if the dialog cannot be shown</returns>
     public bool CanShowDialog()
     {
-        return _applicationProvider.MainPage != null;
+        return _appProvider.MainPage != null;
     }
 }
