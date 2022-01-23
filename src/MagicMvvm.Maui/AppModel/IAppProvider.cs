@@ -14,4 +14,6 @@ public interface IAppProvider
     /// Gets current shell.
     /// </summary>
     Shell CurrentShell { get; }
+
+    IServiceProvider ServiceProvider { get; }
 }

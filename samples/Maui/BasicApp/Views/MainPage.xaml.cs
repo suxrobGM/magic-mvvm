@@ -5,8 +5,8 @@ public partial class MainPage : ContentPage
 {
     public MainPage()
     {
-        Shell
-        BindingContext = MauiProgram.GetService<MainPageViewModel>();
+        //Shell
+        //BindingContext = MauiProgram.GetService<MainPageViewModel>();
         InitializeComponent();
     }
 }

@@ -70,7 +70,7 @@ public sealed class ShellNavigationManager : NavigationManager, IShellNavigation
             var pageName = string.Empty;
 
             if (route.StartsWith("//"))
-                pageName = route.Substring(2);
+                pageName = route[2..];
 
             if (!shellIsRegistered)
             {
