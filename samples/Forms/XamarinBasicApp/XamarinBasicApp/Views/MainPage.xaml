@@ -3,22 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinBasicApp.Views.MainPage">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
+    <ScrollView>
+        <Grid RowSpacing="25" RowDefinitions="Auto,Auto,Auto,Auto,*"
+              Padding="30,60,30,30">
 
+            <Label 
+                Text="Hello, World!"
+                Grid.Row="0"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Label 
+                Text="Welcome to Xamarin.Forms"
+                Grid.Row="1"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
+            <Label 
+                Text="{Binding CounterText}"
+                Grid.Row="2"
+                FontSize="18"
+                FontAttributes="Bold"
+                x:Name="CounterLabel"
+                HorizontalOptions="Center" />
+
+            <StackLayout Grid.Row="3"
+                         Orientation="Horizontal"
+                         VerticalOptions="Center">
+                <Button 
+                    Text="Click me"
+                    FontAttributes="Bold"
+                    Command="{Binding CounterCommand}" />
+
+                <Button
+                    Text="Go To Page A"
+                    FontAttributes="Bold"
+                    Command="{Binding GoToPageCommand}"
+                    CommandParameter="PageA" />
+
+                <Button
+                    Text="Go To Page B"
+                    FontAttributes="Bold"
+                    Command="{Binding GoToPageCommand}"
+                    CommandParameter="PageB" />
+            </StackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

@@ -59,7 +59,7 @@ public class NavigationManager : INavigationManager
             var currentPage = _appProvider.MainPage;
             (currentPage?.BindingContext as INavigationAware)?.OnNavigatedFrom(parameters);
 
-            var targetPage = await _appProvider.MainPage.Navigation.PopAsync(false);
+            var targetPage = await currentPage.Navigation.PopAsync(false);
 
             (targetPage?.BindingContext as INavigationAware)?.OnNavigatedTo(parameters);
             navigationCallback?.Invoke();

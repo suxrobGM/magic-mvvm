@@ -43,7 +43,7 @@ public class NavigationManager : INavigationManager
             var targetPage = Activator.CreateInstance(_pages[pageName]) as Page;
             (currentPage?.BindingContext as INavigationAware)?.OnNavigatedFrom(parameters);
 
-            await _appProvider.MainPage.Navigation.PushAsync(targetPage);
+            await currentPage.Navigation.PushAsync(targetPage);
 
             (targetPage?.BindingContext as INavigationAware)?.OnNavigatedTo(parameters);
             navigationCallback?.Invoke();
@@ -72,7 +72,7 @@ public class NavigationManager : INavigationManager
             var currentPage = _appProvider.MainPage;
             (currentPage?.BindingContext as INavigationAware)?.OnNavigatedFrom(parameters);
 
-            var targetPage = await _appProvider.MainPage.Navigation.PopAsync(false);
+            var targetPage = await currentPage.Navigation.PopAsync(false);
 
             (targetPage?.BindingContext as INavigationAware)?.OnNavigatedTo(parameters);
             navigationCallback?.Invoke();

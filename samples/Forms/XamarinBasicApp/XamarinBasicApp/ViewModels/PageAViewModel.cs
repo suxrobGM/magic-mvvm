@@ -1,6 +1,6 @@
 ﻿using MagicMvvm.Navigation;
 
-namespace BasicApp.ViewModels;
+namespace XamarinBasicApp.ViewModels;
 
 internal class PageAViewModel : PageViewModelBase
 {
