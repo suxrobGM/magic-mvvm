@@ -9,12 +9,40 @@
     <AssemblyName>MagicMvvm.Maui</AssemblyName>
     <RootNamespace>MagicMvvm</RootNamespace>
 
+    <Version>2.1.0</Version>
+    <Authors>Sukhrob Ilyosbekov</Authors>
+    <PackageProjectUrl>https://github.com/suxrobGM/MagicMvvm</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/suxrobGM/MagicMvvm</RepositoryUrl>
+    <Description>MagicMvvm is lightweight library for building rapid MVVM applications.</Description>
+    <Copyright>Copyright Sukhrob Ilyosbekov 2021</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageTags>mvvm, maui, xamarin-forms, MagicMvvm, prism, xaml</PackageTags>
+    <DocumentationFile>.\MagicMvvm.Maui.xml</DocumentationFile>
+    <LangVersion>10</LangVersion>
+
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</TargetPlatformMinVersion>
 	</PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\MagicMvvm.Core\MagicMvvm.Core.csproj" />
