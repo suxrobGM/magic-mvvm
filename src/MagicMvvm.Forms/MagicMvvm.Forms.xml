@@ -4,6 +4,26 @@
         <name>MagicMvvm.Forms</name>
     </assembly>
     <members>
+        <member name="T:MagicMvvm.AppModel.AppProvider">
+            <summary>
+            Provides Application components.
+            </summary>
+        </member>
+        <member name="T:MagicMvvm.AppModel.IAppProvider">
+            <summary>
+            Defines a contract for providing Application components.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.AppModel.IAppProvider.MainPage">
+            <summary>
+            Gets the main page of the Application.
+            </summary>
+        </member>
+        <member name="P:MagicMvvm.AppModel.IAppProvider.CurrentShell">
+            <summary>
+            Gets current shell.
+            </summary>
+        </member>
         <member name="T:MagicMvvm.AppModel.IKeyboardMapper">
             <summary>
             An abstraction to map <see cref="T:MagicMvvm.AppModel.KeyboardType"/> to the <see cref="T:Xamarin.Forms.Keyboard"/>;
@@ -71,26 +91,6 @@
         <member name="F:MagicMvvm.AppModel.KeyboardType.Url">
             <summary>
             Gets an instance of type "UrlKeyboard".
-            </summary>
-        </member>
-        <member name="T:MagicMvvm.Common.ApplicationProvider">
-            <summary>
-            Provides Application components.
-            </summary>
-        </member>
-        <member name="T:MagicMvvm.Common.IApplicationProvider">
-            <summary>
-            Defines a contract for providing Application components.
-            </summary>
-        </member>
-        <member name="P:MagicMvvm.Common.IApplicationProvider.MainPage">
-            <summary>
-            Gets the main page of the Application.
-            </summary>
-        </member>
-        <member name="P:MagicMvvm.Common.IApplicationProvider.CurrentShell">
-            <summary>
-            Gets current shell.
             </summary>
         </member>
         <member name="T:MagicMvvm.Dialogs.DialogManager">
@@ -453,9 +453,9 @@
             Implementation of the <see cref="T:MagicMvvm.Dialogs.IPopupDialog"/>
             </summary>
         </member>
-        <member name="F:MagicMvvm.Dialogs.PopupDialog._applicationProvider">
+        <member name="F:MagicMvvm.Dialogs.PopupDialog._appProvider">
             <summary>
-            Gets the <see cref="T:MagicMvvm.Common.IApplicationProvider"/>.
+            Gets the <see cref="T:MagicMvvm.AppModel.IAppProvider"/>.
             </summary>
         </member>
         <member name="F:MagicMvvm.Dialogs.PopupDialog._keyboardMapper">

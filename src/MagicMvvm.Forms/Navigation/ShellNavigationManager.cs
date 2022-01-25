@@ -11,14 +11,14 @@ namespace MagicMvvm.Navigation;
 public sealed class ShellNavigationManager : NavigationManager, IShellNavigationManager
 {
     private readonly IDictionary<string, object> _shells;
-    private IParameters _navigationParameters;
+    private IParameters _parameters;
     private bool _modalDialogPushed;
     private bool _modalDialogPopped;
 
     public ShellNavigationManager()
     {
         _shells = new Dictionary<string, object>();
-        _navigationParameters = new Parameters();
+        _parameters = new Parameters();
     }
 
     public INavigationManager RegisterShell<T>(T instance)
@@ -59,11 +59,12 @@ public sealed class ShellNavigationManager : NavigationManager, IShellNavigation
     }
 
     private async Task<INavigationResult> NavigateToRouteAsync(string route, Action navigationCallback,
-        IParameters navigationParameters)
+        IParameters parameters)
     {
         try
         {
-            var currentShell = applicationProvider.CurrentShell;
+            _parameters = parameters;
+            var currentShell = _appProvider.CurrentShell;
             var shellIsRegistered = _shells.Values.Contains(currentShell);
             var currentPage = currentShell.CurrentPage?.ToString();
             var pageName = string.Empty;
@@ -77,19 +78,17 @@ public sealed class ShellNavigationManager : NavigationManager, IShellNavigation
                     $"The current shell {currentShell.GetType().Name} is not registered");
             }
 
-            _navigationParameters = navigationParameters;
-
             if (!string.IsNullOrEmpty(pageName) &&
                 !string.IsNullOrEmpty(currentPage) &&
                 currentPage.EndsWith(pageName))
             {
                 var targetPageVM = currentShell.CurrentPage.BindingContext as INavigationAware;
-                targetPageVM?.OnNavigatedFrom(_navigationParameters);
-                targetPageVM?.OnNavigatedTo(_navigationParameters);
+                targetPageVM?.OnNavigatedFrom(_parameters);
+                targetPageVM?.OnNavigatedTo(_parameters);
             }
             else
             {
-                await currentShell.GoToAsync($"{route}{navigationParameters}");
+                await currentShell.GoToAsync($"{route}{parameters}");
             }
 
             navigationCallback?.Invoke();
@@ -136,12 +135,12 @@ public sealed class ShellNavigationManager : NavigationManager, IShellNavigation
         }
 
         var targetPageVM = shell.CurrentPage.BindingContext as INavigationAware;
-        targetPageVM?.OnNavigatedTo(_navigationParameters);
+        targetPageVM?.OnNavigatedTo(_parameters);
 
         // clear old parameters
-        if (_navigationParameters.Count > 0)
+        if (_parameters.Count > 0)
         {
-            _navigationParameters = new Parameters();
+            _parameters = new Parameters();
         }
     }
 
@@ -162,6 +161,6 @@ public sealed class ShellNavigationManager : NavigationManager, IShellNavigation
             return;
         }
         var currentPageVM = shell.CurrentPage.BindingContext as INavigationAware;
-        currentPageVM?.OnNavigatedFrom(_navigationParameters);
+        currentPageVM?.OnNavigatedFrom(_parameters);
     }
 }

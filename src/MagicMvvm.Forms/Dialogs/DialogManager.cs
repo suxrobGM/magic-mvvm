@@ -1,4 +1,6 @@
-﻿using MagicMvvm.Dialogs.Xaml;
+﻿using MagicMvvm.AppModel;
+using MagicMvvm.Dialogs.Xaml;
+using MagicMvvm.Helpers;
 
 namespace MagicMvvm.Dialogs;
 
@@ -8,7 +10,7 @@ namespace MagicMvvm.Dialogs;
 public sealed class DialogManager : IDialogManager
 {
     private readonly IDictionary<string, Type> _dialogs;
-    private readonly IApplicationProvider _applicationProvider;
+    private readonly IAppProvider _appProvider;
 
     /// <summary>
     /// Gets the key for specifying or retrieving popup overlay style from Application Resources.
@@ -20,7 +22,7 @@ public sealed class DialogManager : IDialogManager
     /// </summary>
     public DialogManager()
     {
-        _applicationProvider = new ApplicationProvider();
+        _appProvider = new AppProvider();
         _dialogs = new Dictionary<string, Type>();
     }
 
@@ -233,7 +235,7 @@ public sealed class DialogManager : IDialogManager
                         return null;
                     }
 
-                    var mainPage = _applicationProvider.MainPage;
+                    var mainPage = _appProvider.MainPage;
                     if (mainPage is null)
                         return null;
 

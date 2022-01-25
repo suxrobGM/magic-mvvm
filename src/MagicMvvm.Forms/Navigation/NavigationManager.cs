@@ -1,4 +1,6 @@
-﻿namespace MagicMvvm.Navigation;
+﻿using MagicMvvm.AppModel;
+
+namespace MagicMvvm.Navigation;
 
 /// <summary>
 /// Implements <see cref="INavigationManager"/> to handle navigation between pages.
@@ -8,12 +10,12 @@
 /// </remarks>
 public class NavigationManager : INavigationManager
 {
-    protected readonly IApplicationProvider applicationProvider;
+    protected readonly IAppProvider _appProvider;
     protected readonly IDictionary<string, Type> _pages;
 
     public NavigationManager()
     {
-        applicationProvider = new ApplicationProvider();
+        _appProvider = new AppProvider();
         _pages = new Dictionary<string, Type>();
     }
 
@@ -37,11 +39,11 @@ public class NavigationManager : INavigationManager
 
         try
         {
-            var currentPage = applicationProvider.MainPage;
+            var currentPage = GetRootPage(_appProvider.MainPage);
             var targetPage = Activator.CreateInstance(_pages[pageName]) as Page;
             (currentPage?.BindingContext as INavigationAware)?.OnNavigatedFrom(parameters);
 
-            await applicationProvider.MainPage.Navigation.PushAsync(targetPage);
+            await currentPage.Navigation.PushAsync(targetPage);
 
             (targetPage?.BindingContext as INavigationAware)?.OnNavigatedTo(parameters);
             navigationCallback?.Invoke();
@@ -67,10 +69,10 @@ public class NavigationManager : INavigationManager
     {
         try
         {
-            var currentPage = applicationProvider.MainPage;
+            var currentPage = GetRootPage(_appProvider.MainPage);
             (currentPage?.BindingContext as INavigationAware)?.OnNavigatedFrom(parameters);
 
-            var targetPage = await applicationProvider.MainPage.Navigation.PopAsync(false);
+            var targetPage = await currentPage.Navigation.PopAsync();
 
             (targetPage?.BindingContext as INavigationAware)?.OnNavigatedTo(parameters);
             navigationCallback?.Invoke();
@@ -89,5 +91,19 @@ public class NavigationManager : INavigationManager
                 Exception = e
             };
         }
+    }
+
+    private Page GetRootPage(Page page)
+    {
+        if (page is NavigationPage navigationPage)
+        {
+            return navigationPage.RootPage;
+        }
+        else if (page is TabbedPage tabbedPage)
+        {
+            return tabbedPage.CurrentPage;
+        }
+
+        return page;
     }
 }

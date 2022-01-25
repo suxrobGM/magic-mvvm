@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinBasicApp.Views.MainPage">
+
+    <ScrollView>
+        <Grid RowSpacing="25" RowDefinitions="Auto,Auto,Auto,Auto,*"
+              Padding="30,60,30,30">
+
+            <Label 
+                Text="Hello, World!"
+                Grid.Row="0"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Label 
+                Text="Welcome to Xamarin.Forms"
+                Grid.Row="1"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
+            <Label 
+                Text="{Binding CounterText}"
+                Grid.Row="2"
+                FontSize="18"
+                FontAttributes="Bold"
+                x:Name="CounterLabel"
+                HorizontalOptions="Center" />
+
+            <StackLayout Grid.Row="3"
+                         Orientation="Horizontal"
+                         VerticalOptions="Center">
+                <Button 
+                    Text="Click me"
+                    FontAttributes="Bold"
+                    Command="{Binding CounterCommand}" />
+
+                <Button
+                    Text="Go To Page A"
+                    FontAttributes="Bold"
+                    Command="{Binding GoToPageCommand}"
+                    CommandParameter="PageA" />
+
+                <Button
+                    Text="Go To Page B"
+                    FontAttributes="Bold"
+                    Command="{Binding GoToPageCommand}"
+                    CommandParameter="PageB" />
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

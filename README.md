@@ -15,7 +15,7 @@ Currently WPF, Blazor and Xamarin.Forms platforms are supported.
 * View model closing handling.
 * Handling view models navigation lifecycle.
 * Update commands on property changed.
-* Platform specific features for WPF, Blazor, and Xamarin.Forms.
+* Platform specific features for WPF, Blazor, Xamarin.Forms, and MAUI.
 
 ## NuGet packages
 
@@ -25,6 +25,7 @@ Currently WPF, Blazor and Xamarin.Forms platforms are supported.
 | WPF | [MagicMvvm.Wpf][WpfNuGet] | [![WpfNuGetShield]][WpfNuGet] |
 | Blazor | [MagicMvvm.Blazor][BlazorNuGet] | [![BlazorNuGetShield]][BlazorNuGet]  |
 | Xamarin.Forms | [MagicMvvm.Forms][FormsNuGet] | [![FormsNuGetShield]][FormsNuGet] |
+| MAUI | MagicMvvm.Maui | Coming Soon |
 
 
 ## Documentation

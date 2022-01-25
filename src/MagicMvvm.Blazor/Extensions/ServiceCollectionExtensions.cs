@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using MagicMvvm.Parameters;
+using MagicMvvm.Attributes;
 
 namespace MagicMvvm;
 
@@ -22,7 +23,7 @@ public static class ServiceCollectionExtensions
 
         foreach (var type in definedTypes)
         {
-            var attr = type.GetCustomAttribute<ViewModelLifetimeAttribute>();
+            var attr = type.GetCustomAttribute<ServiceLifetimeAttribute>();
             if (viewModelType.IsAssignableFrom(type) &&
                 type.IsClass && !type.IsAbstract)
             {

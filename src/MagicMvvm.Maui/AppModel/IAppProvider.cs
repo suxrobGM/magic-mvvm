@@ -1,9 +1,9 @@
-﻿namespace MagicMvvm.Common;
+﻿namespace MagicMvvm.AppModel;
 
 /// <summary>
 /// Defines a contract for providing Application components.
 /// </summary>
-public interface IApplicationProvider
+public interface IAppProvider
 {
     /// <summary>
     /// Gets the main page of the Application.
@@ -14,4 +14,9 @@ public interface IApplicationProvider
     /// Gets current shell.
     /// </summary>
     Shell CurrentShell { get; }
+
+    /// <summary>
+    /// Gets application DI container.
+    /// </summary>
+    IServiceProvider ServiceProvider { get; }
 }
