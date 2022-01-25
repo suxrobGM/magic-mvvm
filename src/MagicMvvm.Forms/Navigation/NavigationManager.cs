@@ -39,7 +39,7 @@ public class NavigationManager : INavigationManager
 
         try
         {
-            var currentPage = _appProvider.MainPage;
+            var currentPage = GetRootPage(_appProvider.MainPage);
             var targetPage = Activator.CreateInstance(_pages[pageName]) as Page;
             (currentPage?.BindingContext as INavigationAware)?.OnNavigatedFrom(parameters);
 
@@ -69,10 +69,10 @@ public class NavigationManager : INavigationManager
     {
         try
         {
-            var currentPage = _appProvider.MainPage;
+            var currentPage = GetRootPage(_appProvider.MainPage);
             (currentPage?.BindingContext as INavigationAware)?.OnNavigatedFrom(parameters);
 
-            var targetPage = await currentPage.Navigation.PopAsync(false);
+            var targetPage = await currentPage.Navigation.PopAsync();
 
             (targetPage?.BindingContext as INavigationAware)?.OnNavigatedTo(parameters);
             navigationCallback?.Invoke();
@@ -91,5 +91,19 @@ public class NavigationManager : INavigationManager
                 Exception = e
             };
         }
+    }
+
+    private Page GetRootPage(Page page)
+    {
+        if (page is NavigationPage navigationPage)
+        {
+            return navigationPage.RootPage;
+        }
+        else if (page is TabbedPage tabbedPage)
+        {
+            return tabbedPage.CurrentPage;
+        }
+
+        return page;
     }
 }

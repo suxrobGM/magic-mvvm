@@ -9,6 +9,6 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         <Button Text="Go Back"
-                Command="{Binding GoBackCommand}"/>
+                Command="{Binding GoBackCommand}" />
     </StackLayout>
 </ContentPage>

@@ -1,6 +1,6 @@
 ﻿namespace MagicMvvm.Navigation;
 
-internal class NavigationRegistry : INavigationRegistry
+internal sealed class NavigationRegistry : INavigationRegistry
 {
     public static readonly NavigationRegistry Instance = new();
 

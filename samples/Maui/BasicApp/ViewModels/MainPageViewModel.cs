@@ -50,11 +50,9 @@ internal class MainPageViewModel : ViewModelBase
 
     public override void OnNavigatedFrom(IParameters parameters)
     {
-        base.OnNavigatedFrom(parameters);
     }
 
     public override void OnNavigatedTo(IParameters parameters)
     {
-        base.OnNavigatedTo(parameters);
     }
 }

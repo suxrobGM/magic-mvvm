@@ -45,10 +45,25 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IDialogManager, DialogManager>();
         services.AddSingleton<IPopupDialog, PopupDialog>();
         services.AddSingleton<INavigationRegistry, NavigationRegistry>(i => NavigationRegistry.Instance);
+        services.AddSingleton<IAppProvider, AppProvider>(i => new AppProvider(i));
+        services.AddSingleton<IMvvmBuilder, MvvmBuilder>();
         services.AddSingleton(options);
-        RegisterTypes<ViewModelBase>(services); // register view models
-         
-        // register views
+
+        RegisterViewModels(services);
+        RegisterViews(services, options);
+        return services.BuildServiceProvider().GetRequiredService<IMvvmBuilder>();
+    }
+
+    private static void RegisterViewModels(IServiceCollection services)
+    {
+        RegisterTypes<ViewModelBase>(
+            services, 
+            onAfterRegister: (type) => RegistryContainer.Instance.Types.Add(type)
+            );
+    }
+
+    private static void RegisterViews(IServiceCollection services, MvvmOptions options)
+    {
         if (options.AutoWireViewModels)
         {
             RegisterTypes<IWiredView>(services, WireViewModel);
@@ -57,21 +72,19 @@ public static class ServiceCollectionExtensions
         {
             RegisterTypes<IWiredView>(services);
         }
-
-        services.AddSingleton<IAppProvider, AppProvider>(i => new AppProvider(i));
-        services.AddSingleton<IMvvmBuilder, MvvmBuilder>();
-        return services.BuildServiceProvider().GetRequiredService<IMvvmBuilder>();
     }
 
-    private static void RegisterTypes<T>(IServiceCollection services, 
-        Func<IServiceProvider, Type, object> factory = null)
+    private static void RegisterTypes<T>(
+        IServiceCollection services, 
+        Func<IServiceProvider, Type, object> factory = null,
+        Action<Type> onAfterRegister = null)
     {
         var dataType = typeof(T);
         var definedTypes = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(i => i.DefinedTypes)
             .Where(i => i.IsClass && !i.IsAbstract && dataType.IsAssignableFrom(i));
 
-        foreach (var type in definedTypes)
+        foreach (Type type in definedTypes)
         {
             var attr = type.GetCustomAttribute<ServiceLifetimeAttribute>();
             if (attr == null)
@@ -84,7 +97,8 @@ public static class ServiceCollectionExtensions
                 {
                     services.AddScoped(type);
                 }
-                
+
+                onAfterRegister?.Invoke(type);
                 continue;
             }
 
@@ -137,30 +151,28 @@ public static class ServiceCollectionExtensions
                         services.AddScoped(type);
                     }
                     break;
-                }
-                    
+                } 
             }
+
+            onAfterRegister?.Invoke(type);
         }
     }
 
     private static object WireViewModel(IServiceProvider serviceProvider, Type viewType)
     {
         var dataType = typeof(ViewModelBase);
-        var viewModelType = AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(i => i.DefinedTypes)
-            .FirstOrDefault(i => i.IsClass && !i.IsAbstract &&
-                    dataType.IsAssignableFrom(i) &&
-                    i.Name.Contains(viewType.Name) &&
-                    i.Name.EndsWith("ViewModel"));
+        var viewModelType = RegistryContainer.Instance.Types
+                    .FirstOrDefault(
+                        i => i.IsClass && !i.IsAbstract &&
+                        dataType.IsAssignableFrom(i) &&
+                        i.Name.Contains(viewType.Name) &&
+                        i.Name.EndsWith("ViewModel")
+                    );
 
         var viewModel = serviceProvider.GetService(viewModelType);
         var ctorParams = GetCtorParameters(serviceProvider, viewType);
         var view = Activator.CreateInstance(viewType, ctorParams) as VisualElement;
-        if (viewModel != null)
-        {
-            view.BindingContext = viewModel;
-        }
-
+        view.BindingContext = viewModel;
         return view;
     }
 

@@ -36,18 +36,21 @@
                 <Button 
                     Text="Click me"
                     FontAttributes="Bold"
+                    Margin="5,0,0,0"
                     SemanticProperties.Hint="Counts the number of times you click"
                     Command="{Binding CounterCommand}" />
 
                 <Button
                     Text="Go To Page A"
                     FontAttributes="Bold"
+                    Margin="5,0,0,0"
                     Command="{Binding GoToPageCommand}"
                     CommandParameter="PageA" />
 
                 <Button
                     Text="Go To Page B"
                     FontAttributes="Bold"
+                    Margin="5,0,0,0"
                     Command="{Binding GoToPageCommand}"
                     CommandParameter="PageB" />
             </StackLayout>
